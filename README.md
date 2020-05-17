@@ -1,3 +1,9 @@
+coding_practice
+=====
+##### 
+This project is for storing practice problem's solution implementations
+
+
 setup
 =====
 ##### 
