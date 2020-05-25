@@ -31,3 +31,19 @@ def test_contains_duplicates(test_array, expected_response):
 
 	assert response == expected_response
 
+
+TEST_IS_PREFIX_OF_WORD = [
+	("i love eating burger", "burg", 4),
+	("this problem is an easy problem", "pro", 2),
+	("i am tired", "you", -1),
+	("i use triple pillow", "pill", 4),
+	("hello from the other side", "they", -1),
+	("love errichto jonathan dumb", "dumb", 4)
+]
+@mark.parametrize("test_sentance, test_search_word, expected_response", TEST_IS_PREFIX_OF_WORD)
+def test_is_prefix_of_word(test_sentance, test_search_word, expected_response):
+	response = is_prefix_of_word(test_sentance, test_search_word)
+
+	assert response == expected_response
+
+
