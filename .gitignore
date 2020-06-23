@@ -5,3 +5,6 @@ __pycache__/
 
 # unit-tests
 .pytest_cache/
+
+# virtual environment
+venv/
