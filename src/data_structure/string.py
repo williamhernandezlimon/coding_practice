@@ -22,3 +22,22 @@ def max_vowels(string, substring_length):
 	
 	return vowel_count_max
 
+
+def reverse_integer(number: int) -> int:
+	"""
+	Given an unsigned integer, reverse the number.
+	Return 0 if outside of signed integer range: [−2^31,  2^31 − 1]
+	"""
+	is_positive = True if number > 0 else False
+	number = number if is_positive else number * -1
+	reverse = 0
+	pointer = number
+	while pointer > 0:
+		reverse = (reverse * 10) + (pointer % 10)
+		pointer = int(pointer / 10)
+
+	# check overflow
+	if (reverse < -2**31) or (reverse > (2**31)-1):
+		return 0
+
+	return reverse if is_positive else reverse * -1
