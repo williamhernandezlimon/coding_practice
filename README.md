@@ -12,11 +12,11 @@ setup
     * python3.7+
     * pip3
 * setup virtual environment (optional)
-			* python3 -m pip install --user virtualenv
-			* python3 -m venv venv
-			* source venv/bin/activate
+	* `python3 -m pip install --user virtualenv`
+	* `python3 -m venv venv`
+	* `source venv/bin/activate`
 * download dependencies
-  * `$ pip3 install -r requirements.txt`  
+	* `pip3 install -r requirements.txt`  
 * confirm repo in `PYTHONPATH`
 	* example:
 		* add to `~/.bash_profile`:
