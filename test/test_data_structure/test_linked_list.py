@@ -36,3 +36,15 @@ def test_reverse():
 		back_ptr -= 1
 
 	# TODO: tests empty linked list and single linked list
+TEST_NUMBERS = [
+	([2, 4, 3], [5, 6, 4], 807),
+	([2], [5, 2], 27),
+	([1, 4], [1], 42)
+]
+@mark.parametrize("test_number1, test_number2, expected_response", TEST_NUMBERS)
+def test_add_two_numbers(test_number1, test_number2, expected_response):
+	ll1 = create_linked_list(test_number1)
+	ll2 = create_linked_list(test_number2)
+	response = add_two_numbers(ll1.head, ll2.head)
+
+	assert response == expected_response
