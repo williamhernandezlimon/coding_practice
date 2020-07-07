@@ -1,33 +1,25 @@
 #!/usr/bin/env python3
 
-class LL:
+class LinkedList:
 	def __init__(self, node):
 		self.head = node
 
-	def add(self, node):
-		current = self.head
-		while current.next != None:
-			current = current.next
-		current.next = node
+def reverse(ll: LinkedList) -> LinkedList:
+	"""
+	Given a linked list, reverse the entire linked list
+	"""
+	if not ll:
+		return None
 
-	def to_array(self):
-		array = []
-		current = self.head
-		while current != None:
-			array.append(current.data)
-			current = current.next
-		
-		return array
+	previous = None
+	current = ll.head
+	nnext = current.next
 
-	def reverse(self):
-		previous = None
-		current = self.head
-		nnext = current.next
-
-		while nnext != None:
-			current.next = previous
-			previous = current
-			current = nnext
-			nnext = nnext.next
+	while nnext != None:
 		current.next = previous
-		self.head = current
+		previous = current
+		current = nnext
+		nnext = nnext.next
+	current.next = previous
+	ll.head = current
+
