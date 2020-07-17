@@ -32,3 +32,21 @@ def test_reverse_integer(test_number, expected_response):
 	response = reverse_integer(test_number)
 
 	assert response == expected_response
+
+
+TEST_IS_VALID_PARENTHESIS = [
+	("", True),
+	("()", True),
+	("()[]{}", True),
+	("([{}])", True),
+	("(]", False),
+	("([)]", False),
+	("()]", False),
+	("]]", False),
+	("((", False)
+]
+@mark.parametrize("test_string, expected_response", TEST_IS_VALID_PARENTHESIS)
+def test_is_valid_paranthesis(test_string, expected_response):
+	response = is_valid_parenthesis(test_string)
+
+	assert response == expected_response
