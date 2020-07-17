@@ -20,7 +20,7 @@ setup
 * confirm repo in `PYTHONPATH`
 	* example:
 		* add to `~/.bash_profile`:
-			* `PYTHONPATH=/Users/william/Documents/`
+			* `export PYTHONPATH="${PYTHONPATH}:/Users/william/Documents/code/coding_practice"`
 			* export PYTHONPATH
 		* commit update
 			* `source ~/.bash_profile`
