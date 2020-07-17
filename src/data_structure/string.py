@@ -41,3 +41,53 @@ def reverse_integer(number: int) -> int:
 		return 0
 
 	return reverse if is_positive else reverse * -1
+
+def is_valid_parenthesis(string: str) -> bool:
+	"""
+	Return if parenthesis is valid.
+	Example 1:
+		Input: "()"
+		Output: true
+	Example 2:
+		Input: "()[]{}"
+		Output: true
+	Example 3:
+		Input: "(]"
+		Output: false
+	Example 4:
+		Input: "([)]"
+		Output: false
+	Example 5:
+		Input: "{[]}"
+		Output: true	
+
+	Time Complexity:
+		O(n)
+	Space Complexity:
+		O(n)
+	"""
+	stack = []
+	for c in string:
+		# left parenthesis
+		if c == '(' or c == '[' or c == '{':
+			stack.append(c)
+			continue
+		
+		# right parenthesis
+		top = stack.pop() if stack else None
+		if top == '(' and c == ')':
+			continue
+		elif top =='[' and c == ']':
+			continue
+		elif top =='{' and c == '}':
+			continue
+		else:
+			return False
+	return len(stack) == 0
+
+
+
+
+
+
+
