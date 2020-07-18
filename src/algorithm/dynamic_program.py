@@ -78,13 +78,14 @@ def knapsack(weight_limit, items):
 	"""
 	Dynamic program
 	weight_limit:
-		maximum value one can use
+		the maximum weight a user can use
 	items:
 		weight:
 			the weight of a given item
 		value:
 			the value of a given item
-	returns the maximum value, while still 
+	return:
+		the maximum value for a given weight_limit
 	"""
 	rows = len(items) + 1
 	columns = weight_limit + 1
@@ -107,6 +108,33 @@ def knapsack(weight_limit, items):
 		row += 1
 		
 	return table[rows-1][columns-1]
+
+def knapsack_recursive(weight_limit, items, max_values={}):
+	"""
+	Dynamic program that is recursive using memoization.
+	weight_limit:
+		the maximum weight a user can use
+	items: 
+		weight:
+		 	the weight of  a given item
+	 	value:
+	 		the value of a given itme
+	return:
+		the maximum value for a given weight_limit
+	"""
+	if weight_limit in max_values:
+		return max_values[weight_limit]
+
+	max_value = 0
+	for weight, value in items.items():
+		if weight <= weight_limit:
+
+			sub_max_value = knapsack_recursive(weight_limit - weight, items, max_values) 
+			if sub_max_value + value > max_value:
+				max_value = sub_max_value + value 
+
+	max_values[weight_limit] = max_value
+	return max_value
 
 
 def max_profit(prices, max_transactions):
@@ -148,7 +176,6 @@ def max_profit(prices, max_transactions):
 
 	table_object.draw(table)
 	return table[rows-1][columns-1]
-
 
 
 def max_profit_time_optimized(prices, max_transactions):
