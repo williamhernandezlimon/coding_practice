@@ -15,12 +15,18 @@ def test_get_minimum_string_transformations(test_string1, test_string2, expected
 
 
 KNAPSACK_TESTS = [
+	(7, {}, 0),
+	(0, {5: 60, 3: 50, 4: 70, 2: 30}, 0),
 	(5, {5: 60, 3: 50, 4: 70, 2: 30}, 80)
 ]
 @mark.parametrize("test_weight, test_items, expected_response", KNAPSACK_TESTS)
 def test_knapsack(test_weight, test_items, expected_response):
 	response = knapsack(test_weight,  test_items)
 	
+	assert response == expected_response
+
+
+	response = knapsack_recursive(test_weight, test_items)
 	assert response == expected_response
 
 
