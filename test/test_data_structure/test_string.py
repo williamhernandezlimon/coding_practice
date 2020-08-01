@@ -50,3 +50,21 @@ def test_is_valid_paranthesis(test_string, expected_response):
 	response = is_valid_parenthesis(test_string)
 
 	assert response == expected_response
+
+
+TEST_LENGTH_OF_LONGEST_SUBSTRING = [
+	("", 0),
+	("abcabcbb", 3),
+	("abc", 3),
+	("a", 1),
+	("aaaaa", 1)
+]
+@mark.parametrize("test_input, expected_response", TEST_LENGTH_OF_LONGEST_SUBSTRING)
+def test_length_of_longest_substring(test_input, expected_response):
+	response = length_of_longest_substring(test_input)
+
+	assert response == expected_response
+
+
+
+
