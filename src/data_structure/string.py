@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from src.data_structure import table as table_obj
 
 def max_vowels(string, substring_length):
 	"""
@@ -86,8 +87,27 @@ def is_valid_parenthesis(string: str) -> bool:
 	return len(stack) == 0
 
 
+def length_of_longest_substring(string: str) -> int:
+	# string:
+	# 	contains the string we check for longest substring
+	# return:
+	#	the longest substring 
+	front_ptr = 0
+	back_ptr = 0
+	max_length = 0 
+	char_map = {}
 
+	while back_ptr < len(string):
+		char = string[back_ptr]
+		if char not in char_map:
+			# add new char and increase window size
+			char_map[char] = 1
+			back_ptr += 1
+		else:
+			# remove front element and reduce window size
+			del char_map[string[front_ptr]]
+			front_ptr += 1
 
+		max_length = max(max_length, back_ptr - front_ptr)
 
-
-
+	return max_length
