@@ -16,12 +16,13 @@ setup
 	* `python3 -m venv venv`
 	* `source venv/bin/activate`
 * download dependencies
-	* `pip3 install -r requirements.txt`  
+	* `pip3 install -r requirements.txt` 
+	* `brew install bats`
 * confirm repo in `PYTHONPATH`
 	* example:
 		* add to `~/.bash_profile`:
 			* `export PYTHONPATH="${PYTHONPATH}:/Users/william/Documents/code/coding_practice"`
-			* export PYTHONPATH
+			* `export PYTHONPATH`
 		* commit update
 			* `source ~/.bash_profile`
 
@@ -32,3 +33,4 @@ testing
 ##### 
 * **test/**
    * `pytest test/`
+   * `bats test/test_unix`
