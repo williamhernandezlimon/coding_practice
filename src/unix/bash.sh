@@ -34,3 +34,9 @@ tail -r ${PROJECT_ROOT}test/test_unix/test_data/test_words.txt
 # 	d: deleted everything else
 echo -e "\ntest: $((test_count++))"
 sed '10q;d' bash.sh
+
+
+# find all *.pyc files in the current directory and remove them
+#	{} symbol is what would be the file in question
+#	\; is to syntax termination for -exec
+find . -name '*.pyc' -exec rm -rf {} \;
