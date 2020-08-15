@@ -32,5 +32,4 @@ testing
 =====
 ##### 
 * **test/**
-   * `pytest test/`
-   * `bats test/test_unix`
+   * `make test`
