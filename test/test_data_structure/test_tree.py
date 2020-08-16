@@ -2,7 +2,7 @@
 from src.data_structure.node import *
 from src.data_structure.tree import *
 from pytest import mark
-
+from sys import stderr
 
 def create_tree():
 	"""
@@ -15,8 +15,10 @@ def create_tree():
 	"""
 	left_leaf = NodeBinary(15, None, None)
 	right_leaf = NodeBinary(7, None, None)
-	left_leaf = NodeBinary(9, None, None)
+	
 	right_leaf = NodeBinary(20, left_leaf, right_leaf)
+	left_leaf = NodeBinary(9, None, None)
+	
 	
 	root = NodeBinary(3, left_leaf, right_leaf)
 	return root
@@ -81,5 +83,51 @@ def test_max_depth(test_root, expected_response):
 
 # 	assert response == expected_response
 
+TEST_IN_ORDER_TRAVERSAL = [
+	(None, ''),
+	(create_tree(), "9\n3\n15\n20\n7\n")
+]
+@mark.parametrize("test_tree, expected_response", TEST_IN_ORDER_TRAVERSAL)
+def test_in_order_traversal(capsys, test_tree, expected_response):
+	in_order_traversal(test_tree)
+	captured = capsys.readouterr()
 
+	assert captured.out == expected_response
+
+
+# TODO: add proper tree traversal test cases
+TEST_POST_ORDER_TRAVERSAL = [
+	(None, ''),
+	(create_tree(), "9\n15\n7\n20\n3\n")
+]
+@mark.parametrize("test_tree, expected_response", TEST_POST_ORDER_TRAVERSAL)
+def test_post_order_traversal(capsys, test_tree, expected_response):
+	post_order_traversal(test_tree)
+	captured = capsys.readouterr()
+
+	assert captured.out == expected_response
+
+
+TEST_PRE_ORDER_TRAVERSAL = [
+	(None, ''),
+	(create_tree(), "3\n9\n20\n15\n7\n")
+]
+@mark.parametrize("test_tree, expected_response", TEST_PRE_ORDER_TRAVERSAL)
+def test_pre_order_traversal(capsys, test_tree, expected_response):
+	pre_order_traversal(test_tree)
+	captured = capsys.readouterr()
+
+	assert captured.out == expected_response
+
+
+TEST_LEVEL_ORDER_TRAVERSAL = [
+	(None, ''),
+	(create_tree(), "3\n9\n20\n15\n7\n")
+]
+@mark.parametrize("test_tree, expected_response", TEST_LEVEL_ORDER_TRAVERSAL)
+def test_level_order_traversal(capsys, test_tree, expected_response):
+	level_order_traversal(test_tree)	
+	captured = capsys.readouterr()
+
+	assert captured.out == expected_response
 

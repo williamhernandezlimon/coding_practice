@@ -43,7 +43,6 @@ def is_symmetric_iterative(root):
 			right2 = root2.right
 			root2 = root2.value
 
-		# print(f"root1.value: {root1.value} root2.value: {root2.value}")
 		if root1 != root2:
 			return False
 		
@@ -56,3 +55,41 @@ def is_symmetric_iterative(root):
 		
 
 	return True
+
+
+def in_order_traversal(root):
+	if root:
+		in_order_traversal(root.left)
+		print(root.value)
+		in_order_traversal(root.right)
+
+
+def post_order_traversal(root):
+	if root:
+		post_order_traversal(root.left)
+		post_order_traversal(root.right)
+		print(root.value)
+
+
+def pre_order_traversal(root):
+	if root:
+		print(root.value)
+		pre_order_traversal(root.left)
+		pre_order_traversal(root.right)
+
+
+def level_order_traversal(root):
+	queue = [root] if root else []
+	while queue:
+		leaf = queue.pop(0)
+		print(leaf.value)
+		
+		if leaf.left:
+			queue.append(leaf.left)
+		if leaf.right:
+			queue.append(leaf.right)
+
+
+
+
+

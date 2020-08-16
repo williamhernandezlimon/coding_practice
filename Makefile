@@ -3,5 +3,6 @@ clean:
 	find . -name '*.pyo' -exec rm -f {} +
 
 test: clean
-	py.test --verbose --color=yes test/
+	# --capture=sys allows us capture print() output
+	py.test --verbose --cov=test --capture=sys --color=yes test/
 # 	bats test/test_unix

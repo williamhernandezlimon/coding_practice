@@ -5,6 +5,7 @@ __pycache__/
 
 # unit-tests
 .pytest_cache/
+.coverage
 
 # virtual environment
 venv/
