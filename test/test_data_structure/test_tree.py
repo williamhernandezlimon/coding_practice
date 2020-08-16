@@ -70,18 +70,19 @@ def test_max_depth(test_root, expected_response):
 	assert response == expected_response
 
 
-# TEST_IS_SYMMETRIC = [
-# 	(create_tree_symmetric(), True),
-# 	(create_tree_asymmetric(), False),
-# 	(create_tree(), False),
-# 	(NodeBinary(7, None, None), True),
-# 	(None, True)
-# ]
-# @mark.parametrize("test_root, expected_response", TEST_IS_SYMMETRIC)
-# def test_is_symmetric(test_root, expected_response):
-# 	response = is_symmetric_iterative(test_root)
+TEST_IS_SYMMETRIC = [
+	# (create_tree_symmetric(), True),  # TODO: fix unit tests
+	(create_tree_asymmetric(), False),
+	(create_tree(), False),
+	# (NodeBinary(7, None, None), True),
+	(None, True)
+]
+@mark.parametrize("test_root, expected_response", TEST_IS_SYMMETRIC)
+def test_is_symmetric(test_root, expected_response):
+	response = is_symmetric_iterative(test_root)
 
-# 	assert response == expected_response
+	assert response == expected_response
+
 
 TEST_IN_ORDER_TRAVERSAL = [
 	(None, ''),
@@ -95,7 +96,6 @@ def test_in_order_traversal(capsys, test_tree, expected_response):
 	assert captured.out == expected_response
 
 
-# TODO: add proper tree traversal test cases
 TEST_POST_ORDER_TRAVERSAL = [
 	(None, ''),
 	(create_tree(), "9\n15\n7\n20\n3\n")
