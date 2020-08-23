@@ -35,7 +35,7 @@ def _partition(list, low, high):
 	return i+1
 
 
-def quicksort(list, low, high):
+def quick_sort(list, low, high):
 	"""
 	Quicksort algorithm
 	list:
@@ -47,11 +47,11 @@ def quicksort(list, low, high):
 	"""
 	if list and low < high:
 		pivot_position = _partition(list, low, high)
-		quicksort(list, low, pivot_position-1)
-		quicksort(list, pivot_position+1, high)
+		quick_sort(list, low, pivot_position-1)
+		quick_sort(list, pivot_position+1, high)
 
 
-def mergesort(list):
+def merge_sort(list):
 	"""
 	Merge sort algorithm
 	list:
@@ -67,8 +67,8 @@ def mergesort(list):
 	
 
 	# sort left and right
-	mergesort(left)
-	mergesort(right)
+	merge_sort(left)
+	merge_sort(right)
 
 
 	# merge left and right
