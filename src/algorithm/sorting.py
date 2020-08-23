@@ -10,6 +10,10 @@ def quick_sort(list, low, high):
 		index of the beginning of the list
 	high:
 		index of the end of the list
+	complexity:
+		time average & best: O(nlogn)
+		time worse: O(n^2)
+		space: O(n)
 	"""
 	if list and low < high:
 		pivot_position = _partition(list, low, high)
@@ -22,6 +26,9 @@ def merge_sort(list):
 	Merge sort algorithm
 	list:
 		list of numbers that will be sorted
+	complexity:
+		time average, best, & worst: O(nlogn)
+		space:O(n)
 	"""
 	if len(list) <= 1:
 		return list if list else []
