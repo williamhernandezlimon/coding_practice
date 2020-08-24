@@ -17,7 +17,7 @@ def test_quick_sort(test_list, test_low, test_high, expected_response):
 	assert test_list == expected_response
 
 
-TEST_MERGE_SORT = [
+TEST_SORT = [
 	([], []),
 	([1], [1]),
 	([1, 1, 1], [1, 1, 1]),
@@ -26,8 +26,15 @@ TEST_MERGE_SORT = [
 	([2, 2, 1, 1, 3, 3], [1, 1, 2, 2, 3, 3]),
 	([2, 1, 4, 3], [1, 2, 3, 4])
 ]
-@mark.parametrize("test_list, expected_response", TEST_MERGE_SORT)
+@mark.parametrize("test_list, expected_response", TEST_SORT)
 def test_merge_sort(test_list, expected_response):
 	sorting.merge_sort(test_list)
+
+	assert test_list == expected_response
+
+
+@mark.parametrize("test_list, expected_response", TEST_SORT)
+def test_insertion_sort(test_list, expected_response):
+	sorting.insertion_sort(test_list)
 
 	assert test_list == expected_response
