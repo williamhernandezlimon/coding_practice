@@ -66,6 +66,26 @@ def merge_sort(list):
 		k += 1
 
 
+def insertion_sort(list):
+	"""
+	Insertion sort algorithm
+	list:
+		list of numebers which will be sorted
+	complexity:
+		time: O(n^2)
+		space: O(n)
+	"""
+	i = 1
+	while i < len(list):
+		j = i - 1
+		current_value = list[i]
+		while j >= 0 and list[j] >= current_value:
+			# shift values +1 and swap with current value
+			list[j+1], list[j] = list[j], current_value
+			j -= 1
+			
+		i += 1
+
 
 def _partition(list, low, high):
 	"""
