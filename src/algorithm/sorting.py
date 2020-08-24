@@ -87,6 +87,23 @@ def quick_sort(list, low, high):
 		quick_sort(list, pivot_position+1, high)
 
 
+def selection_sort(list):
+	"""
+	Selection sort algorithm
+	list:
+		list of numbers that will be sorted
+	complexity:
+		best, average, & worst: O(n^2)
+	"""
+	for i in range(len(list)):
+		minimum_index = i
+		for j in range(i+1, len(list)):
+			if list[minimum_index] > list[j]:
+				minimum_index = j
+		
+		list[i], list[minimum_index] = list[minimum_index], list[i]
+
+
 def _partition(list, low, high):
 	"""
 	Only used in quicksort.
