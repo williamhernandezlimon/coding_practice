@@ -2,6 +2,7 @@ from src.algorithm import sorting
 from pytest import mark
 
 
+
 TEST_QUICK_SORT = [
 	([], 0, 0, []),
 	([], 1, 2, []),
@@ -17,6 +18,9 @@ def test_quick_sort(test_list, test_low, test_high, expected_response):
 	assert test_list == expected_response
 
 
+# Please note: 
+#	Reassigning TEST_SORT allows test_list to be reset
+#	Since every test method modifies TEST_SORT's test_list by reference
 TEST_SORT = [
 	([], []),
 	([1], [1]),
@@ -33,8 +37,33 @@ def test_merge_sort(test_list, expected_response):
 	assert test_list == expected_response
 
 
+TEST_SORT = [
+	([], []),
+	([1], [1]),
+	([1, 1, 1], [1, 1, 1]),
+	([2, 1, 3], [1, 2, 3]),
+	([2, 2, 1, 3], [1, 2, 2, 3]),
+	([2, 2, 1, 1, 3, 3], [1, 1, 2, 2, 3, 3]),
+	([2, 1, 4, 3], [1, 2, 3, 4])
+]
 @mark.parametrize("test_list, expected_response", TEST_SORT)
 def test_insertion_sort(test_list, expected_response):
 	sorting.insertion_sort(test_list)
 
+	assert test_list == expected_response
+
+
+TEST_SORT = [
+	([], []),
+	([1], [1]),
+	([1, 1, 1], [1, 1, 1]),
+	([2, 1, 3], [1, 2, 3]),
+	([2, 2, 1, 3], [1, 2, 2, 3]),
+	([2, 2, 1, 1, 3, 3], [1, 1, 2, 2, 3, 3]),
+	([2, 1, 4, 3], [1, 2, 3, 4])
+]
+@mark.parametrize("test_list, expected_response", TEST_SORT)
+def test_selection_sort(test_list, expected_response):
+	sorting.selection_sort(test_list)
+	
 	assert test_list == expected_response
