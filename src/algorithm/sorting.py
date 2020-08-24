@@ -1,24 +1,25 @@
 #!/usr/bin/env python3
 
 
-def quick_sort(list, low, high):
+def insertion_sort(list):
 	"""
-	Quicksort algorithm
+	Insertion sort algorithm
 	list:
-		list of numbers that will be sorted
-	low:
-		index of the beginning of the list
-	high:
-		index of the end of the list
+		list of numebers which will be sorted
 	complexity:
-		time average & best: O(nlogn)
-		time worse: O(n^2)
+		time: O(n^2)
 		space: O(n)
 	"""
-	if list and low < high:
-		pivot_position = _partition(list, low, high)
-		quick_sort(list, low, pivot_position-1)
-		quick_sort(list, pivot_position+1, high)
+	i = 1
+	while i < len(list):
+		j = i - 1
+		current_value = list[i]
+		while j >= 0 and list[j] >= current_value:
+			# shift values +1 and swap with current value
+			list[j+1], list[j] = list[j], current_value
+			j -= 1
+			
+		i += 1
 
 
 def merge_sort(list):
@@ -66,25 +67,24 @@ def merge_sort(list):
 		k += 1
 
 
-def insertion_sort(list):
+def quick_sort(list, low, high):
 	"""
-	Insertion sort algorithm
+	Quicksort algorithm
 	list:
-		list of numebers which will be sorted
+		list of numbers that will be sorted
+	low:
+		index of the beginning of the list
+	high:
+		index of the end of the list
 	complexity:
-		time: O(n^2)
+		time average & best: O(nlogn)
+		time worse: O(n^2)
 		space: O(n)
 	"""
-	i = 1
-	while i < len(list):
-		j = i - 1
-		current_value = list[i]
-		while j >= 0 and list[j] >= current_value:
-			# shift values +1 and swap with current value
-			list[j+1], list[j] = list[j], current_value
-			j -= 1
-			
-		i += 1
+	if list and low < high:
+		pivot_position = _partition(list, low, high)
+		quick_sort(list, low, pivot_position-1)
+		quick_sort(list, pivot_position+1, high)
 
 
 def _partition(list, low, high):
