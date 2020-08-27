@@ -26,32 +26,6 @@ def heap_sort(list):
 		i -= 1
 
 
-def _max_heapify(list, length, parent_pos):
-	"""
-	Max heapify sets parent_pos to be the largest item 
-		if parent_pos is not originally the largest, 
-		then a swap is performed and is re-heapified
-	Once parent_pos is the largest item, heap_sort can extract it later
-	"""
-	# set left and right
-	left_pos = 2*parent_pos + 1
-	right_pos = 2*parent_pos + 2
-
-	max_position = parent_pos
-	# if left child exists and is bigger
-	if left_pos < length and list[parent_pos] < list[left_pos]:
-		max_position = left_pos
-
-	# if right child exists and is bigger
-	if right_pos < length and list[max_position] < list[right_pos]:
-		max_position = right_pos
-
-	# if root is not max, swap and re-heapify
-	if max_position != parent_pos:
-		list[parent_pos], list[max_position] = list[max_position], list[parent_pos]
-		_max_heapify(list, length, parent_pos)
-
-
 def insertion_sort(list):
 	"""
 	Insertion sort algorithm
@@ -154,6 +128,32 @@ def selection_sort(list):
 		
 		list[i], list[minimum_index] = list[minimum_index], list[i]
 
+
+def _max_heapify(list, length, parent_pos):
+	"""
+	Max heapify sets parent_pos to be the largest item 
+		if parent_pos is not originally the largest, 
+		then a swap is performed and is re-heapified
+	Once parent_pos is the largest item, heap_sort can extract it later
+	"""
+	# set left and right
+	left_pos = 2*parent_pos + 1
+	right_pos = 2*parent_pos + 2
+
+	max_position = parent_pos
+	# if left child exists and is bigger
+	if left_pos < length and list[parent_pos] < list[left_pos]:
+		max_position = left_pos
+
+	# if right child exists and is bigger
+	if right_pos < length and list[max_position] < list[right_pos]:
+		max_position = right_pos
+
+	# if root is not max, swap and re-heapify
+	if max_position != parent_pos:
+		list[parent_pos], list[max_position] = list[max_position], list[parent_pos]
+		_max_heapify(list, length, parent_pos)
+		
 
 def _partition(list, low, high):
 	"""
