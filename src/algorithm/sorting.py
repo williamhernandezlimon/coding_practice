@@ -11,35 +11,45 @@ def heap_sort(list):
 		time: O(nlogn)
 		space: O(n)
 	"""
-	length = len(list)
 	# build max heap
-	middle = length // 2
-	while middle >= 0:
-		_max_heapify(list, middle, length)
-		middle -= 1
+	length = len(list)
+	i = length // 2  # starting from the middle works more effeciently
+	while i >= 0:
+		_max_heapify(list, length, i)
+		i -= 1
 
-	# extract elements
+	# extract max element and re-heapify
 	i = length - 1
 	while i > 0:
 		list[0], list[i] = list[i], list[0]
-		_max_heapify(list, 0, i)
+		_max_heapify(list, i, 0)
 		i -= 1
 
 
-def _max_heapify(list, parent_pos, length):
+def _max_heapify(list, length, parent_pos):
 	"""
-
+	Max heapify sets parent_pos to be the largest item 
+		if parent_pos is not originally the largest, 
+		then a swap is performed and is re-heapified
+	Once parent_pos is the largest item, heap_sort can extract it later
 	"""
-	# get left and right
+	# set left and right
 	left_pos = 2*parent_pos + 1
 	right_pos = 2*parent_pos + 2
 
-	max_position = left_pos if left_pos < length and list[parent_pos] < list[left_pos] else parent_pos
-	max_position = right_pos if right_pos < length and list[max_position] < list[right_pos] else max_position
+	max_position = parent_pos
+	# if left child exists and is bigger
+	if left_pos < length and list[parent_pos] < list[left_pos]:
+		max_position = left_pos
 
+	# if right child exists and is bigger
+	if right_pos < length and list[max_position] < list[right_pos]:
+		max_position = right_pos
+
+	# if root is not max, swap and re-heapify
 	if max_position != parent_pos:
 		list[parent_pos], list[max_position] = list[max_position], list[parent_pos]
-		_max_heapify(list, parent_pos, length)
+		_max_heapify(list, length, parent_pos)
 
 
 def insertion_sort(list):
