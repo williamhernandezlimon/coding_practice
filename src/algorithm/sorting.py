@@ -1,6 +1,47 @@
 #!/usr/bin/env python3
 
 
+def heap_sort(list):
+	"""
+	Heap sort algorithm
+	list:
+		the list of numbers to be sorted
+		DOES NOT SUPPORT duplicates
+	complexity:
+		time: O(nlogn)
+		space: O(n)
+	"""
+	length = len(list)
+	# build max heap
+	middle = length // 2
+	while middle >= 0:
+		_max_heapify(list, middle, length)
+		middle -= 1
+
+	# extract elements
+	i = length - 1
+	while i > 0:
+		list[0], list[i] = list[i], list[0]
+		_max_heapify(list, 0, i)
+		i -= 1
+
+
+def _max_heapify(list, parent_pos, length):
+	"""
+
+	"""
+	# get left and right
+	left_pos = 2*parent_pos + 1
+	right_pos = 2*parent_pos + 2
+
+	max_position = left_pos if left_pos < length and list[parent_pos] < list[left_pos] else parent_pos
+	max_position = right_pos if right_pos < length and list[max_position] < list[right_pos] else max_position
+
+	if max_position != parent_pos:
+		list[parent_pos], list[max_position] = list[max_position], list[parent_pos]
+		_max_heapify(list, parent_pos, length)
+
+
 def insertion_sort(list):
 	"""
 	Insertion sort algorithm
