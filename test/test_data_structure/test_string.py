@@ -2,6 +2,21 @@
 from src.data_structure.string import *
 from pytest import mark
 
+TEST_GET_LARGER = [
+	("", "", ""),
+	("", "-", "-"),
+	("", "a", "a"),
+	('aa', 'a', 'aa'),
+	('---', '--', '---'),
+	('hello-12', 'hello-1', 'hello-12'),
+	('hello-world', 'hello-earth', 'hello-world')
+]
+@mark.parametrize("test_s1, test_s2, expected_response", TEST_GET_LARGER)
+def test_get_larger(test_s1, test_s2, expected_response):
+	response = get_larger(test_s1, test_s2)
+
+	assert response == expected_response
+
 
 TEST_MAX_VOWELS = [
 	("abciiidef", 3, 3),
