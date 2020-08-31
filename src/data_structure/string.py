@@ -1,6 +1,35 @@
 #!/usr/bin/env python3
 from src.data_structure import table as table_obj
 
+
+def get_larger(s1, s2):
+	"""
+	Return the larger string delimeted by '-'
+	s1:
+		string 1 delimited by dash
+	s2:
+		string 2 delimited by dash
+	return:
+		return the largest string per ASCII value
+	"""
+	l1 = s1.split('-')
+	l2 = s2.split('-')
+
+	i = 0
+	j = 0
+	while i < len(l1) and j < len(l2):
+		word1 = int(l1[i]) if l1[i].isnumeric() else l1[i]
+		word2 = int(l2[j]) if l2[j].isnumeric() else l2[j]
+		if  word1 > word2:
+			return s1
+		if word1 < word2:
+			return s2
+		i += 1
+		j += 1
+
+	return s1 if len(l1) > len(l2) else s2
+
+
 def max_vowels(string, substring_length):
 	"""
 	string: contains a sequence of chartacter, used to search for vowels
@@ -111,3 +140,4 @@ def length_of_longest_substring(string: str) -> int:
 		max_length = max(max_length, back_ptr - front_ptr)
 
 	return max_length
+
