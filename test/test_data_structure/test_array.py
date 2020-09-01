@@ -18,6 +18,30 @@ def test_contains_duplicates(test_array, expected_response):
 	assert response == expected_response
 
 
+TEST_PADOVAN_SEQUENCE = [
+	(0, 1),
+	(1, 1),
+	(2, 1),
+	(3, 2),
+	(4, 2),
+	(5, 3),
+	(6, 4),
+	(7, 5)
+]
+@mark.parametrize("test_num, expected_response", copy.deepcopy(TEST_PADOVAN_SEQUENCE))
+def test_padovan_sequence(test_num, expected_response):
+	response = padovan_sequence(test_num)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_num, expected_response", copy.deepcopy(TEST_PADOVAN_SEQUENCE))
+def test_padovan_sequence_inefficient(test_num, expected_response):
+	response = padovan_sequence_inefficient(test_num)
+
+	assert response == expected_response
+
+
 TEST_REMOVE_DUPLICATES = [
 	([], 0),
 	([1], 1),
