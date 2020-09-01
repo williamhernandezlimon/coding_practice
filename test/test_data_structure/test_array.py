@@ -4,24 +4,40 @@ from src.data_structure.array import *
 from pytest import mark
 
 
-TEST_THREE_SUMS = [
-	([], []),
-	([1, 2], []),
-	([1, 2, 3, 4], []),
-	([0, 0, 0], [[0, 0, 0]]),
-	([0, 0, 0, 1], [[0, 0, 0]]),
-	([-1, 0, 1, 2, -1, -4], [[-1, 0, 1], [-1, -1, 2]])
+TEST_CONTAINS_DUPLICATES = [
+	([], False),
+	([1], False),
+	([1,1], True),
+	([1,2,3,4,5,6,7,1], True),
+	([1,2,3,4,5,6,7], False)
 ]
-@mark.parametrize("test_list, expected_response", copy.deepcopy(TEST_THREE_SUMS))
-def test_three_sums_inefficient(test_list, expected_response):
-	response = three_sums(test_list)
+@mark.parametrize("test_array, expected_response", TEST_CONTAINS_DUPLICATES)
+def test_contains_duplicates(test_array, expected_response):
+	response = contains_duplicates(test_array)
 
 	assert response == expected_response
 
 
-@mark.parametrize("test_list, expected_response", copy.deepcopy(TEST_THREE_SUMS))
-def test_three_sums_inefficient(test_list, expected_response):
-	response = three_sums_inefficient(test_list)
+TEST_PADOVAN_SEQUENCE = [
+	(0, 1),
+	(1, 1),
+	(2, 1),
+	(3, 2),
+	(4, 2),
+	(5, 3),
+	(6, 4),
+	(7, 5)
+]
+@mark.parametrize("test_num, expected_response", copy.deepcopy(TEST_PADOVAN_SEQUENCE))
+def test_padovan_sequence(test_num, expected_response):
+	response = padovan_sequence(test_num)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_num, expected_response", copy.deepcopy(TEST_PADOVAN_SEQUENCE))
+def test_padovan_sequence_inefficient(test_num, expected_response):
+	response = padovan_sequence_inefficient(test_num)
 
 	assert response == expected_response
 
@@ -39,18 +55,27 @@ def test_remove_duplicates(test_array, expected_response):
 	assert response == expected_response
 
 
-TEST_CONTAINS_DUPLICATES = [
-	([], False),
-	([1], False),
-	([1,1], True),
-	([1,2,3,4,5,6,7,1], True),
-	([1,2,3,4,5,6,7], False)
+TEST_THREE_SUMS = [
+	([], []),
+	([1, 2], []),
+	([1, 2, 3, 4], []),
+	([0, 0, 0], [[0, 0, 0]]),
+	([0, 0, 0, 1], [[0, 0, 0]]),
+	([-1, 0, 1, 2, -1, -4], [[-1, 0, 1], [-1, -1, 2]])
 ]
-@mark.parametrize("test_array, expected_response", TEST_CONTAINS_DUPLICATES)
-def test_contains_duplicates(test_array, expected_response):
-	response = contains_duplicates(test_array)
+@mark.parametrize("test_list, expected_response", copy.deepcopy(TEST_THREE_SUMS))
+def test_three_sums(test_list, expected_response):
+	response = three_sums(test_list)
 
 	assert response == expected_response
+
+
+@mark.parametrize("test_list, expected_response", copy.deepcopy(TEST_THREE_SUMS))
+def test_three_sums_inefficient(test_list, expected_response):
+	response = three_sums_inefficient(test_list)
+
+	assert response == expected_response
+
 
 # TODO: fix test case
 # TEST_IS_PREFIX_OF_WORD = [
