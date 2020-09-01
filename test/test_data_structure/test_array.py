@@ -1,8 +1,29 @@
 #!/usr/bin/env python3
+import copy
 from src.data_structure.array import *
 from pytest import mark
 
 
+TEST_THREE_SUMS = [
+	([], []),
+	([1, 2], []),
+	([1, 2, 3, 4], []),
+	([0, 0, 0], [[0, 0, 0]]),
+	([0, 0, 0, 1], [[0, 0, 0]]),
+	([-1, 0, 1, 2, -1, -4], [[-1, 0, 1], [-1, -1, 2]])
+]
+@mark.parametrize("test_list, expected_response", copy.deepcopy(TEST_THREE_SUMS))
+def test_three_sums_inefficient(test_list, expected_response):
+	response = three_sums(test_list)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_list, expected_response", copy.deepcopy(TEST_THREE_SUMS))
+def test_three_sums_inefficient(test_list, expected_response):
+	response = three_sums_inefficient(test_list)
+
+	assert response == expected_response
 
 
 TEST_REMOVE_DUPLICATES = [
