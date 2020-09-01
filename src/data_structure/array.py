@@ -15,6 +15,46 @@ def contains_duplicates(array):
 	return False
 
 
+def padovan_sequence(num: int) -> int:
+	"""
+	Calculate the padovan sequence from num
+	num:
+		number used to calculate padovan sequence
+	return:
+		return the number from padovan sequence provided num
+	complexity:
+		time: O(n)
+		space: O(n)
+	"""
+	if num < 0:
+		return None
+	sequence = [1,1,1]
+	for i in range(3, num + 1):
+		i_value = sequence[i - 2] + sequence[i - 3]
+		sequence.append(i_value)
+
+	return sequence[num]
+			
+
+def padovan_sequence_inefficient(num: int) -> int:
+	"""
+	Calculate the padovan sequence from num
+	num:
+		number used to calculate padovan sequence
+	return:
+		return the number from padovan sequence provided num
+	complexity:
+		time: O(2^n)
+		space: O(n)
+	"""
+	if num < 0:
+		return None
+	if num == 0 or num == 1 or num == 2:
+		return 1
+
+	return padovan_sequence_inefficient(num - 2) + padovan_sequence_inefficient(num - 3)
+
+
 def remove_duplicates(array):
 	"""
 	Remove all duplicates from sorted array "in place"
