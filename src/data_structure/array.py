@@ -9,17 +9,20 @@ def three_sums(nums):
 	return:
 		three numbers that do not add up to zero
 	"""
-	if not nums or len(nums) < 3:
-		return []
-
-	
-	
-	# store nums in hash_map
-	hash_nums = {}
-	for num in nums:
-		hash_nums[num] = 0
-
 	three_sums = []
+	for i, num_i in enumerate(nums[:-1]):
+		nums_set = set()
+		for j, num_j in enumerate(nums[i+1:], i+1):
+			target_num = 0 - num_i - num_j
+			if target_num in nums_set:
+				three_nums = sorted([num_i, num_j, target_num])
+				if three_nums not in three_sums:
+					three_sums.append(three_nums)
+			nums_set.add(num_j)
+
+
+	return three_sums
+
 
 def three_sums_inefficient(nums):
 	"""
