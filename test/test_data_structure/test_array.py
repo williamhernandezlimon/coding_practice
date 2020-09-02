@@ -28,8 +28,6 @@ TEST_FIBONACCI_SEQUENCE = [
 	(6, 8),
 	(7, 13)
 ]
-
-
 @mark.parametrize("test_num, expected_response", copy.deepcopy(TEST_FIBONACCI_SEQUENCE))
 def test_fibonacci_sequence(test_num, expected_response):
 	response = fibonacci_sequence(test_num)
