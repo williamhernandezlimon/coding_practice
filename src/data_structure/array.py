@@ -15,6 +15,46 @@ def contains_duplicates(array):
 	return False
 
 
+def fibonacci_sequence(num: int) -> int:
+	"""
+	Calculate the fibonacci sequence from num
+	num:
+		number used to calculate fibonacci sequence
+	return:
+		return the number from fibonacci sequence provided num
+	complexity:
+		time: O(n)
+		space: O(n)
+	"""
+	if num < 0:
+		return None
+
+	sequence = [0, 1]
+	for i in range(2, num+1):
+		i_value = sequence[i - 1]  + sequence[i - 2]
+		sequence.append(i_value)
+
+	return sequence[num]
+	
+
+def fibonacci_sequence_inefficient(num: int) -> int:
+	"""
+	Calculate the fibonacci sequence from num
+	num:
+		number used to calculate fibonacci sequence
+	return:
+		return the number from fibonacci sequence provided num
+	complexity:
+		time: O(2^n)
+		space: O(n)
+	"""
+	if num == 0:
+		return 0
+	if num == 1:
+		return 1
+	return fibonacci_sequence_inefficient(num - 1) + fibonacci_sequence_inefficient(num - 2)
+
+
 def padovan_sequence(num: int) -> int:
 	"""
 	Calculate the padovan sequence from num

@@ -18,6 +18,30 @@ def test_contains_duplicates(test_array, expected_response):
 	assert response == expected_response
 
 
+TEST_FIBONACCI_SEQUENCE = [
+	(0, 0),
+	(1, 1),
+	(2, 1),
+	(3, 2),
+	(4, 3),
+	(5, 5),
+	(6, 8),
+	(7, 13)
+]
+@mark.parametrize("test_num, expected_response", copy.deepcopy(TEST_FIBONACCI_SEQUENCE))
+def test_fibonacci_sequence(test_num, expected_response):
+	response = fibonacci_sequence(test_num)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_num, expected_response", copy.deepcopy(TEST_FIBONACCI_SEQUENCE))
+def test_fibonacci_sequence_inefficient(test_num, expected_response):
+	response = fibonacci_sequence_inefficient(test_num)
+
+	assert response == expected_response
+
+
 TEST_PADOVAN_SEQUENCE = [
 	(0, 1),
 	(1, 1),
