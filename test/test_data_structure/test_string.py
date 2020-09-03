@@ -49,6 +49,24 @@ def test_reverse_integer(test_number, expected_response):
 	assert response == expected_response
 
 
+TEST_IS_PALINDROME_INTEGER = [
+	(-1, False),
+	(-11, False),
+	(1211, False),
+	(948, False),
+	(0, True),
+	(1, True),
+	(11, True),
+	(121, True),
+	(1221, True)
+]
+@mark.parametrize("test_number, expected_response", TEST_IS_PALINDROME_INTEGER)
+def test_is_palindrom_integer(test_number, expected_response):
+	response = is_palindrome_integer(test_number)
+
+	assert response == expected_response
+
+
 TEST_IS_VALID_PARENTHESIS = [
 	("", True),
 	("()", True),
