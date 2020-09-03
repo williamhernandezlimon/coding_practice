@@ -72,6 +72,22 @@ def reverse_integer(number: int) -> int:
 
 	return reverse if is_positive else reverse * -1
 
+
+def is_palindrome_integer(num: int) -> bool:
+	"""
+	Checks to see if the integer is a valid palindrome
+	num:
+		signed integer
+	return:
+		'num' is a valid palindrome
+	"""
+	if num < 0:
+		return False
+	num_str = str(num)
+
+	return num_str == num_str[::-1]
+
+
 def is_valid_parenthesis(string: str) -> bool:
 	"""
 	Return if parenthesis is valid.
