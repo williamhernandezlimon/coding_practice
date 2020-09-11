@@ -73,6 +73,38 @@ def reverse_integer(number: int) -> int:
 	return reverse if is_positive else reverse * -1
 
 
+def roman_to_integer(roman_number: str) -> int:
+	"""
+	Convert string roman numbers to integer value
+	roman_number:
+		string that represents the roman number
+		please note: assumming valid roman_number
+	return:
+		integer value of the roman_number
+	"""
+	roman_map = {
+		"I": 1,
+		"V": 5,
+		"X": 10,
+		"L": 50,
+		"C": 100,
+		"D": 500,
+		"M": 1000
+	}
+	reverse = roman_number[::-1]
+	total = roman_map[reverse[0]] if reverse else None
+	# traverse reverse string starting from 1
+	for i, char in enumerate(reverse[1:], 1):
+		previous_number = roman_map[reverse[i-1]]
+		current_number = roman_map[reverse[i]]
+		if current_number >= previous_number:
+			total += current_number
+		else:
+			total -= current_number
+
+	return total
+
+
 def is_palindrome_integer(num: int) -> bool:
 	"""
 	Checks to see if the integer is a valid palindrome
