@@ -48,6 +48,28 @@ def test_reverse_integer(test_number, expected_response):
 
 	assert response == expected_response
 
+TEST_ROMAN_TO_INTEGER = [
+	("I", 1),
+	("V", 5),
+	("X", 10),
+	("L", 50),
+	("C", 100),
+	("D", 500),
+	("M", 1000),
+	("III", 3),
+	("IV", 4),
+	("III", 3),
+	("IV", 4),
+	("LVIII", 58),
+	("MCMXCIV", 1994)
+]
+@mark.parametrize("test_roman_number, expected_response", TEST_ROMAN_TO_INTEGER)
+def test_roman_to_integer(test_roman_number, expected_response):
+	response = roman_to_integer(test_roman_number)
+
+	assert response == expected_response
+
+
 
 TEST_IS_PALINDROME_INTEGER = [
 	(-1, False),
