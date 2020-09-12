@@ -30,6 +30,31 @@ def get_larger(s1, s2):
 	return s1 if len(l1) > len(l2) else s2
 
 
+def longest_palindrome(s: str) -> str:
+	"""
+   	s:
+   		string that will be used to find the longest palindrome
+   	return:
+   		the largest string palindrome, inside s
+	"""
+	if not s or len(s) < 1: return ""
+	start = 0
+	end = 0
+
+	for i in range(len(s)):
+		len_odd = _expand_from_middle(s, i, i)  # for odd strings: "aba"
+		len_even = _expand_from_middle(s, i, i+1)  # for even strings: "abba"
+		len_max = max(len_even, len_odd)
+		
+		if len_max > end - start:
+			# save new max-substring end and start
+			# please note: 'i' is considered the middle point
+			start = i - int(((len_max - 1) / 2))
+			end = i + int((len_max / 2))
+
+	return s[start:end+1]
+
+
 def max_vowels(string, substring_length):
 	"""
 	string: contains a sequence of chartacter, used to search for vowels
@@ -189,3 +214,26 @@ def length_of_longest_substring(string: str) -> int:
 
 	return max_length
 
+
+# PRIVATE METHODS BELOW:
+def _expand_from_middle(s: str, left: int, right: int) -> int:
+	"""
+	Given a string, traverse left and right, respectively
+	as long as within bounds and s[left] == s[right]
+	Used in method longest_palindrome(s)
+	s:
+		string that will be traversed
+	left:
+		integer for left start point before decrementing to the left
+	right:
+		integer for right start point before incrementing to the right
+	return:
+		the length between right and left
+	"""
+	if not s or left > right: return 0
+
+	while left >= 0 and right < len(s) and s[left] == s[right]:
+		left -= 1
+		right += 1
+
+	return right - left - 1
