@@ -38,7 +38,6 @@ def longest_palindrome(s: str) -> str:
    		the largest string palindrome, inside s
 	"""
 	if not s or len(s) < 1: return ""
-
 	start = 0
 	end = 0
 
@@ -50,8 +49,8 @@ def longest_palindrome(s: str) -> str:
 		if len_max > end - start:
 			# save new max-substring end and start
 			# please note: 'i' is considered the middle point
-			start = int(i - ((len_max -1) / 2))
-			end = int(i + (len_max / 2))
+			start = i - int(((len_max - 1) / 2))
+			end = i + int((len_max / 2))
 
 	return s[start:end+1]
 
