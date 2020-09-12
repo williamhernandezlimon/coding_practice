@@ -18,6 +18,21 @@ def test_get_larger(test_s1, test_s2, expected_response):
 	assert response == expected_response
 
 
+TEST_LONGEST_PALINDROME = [
+	("", ""),
+	("a", "a"),
+	("aba", "aba"),
+	("abba", "abba"),
+	("cbbd", "bb"),
+	("abcdefg", "g")
+]
+@mark.parametrize("test_s, expected_response", TEST_LONGEST_PALINDROME)
+def test_longest_palindrome(test_s, expected_response):
+	response = longest_palindrome(test_s)
+
+	assert response == expected_response
+
+
 TEST_MAX_VOWELS = [
 	("abciiidef", 3, 3),
 	("aeiou", 2, 2),
