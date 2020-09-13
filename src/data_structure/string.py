@@ -158,6 +158,43 @@ def length_of_longest_substring(string: str) -> int:
 	return max_length
 
 
+def longest_common_prefix_inefficient(strs):
+	"""
+	Get the longest common prefix, for a given list of strings
+	strs:
+		list of strings, to choose the common prefix from
+	return:
+		longest common prefix
+	complexity:
+		time: O(mxn)
+			m: is the number of elements in the list
+			n: the length of the strings
+		space: O(mxn)
+	"""
+	if len(strs) < 1: return ""
+	if len(strs) == 1: return strs[0]
+
+	longest_prefix = strs[0]
+	
+	# loop list
+	for i, curr_string in enumerate(strs[1:], 1):
+		prev_string = strs[i-1]
+
+		# loop previous and current string
+		j = 0
+		print(f"prev_string: {prev_string} len(prev_string): {len(prev_string)} curr_string: {curr_string} len(curr_string): {len(curr_string)} longest_prefix: {longest_prefix} len(longest_prefix): {len(longest_prefix)}")
+		while prev_string and curr_string and longest_prefix and \
+				j < len(prev_string) and j < len(curr_string) and j < len(longest_prefix) and \
+				prev_string[j] == curr_string[j] == longest_prefix[j]:
+			print(f"j: {j}")
+			j += 1
+
+		longest_prefix = longest_prefix[0:j]
+		if longest_prefix == 0: return ""
+
+	return longest_prefix
+
+
 def longest_palindrome(s: str) -> str:
 	"""
    	s:
