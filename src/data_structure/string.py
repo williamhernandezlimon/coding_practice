@@ -2,6 +2,49 @@
 from src.data_structure import table as table_obj
 
 
+def compress(s):
+	"""
+	Compress duplicate neighboring characters, by using integer
+	to represent the number of occurances.
+	Example:
+		abbccc --> a2b2c3
+	s:
+		the string that will be compresed
+	return:
+		the compressed string
+
+	complexity:
+		time: O(n)
+		space: O(n)
+			using join() instead of += for str
+			reduces the space complexity
+	"""
+	# check for unordinary null cases
+	if not s: return ""
+
+	compressed_string = []
+	
+	# i is the pointer to the last duplicate character
+	i = 0; j = 0
+	while j < len(s):
+		# duplicate character
+		if s[i] == s[j]:
+			if i == j:
+				compressed_string.append(s[j])
+		# non-duplicate character
+		else:
+			if j - i > 1:
+				compressed_string.append(str(j - i))
+			compressed_string.append(s[j])
+			i = j
+		j += 1
+
+	if j - i > 1:
+		compressed_string.append(str(j - i))
+
+	return "".join(compressed_string)
+
+
 def get_larger(s1, s2):
 	"""
 	Return the larger string delimeted by '-'
