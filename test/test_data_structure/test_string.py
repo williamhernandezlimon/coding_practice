@@ -2,6 +2,26 @@
 from src.data_structure.string import *
 from pytest import mark
 
+TEST_COMPRESS = [
+	("", ""),
+	("a", "a"),
+	("aa", "a2"),
+	("aaa", "a3"),
+	("aabbcc", "a2b2c2"),
+	("abbcdddd", "ab2cd4"),
+	("abcdefg", "abcdefg"),
+	("AaBBbb", "AaB2b2"),
+	("ddaaaff", "d2a3f2"),
+	("daaaafffyy", "da4f3y2"),
+	("mississippi", "mis2is2ip2i"),
+	("aaabbccccddefg", "a3b2c4d2efg")
+]
+@mark.parametrize("test_s, expected_response", TEST_COMPRESS)
+def test_compress(test_s, expected_response):
+	response = compress(test_s)
+
+	assert response == expected_response
+
 TEST_GET_LARGER = [
 	("", "", ""),
 	("", "-", "-"),
