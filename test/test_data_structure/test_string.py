@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from src.data_structure.string import *
+from src.data_structure import string
 from pytest import mark
 
 TEST_COMPRESS = [
@@ -18,7 +18,7 @@ TEST_COMPRESS = [
 ]
 @mark.parametrize("test_s, expected_response", TEST_COMPRESS)
 def test_compress(test_s, expected_response):
-	response = compress(test_s)
+	response = string.compress(test_s)
 
 	assert response == expected_response
 
@@ -33,7 +33,7 @@ TEST_GET_LARGER = [
 ]
 @mark.parametrize("test_s1, test_s2, expected_response", TEST_GET_LARGER)
 def test_get_larger(test_s1, test_s2, expected_response):
-	response = get_larger(test_s1, test_s2)
+	response = string.get_larger(test_s1, test_s2)
 
 	assert response == expected_response
 
@@ -48,7 +48,7 @@ TEST_LONGEST_PALINDROME = [
 ]
 @mark.parametrize("test_s, expected_response", TEST_LONGEST_PALINDROME)
 def test_longest_palindrome(test_s, expected_response):
-	response = longest_palindrome(test_s)
+	response = string.longest_palindrome(test_s)
 
 	assert response == expected_response
 
@@ -65,7 +65,7 @@ TEST_MAX_VOWELS = [
 ]
 @mark.parametrize("test_str, test_substr_len, expected_response", TEST_MAX_VOWELS)
 def test_max_vowels(test_str, test_substr_len, expected_response):
-	response = max_vowels(test_str, test_substr_len)
+	response = string.max_vowels(test_str, test_substr_len)
 
 	assert response == expected_response
 
@@ -79,7 +79,7 @@ TEST_REVERSE_INTEGER = [
 ]
 @mark.parametrize("test_number, expected_response", TEST_REVERSE_INTEGER)
 def test_reverse_integer(test_number, expected_response):
-	response = reverse_integer(test_number)
+	response = string.reverse_integer(test_number)
 
 	assert response == expected_response
 
@@ -100,7 +100,7 @@ TEST_ROMAN_TO_INTEGER = [
 ]
 @mark.parametrize("test_roman_number, expected_response", TEST_ROMAN_TO_INTEGER)
 def test_roman_to_integer(test_roman_number, expected_response):
-	response = roman_to_integer(test_roman_number)
+	response = string.roman_to_integer(test_roman_number)
 
 	assert response == expected_response
 
@@ -119,7 +119,7 @@ TEST_IS_PALINDROME_INTEGER = [
 ]
 @mark.parametrize("test_number, expected_response", TEST_IS_PALINDROME_INTEGER)
 def test_is_palindrom_integer(test_number, expected_response):
-	response = is_palindrome_integer(test_number)
+	response = string.is_palindrome_integer(test_number)
 
 	assert response == expected_response
 
@@ -137,7 +137,7 @@ TEST_IS_VALID_PARENTHESIS = [
 ]
 @mark.parametrize("test_string, expected_response", TEST_IS_VALID_PARENTHESIS)
 def test_is_valid_paranthesis(test_string, expected_response):
-	response = is_valid_parenthesis(test_string)
+	response = string.is_valid_parenthesis(test_string)
 
 	assert response == expected_response
 
@@ -151,7 +151,7 @@ TEST_LENGTH_OF_LONGEST_SUBSTRING = [
 ]
 @mark.parametrize("test_input, expected_response", TEST_LENGTH_OF_LONGEST_SUBSTRING)
 def test_length_of_longest_substring(test_input, expected_response):
-	response = length_of_longest_substring(test_input)
+	response = string.length_of_longest_substring(test_input)
 
 	assert response == expected_response
 
