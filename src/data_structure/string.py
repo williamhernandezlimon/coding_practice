@@ -73,6 +73,91 @@ def get_larger(s1, s2):
 	return s1 if len(l1) > len(l2) else s2
 
 
+def is_palindrome_integer(num: int) -> bool:
+	"""
+	Checks to see if the integer is a valid palindrome
+	num:
+		signed integer
+	return:
+		'num' is a valid palindrome
+	"""
+	if num < 0:
+		return False
+	num_str = str(num)
+
+	return num_str == num_str[::-1]
+
+
+def is_valid_parenthesis(string: str) -> bool:
+	"""
+	Return if parenthesis is valid.
+	Example 1:
+		Input: "()"
+		Output: true
+	Example 2:
+		Input: "()[]{}"
+		Output: true
+	Example 3:
+		Input: "(]"
+		Output: false
+	Example 4:
+		Input: "([)]"
+		Output: false
+	Example 5:
+		Input: "{[]}"
+		Output: true	
+
+	Time Complexity:
+		O(n)
+	Space Complexity:
+		O(n)
+	"""
+	stack = []
+	for c in string:
+		# left parenthesis
+		if c == '(' or c == '[' or c == '{':
+			stack.append(c)
+			continue
+		
+		# right parenthesis
+		top = stack.pop() if stack else None
+		if top == '(' and c == ')':
+			continue
+		elif top =='[' and c == ']':
+			continue
+		elif top =='{' and c == '}':
+			continue
+		else:
+			return False
+	return len(stack) == 0
+
+
+def length_of_longest_substring(string: str) -> int:
+	# string:
+	# 	contains the string we check for longest substring
+	# return:
+	#	the longest substring 
+	front_ptr = 0
+	back_ptr = 0
+	max_length = 0 
+	char_map = {}
+
+	while back_ptr < len(string):
+		char = string[back_ptr]
+		if char not in char_map:
+			# add new char and increase window size
+			char_map[char] = 1
+			back_ptr += 1
+		else:
+			# remove front element and reduce window size
+			del char_map[string[front_ptr]]
+			front_ptr += 1
+
+		max_length = max(max_length, back_ptr - front_ptr)
+
+	return max_length
+
+
 def longest_palindrome(s: str) -> str:
 	"""
    	s:
@@ -171,91 +256,6 @@ def roman_to_integer(roman_number: str) -> int:
 			total -= current_number
 
 	return total
-
-
-def is_palindrome_integer(num: int) -> bool:
-	"""
-	Checks to see if the integer is a valid palindrome
-	num:
-		signed integer
-	return:
-		'num' is a valid palindrome
-	"""
-	if num < 0:
-		return False
-	num_str = str(num)
-
-	return num_str == num_str[::-1]
-
-
-def is_valid_parenthesis(string: str) -> bool:
-	"""
-	Return if parenthesis is valid.
-	Example 1:
-		Input: "()"
-		Output: true
-	Example 2:
-		Input: "()[]{}"
-		Output: true
-	Example 3:
-		Input: "(]"
-		Output: false
-	Example 4:
-		Input: "([)]"
-		Output: false
-	Example 5:
-		Input: "{[]}"
-		Output: true	
-
-	Time Complexity:
-		O(n)
-	Space Complexity:
-		O(n)
-	"""
-	stack = []
-	for c in string:
-		# left parenthesis
-		if c == '(' or c == '[' or c == '{':
-			stack.append(c)
-			continue
-		
-		# right parenthesis
-		top = stack.pop() if stack else None
-		if top == '(' and c == ')':
-			continue
-		elif top =='[' and c == ']':
-			continue
-		elif top =='{' and c == '}':
-			continue
-		else:
-			return False
-	return len(stack) == 0
-
-
-def length_of_longest_substring(string: str) -> int:
-	# string:
-	# 	contains the string we check for longest substring
-	# return:
-	#	the longest substring 
-	front_ptr = 0
-	back_ptr = 0
-	max_length = 0 
-	char_map = {}
-
-	while back_ptr < len(string):
-		char = string[back_ptr]
-		if char not in char_map:
-			# add new char and increase window size
-			char_map[char] = 1
-			back_ptr += 1
-		else:
-			# remove front element and reduce window size
-			del char_map[string[front_ptr]]
-			front_ptr += 1
-
-		max_length = max(max_length, back_ptr - front_ptr)
-
-	return max_length
 
 
 # PRIVATE METHODS BELOW:
