@@ -73,6 +73,150 @@ def get_larger(s1, s2):
 	return s1 if len(l1) > len(l2) else s2
 
 
+def is_palindrome_integer(num: int) -> bool:
+	"""
+	Checks to see if the integer is a valid palindrome
+	num:
+		signed integer
+	return:
+		'num' is a valid palindrome
+	"""
+	if num < 0:
+		return False
+	num_str = str(num)
+
+	return num_str == num_str[::-1]
+
+
+def is_valid_parenthesis(string: str) -> bool:
+	"""
+	Return if parenthesis is valid.
+	Example 1:
+		Input: "()"
+		Output: true
+	Example 2:
+		Input: "()[]{}"
+		Output: true
+	Example 3:
+		Input: "(]"
+		Output: false
+	Example 4:
+		Input: "([)]"
+		Output: false
+	Example 5:
+		Input: "{[]}"
+		Output: true	
+
+	Time Complexity:
+		O(n)
+	Space Complexity:
+		O(n)
+	"""
+	stack = []
+	for c in string:
+		# left parenthesis
+		if c == '(' or c == '[' or c == '{':
+			stack.append(c)
+			continue
+		
+		# right parenthesis
+		top = stack.pop() if stack else None
+		if top == '(' and c == ')':
+			continue
+		elif top =='[' and c == ']':
+			continue
+		elif top =='{' and c == '}':
+			continue
+		else:
+			return False
+	return len(stack) == 0
+
+
+def length_of_longest_substring(string: str) -> int:
+	# string:
+	# 	contains the string we check for longest substring
+	# return:
+	#	the longest substring 
+	front_ptr = 0
+	back_ptr = 0
+	max_length = 0 
+	char_map = {}
+
+	while back_ptr < len(string):
+		char = string[back_ptr]
+		if char not in char_map:
+			# add new char and increase window size
+			char_map[char] = 1
+			back_ptr += 1
+		else:
+			# remove front element and reduce window size
+			del char_map[string[front_ptr]]
+			front_ptr += 1
+
+		max_length = max(max_length, back_ptr - front_ptr)
+
+	return max_length
+
+
+def longest_common_prefix(strs):
+	"""
+	Get the longest common prefix, for a given list of strings
+	strs:
+		list of strings, to choose the common prefix from
+	return:
+		longest common prefix
+	complexity:
+		time: O(s)
+		space: O(1)
+	"""
+	# Example zip:  
+	# ["flower", "flow"] --> [('f', 'f'), ('l', 'l'), ('o', 'o'), ('w', 'w')]
+	letter_groups = zip(*strs)
+	longest_prefix = []
+	for letter_group in letter_groups:
+		if len(set(letter_group)) > 1: break
+		longest_prefix.append(letter_group[0])
+
+	return "".join(longest_prefix)
+
+
+def longest_common_prefix_inefficient(strs):
+	"""
+	Get the longest common prefix, for a given list of strings
+	strs:
+		list of strings, to choose the common prefix from
+	return:
+		longest common prefix
+	complexity:
+		time: O(mxn)
+			m: is the number of elements in the list
+			n: the length of the strings
+		space: O(mxn)
+	"""
+	if len(strs) < 1: return ""
+	if len(strs) == 1: return strs[0]
+
+	longest_prefix = strs[0]
+	
+	# loop list
+	for i, curr_string in enumerate(strs[1:], 1):
+		prev_string = strs[i-1]
+
+		# loop previous and current string
+		j = 0
+		print(f"prev_string: {prev_string} len(prev_string): {len(prev_string)} curr_string: {curr_string} len(curr_string): {len(curr_string)} longest_prefix: {longest_prefix} len(longest_prefix): {len(longest_prefix)}")
+		while prev_string and curr_string and longest_prefix and \
+				j < len(prev_string) and j < len(curr_string) and j < len(longest_prefix) and \
+				prev_string[j] == curr_string[j] == longest_prefix[j]:
+			print(f"j: {j}")
+			j += 1
+
+		longest_prefix = longest_prefix[0:j]
+		if longest_prefix == 0: return ""
+
+	return longest_prefix
+
+
 def longest_palindrome(s: str) -> str:
 	"""
    	s:
@@ -171,91 +315,6 @@ def roman_to_integer(roman_number: str) -> int:
 			total -= current_number
 
 	return total
-
-
-def is_palindrome_integer(num: int) -> bool:
-	"""
-	Checks to see if the integer is a valid palindrome
-	num:
-		signed integer
-	return:
-		'num' is a valid palindrome
-	"""
-	if num < 0:
-		return False
-	num_str = str(num)
-
-	return num_str == num_str[::-1]
-
-
-def is_valid_parenthesis(string: str) -> bool:
-	"""
-	Return if parenthesis is valid.
-	Example 1:
-		Input: "()"
-		Output: true
-	Example 2:
-		Input: "()[]{}"
-		Output: true
-	Example 3:
-		Input: "(]"
-		Output: false
-	Example 4:
-		Input: "([)]"
-		Output: false
-	Example 5:
-		Input: "{[]}"
-		Output: true	
-
-	Time Complexity:
-		O(n)
-	Space Complexity:
-		O(n)
-	"""
-	stack = []
-	for c in string:
-		# left parenthesis
-		if c == '(' or c == '[' or c == '{':
-			stack.append(c)
-			continue
-		
-		# right parenthesis
-		top = stack.pop() if stack else None
-		if top == '(' and c == ')':
-			continue
-		elif top =='[' and c == ']':
-			continue
-		elif top =='{' and c == '}':
-			continue
-		else:
-			return False
-	return len(stack) == 0
-
-
-def length_of_longest_substring(string: str) -> int:
-	# string:
-	# 	contains the string we check for longest substring
-	# return:
-	#	the longest substring 
-	front_ptr = 0
-	back_ptr = 0
-	max_length = 0 
-	char_map = {}
-
-	while back_ptr < len(string):
-		char = string[back_ptr]
-		if char not in char_map:
-			# add new char and increase window size
-			char_map[char] = 1
-			back_ptr += 1
-		else:
-			# remove front element and reduce window size
-			del char_map[string[front_ptr]]
-			front_ptr += 1
-
-		max_length = max(max_length, back_ptr - front_ptr)
-
-	return max_length
 
 
 # PRIVATE METHODS BELOW:
