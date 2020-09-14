@@ -47,9 +47,11 @@ TEST_LONGEST_COMMON_PREFIX = [
 ]
 @mark.parametrize("test_str_list, expected_response", TEST_LONGEST_COMMON_PREFIX)
 def test_longest_common_prefix(test_str_list, expected_response):
-	response = string.longest_common_prefix_inefficient(test_str_list)
+	response = string.longest_common_prefix(test_str_list)
+	response_inefficient = string.longest_common_prefix_inefficient(test_str_list)
 
 	assert response == expected_response
+	assert response_inefficient == expected_response
 
 
 TEST_LONGEST_PALINDROME = [
