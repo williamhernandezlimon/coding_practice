@@ -158,6 +158,28 @@ def length_of_longest_substring(string: str) -> int:
 	return max_length
 
 
+def longest_common_prefix(strs):
+	"""
+	Get the longest common prefix, for a given list of strings
+	strs:
+		list of strings, to choose the common prefix from
+	return:
+		longest common prefix
+	complexity:
+		time: O(s)
+		space: O(1)
+	"""
+	# Example zip:  
+	# ["flower", "flow"] --> [('f', 'f'), ('l', 'l'), ('o', 'o'), ('w', 'w')]
+	letter_groups = zip(*strs)
+	longest_prefix = []
+	for letter_group in letter_groups:
+		if len(set(letter_group)) > 1: break
+		longest_prefix.append(letter_group[0])
+
+	return "".join(longest_prefix)
+
+
 def longest_common_prefix_inefficient(strs):
 	"""
 	Get the longest common prefix, for a given list of strings
