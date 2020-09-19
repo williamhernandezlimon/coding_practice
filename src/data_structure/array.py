@@ -157,3 +157,32 @@ def three_sums_inefficient(nums):
 	return three_sums
 
 
+def two_sum(nums, target):
+	"""
+	nums:
+		list of numbers
+	target:
+		the number to target, with 2 numbers from nums
+	return:
+		list of indexes for the corresponding 2 numbers in nums adding to the target
+	complexity:
+		time: O(n)
+		space: O(n)
+	"""
+	m = {}
+	for j, num in enumerate(nums):
+		new_target = target - num
+		if new_target in m:
+			i = m[new_target]
+			return [i, j]
+		else:
+			m[num] = j
+	
+	return []
+
+
+
+
+
+
+

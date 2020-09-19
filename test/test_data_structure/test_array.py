@@ -101,6 +101,24 @@ def test_three_sums_inefficient(test_list, expected_response):
 	assert response == expected_response
 
 
+TEST_TWO_SUM = [
+	([], 0, []),
+	([1], 0, []),
+	([1], 7, []),
+	([10, -3], 7, [0, 1]),
+	([0, 0], 0, [0, 1]),
+	([0, 1, 0], 0, [0, 2]),
+	([1, 1], 2, [0, 1]),
+	([1, 1], 5, []),
+	([1, 3, 2], 5, [1, 2]),
+	([1, 3, 6, 8, 9, 1], 2, [0, 5])
+]
+@mark.parametrize("test_num, test_target, expected_response", TEST_TWO_SUM)
+def test_two_sum(test_num, test_target, expected_response):
+	response = two_sum(test_num, test_target)
+
+	assert response == expected_response
+
 # TODO: fix test case
 # TEST_IS_PREFIX_OF_WORD = [
 # 	("i love eating burger", "burg", 4),
