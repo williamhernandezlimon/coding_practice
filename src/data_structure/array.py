@@ -169,28 +169,15 @@ def two_sum(nums, target):
 		time: O(n)
 		space: O(n)
 	"""
-	if not nums or len(nums) <= 1: return []
- 
- 	# populate map
 	m = {}
-	for i, num in enumerate(nums):
-		if num in m:
-			m[num].append(i)
-		else:
-			m[num] = [i]
-
-	# check 2sum
-	for i, num in enumerate(nums):
+	for j, num in enumerate(nums):
 		new_target = target - num
 		if new_target in m:
-			j = m[new_target][0]
-			if i != j:
-				return [i, j]
-			else:
-				if len(m[new_target]) > 1:
-					j = m[new_target][1]
-					return [i, j]
-
+			i = m[new_target]
+			return [i, j]
+		else:
+			m[num] = j
+	
 	return []
 
 
