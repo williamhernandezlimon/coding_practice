@@ -42,6 +42,28 @@ def test_fibonacci_sequence_inefficient(test_num, expected_response):
 	assert response == expected_response
 
 
+TEST_FOUR_SUMS = [
+	([], 0, []),
+	([1, 2], 0, []),
+	([1, 2, 3, 4], 0, []),
+	([1, 2, 3, 4, 5], 0, []),
+	([1, 2, 3, 4, 5, 6], 0, []),
+	([1, 2, 3, 4, 5, 6, 7], 0, []),
+	([1, 2, 3, 4], 10, [[1, 2, 3, 4]]),
+	([3, 2, 1, 4], 10, [[1, 2, 3, 4]]),
+	([1, 1, 2, 3, 4], 10, [[1, 2, 3, 4]]),
+	([1, 1, 2, 2, 3, 3, 4, 4], 10, [[1, 1, 4, 4], [1, 2, 3, 4], [2, 2, 3, 3]]),
+	([1, 0, -1, 0, -2, 2], 0, [[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]]),
+	([-3,-2,-1,0,0,1,2,3], 0, [[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-3,0,1,2],[-2,-1,0,3],[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]),
+	([-1,0,-5,-2,-2,-4,0,1,-2], -9, [[-5,-4,-1,1],[-5,-4,0,0],[-5,-2,-2,0],[-4,-2,-2,-1]])
+]
+@mark.parametrize("test_list, test_target, expected_response", copy.deepcopy(TEST_FOUR_SUMS))
+def test_four_sums(test_list, test_target, expected_response):
+	response = four_sums(test_list, test_target)
+
+	assert response == expected_response
+
+
 TEST_PADOVAN_SEQUENCE = [
 	(0, 1),
 	(1, 1),
