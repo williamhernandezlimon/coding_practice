@@ -49,10 +49,64 @@ def fibonacci_sequence_inefficient(num: int) -> int:
 		space: O(n)
 	"""
 	if num == 0:
-		return 0
+		return 0	
 	if num == 1:
 		return 1
 	return fibonacci_sequence_inefficient(num - 1) + fibonacci_sequence_inefficient(num - 2)
+
+
+def four_sums(nums, target):
+	"""
+	nums:
+		list of unsorted, duplicate, and signed integers
+	target:
+		integer to find the 4 sums for
+	return:
+		list of 4 unique sums
+	complexity:
+		time: O(n^3)
+	"""
+	nums.sort()
+	sums = []
+
+	for i, num_i in enumerate(nums[:-2]):
+		# avoid duplicate
+		if i > 0 and num_i == nums[i-1]:
+			continue
+		for j, num_j in enumerate(nums[i+1:-1], i+1):
+			# avoid duplicate
+			if i + 1 != j and num_j == nums[j-1]:
+				continue
+
+			new_target = target - num_i - num_j
+			
+			# sublist for new_target
+			left = j + 1
+			right = len(nums) - 1
+
+			# find sum pairs for new_target
+			while left < right:
+				# move window
+				if nums[left] + nums[right] < new_target:
+					left += 1
+				elif nums[left] + nums[right] > new_target:
+					right -= 1
+				else:
+					# quadruple pairs found!
+					l = [num_i, num_j, nums[left], nums[right]]
+					sums.append(l)
+					left += 1
+					right -= 1
+
+					# avoid duplicates
+					while left < right and nums[left] == nums[left - 1]:
+						print(f"duplicate left! nums[{left}]: {nums[left]} nums[{left-1}]: {nums[left-1]}")
+						left += 1
+					while left < right and nums[right] == nums[right + 1]:
+						print(f"duplicate right! nums[{right}]: {nums[right]} nums[{right-1}]: {nums[right-1]}")
+						right -= 1
+
+	return sums
 
 
 def padovan_sequence(num: int) -> int:
