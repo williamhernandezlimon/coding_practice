@@ -8,7 +8,7 @@ def heap_max(a):
 	a:
 		list of elements to be converted into a max heap
 	complexity:
-		time: O(log(n))
+		time: O(nlog(n))
 		space: O(1)
 	"""
 	# last non-leaf node is: len(a)//2 - 1
@@ -24,7 +24,7 @@ def heap_min(a):
 	a:
 		list of elements to be converted into a min heap
 	complexity:
-		time: O(log(n))
+		time: O(nlog(n))
 		space: O(1)
 	"""
 	for i in range(len(a)//2 -1, -1, -1):
