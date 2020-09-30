@@ -31,3 +31,18 @@ def test_heap_min(test_a, expected_response):
 	heap.heap_min(test_a)
 
 	assert test_a == expected_response
+
+
+TEST_KTH_SMALLEST_ELEMENT = [
+	([], 0, None),
+	([], 1, None),
+	([0], 0, None),
+	([0, 1], 0, None),
+	([1, 2, 3, 4, 5], 2, 2),
+	([17, 15, 13, 9, 6, 5, 10, 4, 8, 3, 1], 7, 9),
+]
+@mark.parametrize("test_a, test_k, expected_response", TEST_KTH_SMALLEST_ELEMENT)
+def test_kth_smallest_element(test_a, test_k, expected_response):
+	response = heap.kth_smallest_element(test_a, test_k)
+
+	assert response == expected_response
