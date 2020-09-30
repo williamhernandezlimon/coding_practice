@@ -152,7 +152,7 @@ def _max_heapify(list, length, parent_pos):
 	# if root is not max, swap and re-heapify
 	if max_position != parent_pos:
 		list[parent_pos], list[max_position] = list[max_position], list[parent_pos]
-		_max_heapify(list, length, parent_pos)
+		_max_heapify(list, length, max_position)
 		
 
 def _partition(list, low, high):
