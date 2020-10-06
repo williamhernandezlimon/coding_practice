@@ -4,6 +4,25 @@ from src.data_structure.array import *
 from pytest import mark
 
 
+TEST_ALIEN_SORT = [
+	([], "", None),
+	([], "abc", None),
+	(["app", "web"], "", None),
+	(["app", "web"], "webapp", False),
+	(["apple", "app"], "webapp", False),
+	(["app", "apple"], "aple", True),
+	(["web", "app"], "webapp", True),
+	(["hello", "leetcode"], "hlabcdefgijkmnopqrstuvwxyz", True),
+	(["word", "world", "row"], "worldabcefghijkmnpqrstuvxyz", False),
+	(["apple", "app"], "abcdefghijklmnopqrstuvwxyz", False)
+]
+@mark.parametrize("test_words, test_alphabet, expected_response", TEST_ALIEN_SORT)
+def test_alien_sort(test_words, test_alphabet, expected_response):
+	response = alien_sort(test_words, test_alphabet)
+
+	assert response == expected_response
+
+
 TEST_CONTAINS_DUPLICATES = [
 	([], False),
 	([1], False),

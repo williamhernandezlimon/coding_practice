@@ -1,6 +1,46 @@
 #!/usr/bin/env python3
 
 
+def alien_sort(words, alphabet):
+	"""
+	Given a set of words, sort the words using the provided alphabet.
+	For fun, the alphabet can be considered an alien alphabet that
+	only uses the english alphabet characters. Just in a different order
+	complexity:
+		time: O(m*n)
+		space: O(m*n)
+	"""
+	if len(words) <= 0 or len(alphabet) <= 0: return None
+	if len(words) == 1: return True
+
+	# store alphabet with unique value
+	alphabet_hash = {}
+	for i, letter in enumerate(alphabet):
+		alphabet_hash[letter] = i
+
+	# compare every word in words
+	for j, word_j in enumerate(words[1:], 1):
+		word_i = words[j - 1]
+
+		# compare letters
+		x = 0
+		while x < len(word_j) and x < len(word_i):  # within bounds
+			letter_i = alphabet_hash[word_i[x]] if word_i[x] in alphabet_hash else float("inf")
+			letter_j = alphabet_hash[word_j[x]] if word_j[x] in alphabet_hash else float("-inf")
+			
+			print(f"word_i: {word_i} letter_i {letter_i} word_j: {word_j} letter_j {letter_j}")
+			if letter_i > letter_j:
+				return False
+			if letter_i < letter_j:
+				return True
+			x += 1
+		
+		if len(word_i) > len(word_j):
+			return False
+
+	return True
+
+
 def contains_duplicates(array):
 	"""
 	Check if there are duplicates
