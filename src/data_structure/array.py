@@ -109,6 +109,48 @@ def four_sums(nums, target):
 	return sums
 
 
+def highest_population(population):
+	"""
+	Assume population data structure is built properly, with correct tuple structure.
+	Given a list of population, where every element contains a (person, birthyear, deathyear),
+	find the year that had the maximum number of people living.
+	Assume that a birthyear always adds 1 to population and deathyear subtracts 1 from population.
+	
+	population:
+		Array of tuples, where every tuple is of size 3.
+		The tuple contains name (string), birthyear (int), deathyear (int)
+	complexity:
+		time: O(n)
+		space: O(k)
+			where k is the number of unique years
+	"""
+	
+	# store year deltas
+	years_population = {}
+	for person in population:
+		birthyear = person[1]
+		# birthyear
+		if birthyear in years_population:
+			years_population[birthyear] += 1
+		else:
+			years_population[birthyear] = 1
+
+		# deathyear
+		deathyear = person[2]
+		if deathyear in years_population:
+			years_population[deathyear] -= 1
+		else:
+			years_population[deathyear] = 1
+
+	# get the max year using the deltas
+	max_year = float("-inf")
+	for year in years_population:
+		if max_year == float("-inf") or years_population[year] > years_population[max_year]:
+			max_year = year
+
+	return max_year
+
+
 def padovan_sequence(num: int) -> int:
 	"""
 	Calculate the padovan sequence from num
