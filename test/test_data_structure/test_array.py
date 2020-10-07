@@ -64,6 +64,21 @@ def test_four_sums(test_list, test_target, expected_response):
 	assert response == expected_response
 
 
+TEST_HIGHEST_POPULATION = [
+	([], float("-inf")),
+	([("p1", 1990, 2020)], 1990),
+	([("p1", 1990, 1990), ("p2", 1990, 1990)], 1990),
+	([("p1", 1990, 2020), ("p2", 1980, 2020)], 1990),
+	([("p1", 1990, 2020), ("p2", 1980, 2020), ("p3", 1980, 1980)], 1990),
+	([("p1", 1990, 2020), ("p2", 1980, 2020), ("p3", 1980, 1985), ("p4", 1980, 1983), ("p3", 1980, 1984)], 1980),
+]
+@mark.parametrize("test_population, expected_response", TEST_HIGHEST_POPULATION)
+def test_highest_population(test_population, expected_response):
+	response = highest_population(test_population)
+
+	assert response == expected_response
+
+
 TEST_PADOVAN_SEQUENCE = [
 	(0, 1),
 	(1, 1),
