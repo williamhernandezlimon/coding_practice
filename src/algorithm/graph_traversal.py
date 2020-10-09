@@ -14,20 +14,23 @@ def bfs(graph, start):
 	Graph
 	breadth first search
 	"""
-	explored = []
-	queue = [start]
+	visited = []
+	q = [start]
+	
+	while q:
+		# take the front
+		parent = q.pop(0)
+		if parent in visited:
+			continue
 
-	while queue:
-		node = queue.pop(0)
-		neighbors = graph[node] if node and node in graph else []
+		# add to visited
+		visited.append(parent)
 
-		if node not in explored:
-			neighbors = graph[node]
-			for neighbor in neighbors:
-				queue.append(neighbor)
-			explored.append(node)
+		# add neighbors to queue
+		neighbors = graph[parent] if graph[parent] else []
+		q.extend(neighbors)
 
-	return explored
+	return visited
 
 
 def dfs_iterative(graph, start):
