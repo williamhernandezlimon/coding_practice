@@ -95,6 +95,30 @@ def fibonacci_sequence_inefficient(num: int) -> int:
 	return fibonacci_sequence_inefficient(num - 1) + fibonacci_sequence_inefficient(num - 2)
 
 
+def first_missing_positive(numbers):
+	"""
+	Return the smallest unsigned integer, given a list of signed integers
+	numbers:
+		list of signed integers
+	return:
+		smallest unsigned integer
+	complexity:
+		time: O(n)
+		space: O(n)
+	"""
+	# convert to set; removes duplicates
+	if not numbers: return None
+
+	numbers_set = set(numbers)
+
+	# look for smallest unsigned integer
+	i = 1
+	while i < len(numbers_set) + 1 and i in numbers_set:
+		i += 1
+
+	return i
+
+
 def four_sums(nums, target):
 	"""
 	nums:
