@@ -61,6 +61,22 @@ def test_fibonacci_sequence_inefficient(test_num, expected_response):
 	assert response == expected_response
 
 
+TEST_FIND_MISSING_POSITIVE = [
+	([], None),
+	([-1], 1),
+	([1], 2),
+	([1, -1], 2),
+	([1, 2], 3),
+	([3,4,-1,1], 2),
+	([7,8,9,11,12], 1)
+]
+@mark.parametrize("test_numbers, expected_response", TEST_FIND_MISSING_POSITIVE)
+def test_first_missing_positive(test_numbers, expected_response):
+	response = first_missing_positive(test_numbers)
+
+	assert response == expected_response
+
+
 TEST_FOUR_SUMS = [
 	([], 0, []),
 	([1, 2], 0, []),
