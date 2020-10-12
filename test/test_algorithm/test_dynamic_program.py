@@ -38,6 +38,21 @@ def test_get_minimum_string_transformations(test_string1, test_string2, expected
 	assert response == expected_response
 
 
+TEST_MINIMUM_CHANGE = [
+	(0, [], 0),
+	(0, [1], 0),
+	(1, [], 0),
+	(3, [2], -1),
+	(11, [1, 2, 5], 3),
+	(30, [25, 10, 5], 2)
+]
+@mark.parametrize("test_amount, test_coins, expected_response", TEST_MINIMUM_CHANGE)
+def test_minimum_change(test_amount, test_coins, expected_response):
+	response = minimum_change(test_amount, test_coins)
+
+	assert response == expected_response
+
+
 KNAPSACK_TESTS = [
 	(7, {}, 0),
 	(0, {5: 60, 3: 50, 4: 70, 2: 30}, 0),
