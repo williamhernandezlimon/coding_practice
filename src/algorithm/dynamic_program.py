@@ -49,29 +49,41 @@ def get_minimum_string_transformations(s1, s2):
 
 def minimum_change(amount, coins):
 	"""
-	Dynamic program
-	Returns the minumum number of coins used for the given amount
+	Given a list of integer coins. Return the least amount of coins needed to 
+	make change that adds up to the provided integer amount
+	amount:
+		integer amount the coins needs to make change for
+	coins:
+		denomination used to create amount
+	complexity:
+		time: O(nxm) where m is the amount and n are the coins
+		space: O(m) where m is the amount
 	"""
-	rows = len(coins) + 1
-	columns = amount + 1
-	table = table_object.create(rows, columns)
+	# TODO: add cases for when no change can be made
 
 	# base case
-	for row in range(rows):
-		table[row][0] = 0
-	for column in range(columns):
-		table[0][column] = 0
+	if amount <= 0 or len(coins) == 0: return 0
 
-	# dynamic programming
-	for row in range(1, rows):
-		for column in range(1, columns):
-			coin = coins[row-1]
-			ignore_coin_cost = table[row][column-coin] if coin <= column else 0
-			accept_coin_cost = table[row-1][column]
-			
-			table[row][column] = ignore_coin_cost + accept_coin_cost
-									
-	return table[rows-1][columns-1]
+	# create subproblem memory
+	subproblem = [float("inf") for i in range(amount + 1)]
+
+	# another base case
+	subproblem[0] = 0
+
+	# fill in all subproblems
+	for i in range(len(subproblem)):
+
+		# for coin, use sub problem, to find the least amount of coins
+		for coin in coins:
+
+			# check within range
+			if i - coin >= 0:
+				subproblem[i] = min(subproblem[i], subproblem[i - coin] + 1)
+
+	# if no coins can make amount, return -1
+	return subproblem[-1] if subproblem[-1] != float("inf") else -1
+
+
 
 
 def knapsack(weight_limit, items):
