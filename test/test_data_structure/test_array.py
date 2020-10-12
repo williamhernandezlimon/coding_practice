@@ -114,6 +114,21 @@ def test_highest_population(test_population, expected_response):
 	assert response == expected_response
 
 
+TEST_LONGEST_CONSECUTIVE_SUBSEQUENCE = [
+	([], 0),
+	([1, 2], 2),
+	([1, 8, 8, 5, 2, 3], 3),
+	([1, 1, 1, 1], 1),
+	([-1, -2], 2),
+	([-10, -11, -12], 3)
+]
+@mark.parametrize("test_numbers, expected_response", TEST_LONGEST_CONSECUTIVE_SUBSEQUENCE)
+def test_longest_consecutive_subsequence(test_numbers, expected_response):
+	response = longest_consecutive_subsequence(test_numbers)
+
+	assert response == expected_response
+
+
 TEST_PADOVAN_SEQUENCE = [
 	(0, 1),
 	(1, 1),

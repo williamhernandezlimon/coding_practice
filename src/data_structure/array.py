@@ -215,6 +215,37 @@ def highest_population(population):
 	return max_year
 
 
+def longest_consecutive_subsequence(numbers):
+	"""
+	Find the longest consecutive subsequence from a given amount of numbers
+	numbers:
+		list of numbers
+	return:
+		the largest amount of consecutive subsequence
+	complexity:
+		time: O(n)
+		space: O(n)
+			store every element in the hashmap
+	"""
+	max_consecutive_numbers = 0
+	num_set = set(numbers)
+
+	for current_number in num_set:
+		# check if current number is a starting point
+		is_starting_number = not((current_number - 1) in num_set)
+		if is_starting_number:
+
+			# continue incrementing next number as long as it's in the set
+			next_number = current_number + 1
+			while next_number in num_set:
+				next_number += 1
+
+			# store max subsequence
+			max_consecutive_numbers = max(max_consecutive_numbers, next_number - current_number)
+
+	return max_consecutive_numbers
+
+
 def padovan_sequence(num: int) -> int:
 	"""
 	Calculate the padovan sequence from num
