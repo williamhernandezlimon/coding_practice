@@ -85,3 +85,72 @@ def dfs_recursive(graph, start, visited):
 			dfs_recursive(graph, neighbor, visited)
 
 	return visited
+
+
+def dijkstras(graph, start):
+	"""
+	graph:
+		map where key is the vertex and value is the neighboring vertecies
+	start:
+		starting vertex of the graph
+	return:
+		map of distances with shortest distance from the start and
+		map of paths of the parents with the shortest distance from the start
+	"""
+	if len(graph) == 0 or not start: return None, None
+
+
+	unvisited = set(graph.keys())
+	path = {}
+	distances = {start: 0} 
+	q = {start: 0} 	
+
+	while unvisited:
+		# get the vertex with the smallest value
+		vertex, distance = _pop_min_map_value(q)
+
+		# set the distances to that vertex
+		distances[vertex] = distance
+
+		if vertex == None:
+			break
+
+		# remove vertex from unvisited
+		unvisited.remove(vertex)
+
+		for neighbor in graph[vertex]:
+			print(f"neighbor: {neighbor}")
+
+			# if neighbor is unvisited, relax
+			if neighbor in unvisited:
+				current_distance = distances[vertex] + graph[vertex][neighbor]
+
+				if current_distance < distances.get(neighbor, float("inf")):
+					distances[neighbor] = current_distance
+					q[neighbor] = current_distance
+					path[neighbor] = vertex
+
+	return distances, path
+
+
+def _pop_min_map_value(q):
+	"""
+	Given a map of key,values return the key,value
+	with the smallest value
+	q:
+		map of key, values
+	return:
+		return smallest map key, value
+	"""
+	min_vertex = None
+	min_distance = float("inf")
+	for vertex in q:
+		if q[vertex] < min_distance:
+			min_vertex = vertex
+			min_distance = q[vertex]
+
+	if min_vertex in q:
+		del q[min_vertex]
+
+	return min_vertex, min_distance
+
