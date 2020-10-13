@@ -99,12 +99,11 @@ def dijkstras(graph, start):
 	"""
 	if len(graph) == 0 or not start: return None, None
 
+	path = {}  # maps the vertecies and their predecessors
+	q = {start: 0}  # similar to distances, but only tracks smallest distance
+	distances = {start: 0}  # vertices and thier distances
 
 	unvisited = set(graph.keys())
-	path = {}
-	distances = {start: 0} 
-	q = {start: 0} 	
-
 	while unvisited:
 		# get the vertex with the smallest value
 		vertex, distance = _pop_min_map_value(q)
@@ -112,22 +111,18 @@ def dijkstras(graph, start):
 		# set the distances to that vertex
 		distances[vertex] = distance
 
-		if vertex == None:
-			break
-
 		# remove vertex from unvisited
 		unvisited.remove(vertex)
 
 		for neighbor in graph[vertex]:
-			print(f"neighbor: {neighbor}")
 
 			# if neighbor is unvisited, relax
 			if neighbor in unvisited:
-				current_distance = distances[vertex] + graph[vertex][neighbor]
+				alt_distance = distances[vertex] + graph[vertex][neighbor]
 
-				if current_distance < distances.get(neighbor, float("inf")):
-					distances[neighbor] = current_distance
-					q[neighbor] = current_distance
+				if alt_distance < q.get(neighbor, float("inf")):
+					# set min in q and path
+					q[neighbor] = alt_distance
 					path[neighbor] = vertex
 
 	return distances, path
