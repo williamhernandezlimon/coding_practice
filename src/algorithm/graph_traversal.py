@@ -3,7 +3,7 @@ import logging
 import math
 
 from src.data_structure import table as table_object
-
+from src.data_structure import node
 
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
@@ -31,6 +31,38 @@ def bfs(graph, start):
 		q.extend(neighbors)
 
 	return visited
+
+
+def clone_graph(start):
+	"""
+	Runs a bfs on graph, starting from Node "start"
+	start:
+		type Node which is the starting point to clone the graph
+	return:
+		cloned graph
+	"""
+	# TODO: create unit tests
+	if node is None: return None
+
+	# cloned map
+	# the key will be the original node
+	# the value will be the cloned node, with neighbors
+	cloned = {node: node.NodeGraph(node.data)}
+	q = [node]
+
+	while q:
+		node = q.pop()
+
+		# for neighbor in node.neighbors:
+		for neighbor in node.neighbors:
+			
+			# if not visited, then add to visited
+			if neighbor not in cloned:
+				q.append(neighbor)
+				cloned[neighbor] = node.NodeGraph(neighbor.data)
+			cloned[node].neighbors.append(cloned[neighbor])
+
+	return cloned[node]
 
 
 def dfs_iterative(graph, start):

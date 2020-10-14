@@ -11,4 +11,9 @@ class NodeBinary:
 		self.left = left
 		self.right = right
 
+class NodeGraph:
+	def __init__(self, data=0, neighbors=None):
+		self.data = data
+		self.neighbors = neighbors
+
 		
