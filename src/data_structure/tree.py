@@ -5,6 +5,26 @@ logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
 
 
+def count_nodes(tree_map, start_node):
+	"""
+	Count the number of nodes, from the starting_node inclusive
+
+	tree_map:
+		map of nodes that make a tree
+	start_node:
+		starting node to count nodes from
+	complexity:
+		time: O(n)
+	"""	
+	if not tree_map: return 0
+
+	total = 1
+	for node in tree_map.get(start_node, []):
+		total += count_nodes(tree_map, node)
+
+	return total
+
+
 def max_depth(root):
 	"""
 	Returns the max depth of a binary tree
