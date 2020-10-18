@@ -147,3 +147,17 @@ def test_level_order_traversal(capsys, test_tree, expected_response):
 
 	assert captured.out == expected_response
 
+
+TEST_VALID_TREE = [
+	({}, 1, False),  # empty map
+	({1: [2]}, 1, True),
+	({1: [2], 3: {}}, 1, False),  # has island
+	({1: [2, 3], 2: [4, 5], 3: [], 4: [], 5: []}, 1, True),
+	({1: [2, 3], 2: [4, 5], 3: [1], 4: [], 5: []}, 1, False)  # check loop
+]
+@mark.parametrize("test_tree_map, test_root, expected_response", TEST_VALID_TREE)
+def test_valid_tree(test_tree_map, test_root, expected_response):
+	response = valid_tree(test_tree_map, test_root)
+
+	assert response == expected_response
+

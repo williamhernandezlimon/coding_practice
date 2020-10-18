@@ -110,6 +110,60 @@ def level_order_traversal(root):
 			queue.append(leaf.right)
 
 
+def valid_tree(tree_map, root):
+	"""
+	Check to see the tree is valid; no loops
+
+	tree_map:
+		map of nodes that make a tree
+	start_node:
+		starting node to count nodes from
+	visited:
+		set(), for constant lookups, used for detecting loops
+	complexity:
+		time: O(n)
+	"""
+	if root not in tree_map: return False
+	
+	visited = set()
+	has_no_loops = not(_has_loops(tree_map, root, visited))
+	has_no_islands = not(_has_islands(tree_map, root, visited))
+
+	return has_no_loops and has_no_islands
 
 
+def _has_loops(tree_map, root, visited):
+	"""
+	tree_map:
+		map of nodes that make a tree
+	start_node:
+		starting node to count nodes from
+	visited:
+		set(), for constant lookups, used for detecting loops
+	"""
+	if root not in tree_map: return False
+	visited.add(root)
+	loop = False
+	for child in tree_map[root]:
+		if child in visited:
+			return True
+		loop = _has_loops(tree_map, child, visited)
+
+	return loop
+
+
+def _has_islands(tree_map, root, visited):
+	"""
+	tree_map:
+		map of nodes that make a tree
+	start_node:
+		starting node to count nodes from
+	visited:
+		set(), for constant lookups, used to detect islands
+	"""
+	for node in tree_map:
+		if node not in visited:
+			return True
+
+	return False
 
