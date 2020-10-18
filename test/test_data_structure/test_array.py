@@ -23,6 +23,19 @@ def test_alien_sort(test_words, test_alphabet, expected_response):
 	assert response == expected_response
 
 
+TEST_CONFLICT = [
+	([], False),
+	([(1, [1, 1, 2], 10), (2, [1, 1, None], 10)], False),
+	([(1, [1, 1, 2], 10), (2, [1, 1, None], 20)], True),
+	([(1, [1, 1, 2], 10), (2, [1, 1, 2], 20)], True),
+]
+@mark.parametrize("test_array, expected_response", TEST_CONFLICT)
+def test_conflict(test_array, expected_response):
+	response = conflict(test_array)
+
+	assert response == expected_response
+
+
 TEST_CONTAINS_DUPLICATES = [
 	([], False),
 	([1], False),
