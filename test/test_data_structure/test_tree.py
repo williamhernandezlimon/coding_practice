@@ -58,6 +58,22 @@ def create_tree_asymmetric():
 	return root
 
 
+TEST_COUNT_NODES = [
+	({}, 1, 0),
+	# ({1: []}, 2, 0),
+	({1: []}, 1, 1),
+	# ({1: [2]}, 3, 0),
+	({1: [2]}, 1, 2),
+	({1: [2, 3], 2: [4, 5], 3: [], 4: [], 5: []}, 2, 3),
+	({1: [2, 3], 2: [4, 5], 3: [], 4: [], 5: []}, 1, 5)
+]
+@mark.parametrize("test_tree, test_node, expected_response", TEST_COUNT_NODES)
+def test_count_nodes(test_tree, test_node, expected_response):
+	response = count_nodes(test_tree, test_node)
+
+	assert response == expected_response
+
+
 TEST_MAX_DEPTH = [
 	(create_tree(), 3),
 	(NodeBinary(7, None, None), 1),
