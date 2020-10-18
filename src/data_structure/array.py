@@ -41,6 +41,50 @@ def alien_sort(words, alphabet):
 	return True
 
 
+def conflict(array):
+	"""
+	Given an array off tuples, where every tuple is 3 elements:
+		0: name
+		1: x1, x2, x3
+			this field can contain any integer or None (*)
+			if field is 
+		2: value
+	Example:
+		array = [
+			(1. [1, 1, 2], 10),
+			(2. [1, 1, None], 20),  # conflict
+			
+		]
+
+	complexity:
+		time:
+			O(n^2)
+		space:
+			O(1)
+	"""
+	# traverse each row
+	for i, row_i in enumerate(array[:-1]):
+		column_i = row_i[1]
+		value_i = row_i[2]
+
+		# traverse neighboring rows
+		for row_j in array[i+1:]:
+			column_j = row_j[1]
+			value_j = row_j[2]
+
+			# check if x1, x2, x3 are identical
+			columns_identical = (column_i[0] == column_j[0] or column_i[0] == None or column_j[0] == None) and \
+				(column_i[1] == column_j[1] or column_i[1] == None or column_j[1] == None) and \
+				(column_i[2] == column_j[2] or column_i[2] == None or column_j[2] == None)
+
+			is_conflict = (columns_identical and value_i != value_j) or \
+				((not columns_identical) and value_i == value_j)
+			if is_conflict:
+				return True
+
+	return False
+
+
 def contains_duplicates(array):
 	"""
 	Check if there are duplicates
