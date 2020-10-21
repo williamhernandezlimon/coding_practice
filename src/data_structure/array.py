@@ -290,6 +290,34 @@ def longest_consecutive_subsequence(numbers):
 	return max_consecutive_numbers
 
 
+def two_city_sched_cost(costs):
+	"""
+	A company is planning to interview 2n people. 
+	Given the array costs where costs[i] = [aCosti, bCosti], 
+	the cost of flying the ith person to city a is aCosti, 
+	and the cost of flying the ith person to city b is bCosti.
+	Return the minimum cost to fly every person to a city such that exactly n people arrive in each city.
+
+	What we do is sort, by the difference between the 2 destination, which allows us to get the smallest 0th element
+	costs:
+		array of arrays where each element contains a cost to [city-a, city-b]
+	complexity:
+		time: O(nlogn)
+		space: O(1)
+	"""
+	costs.sort(key=lambda x: x[0]-x[1])
+	half_costs_size = len(costs) / 2
+	total_min_costs = 0
+
+	for i, cost in enumerate(costs):
+	    if i < half_costs_size:
+	        total_min_costs += cost[0]
+	    else:
+	        total_min_costs += cost[1]
+
+	return total_min_costs
+
+
 def padovan_sequence(num: int) -> int:
 	"""
 	Calculate the padovan sequence from num

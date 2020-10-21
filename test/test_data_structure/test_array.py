@@ -201,6 +201,22 @@ def test_three_sums_inefficient(test_list, expected_response):
 	assert response == expected_response
 
 
+TEST_TWO_CITY_SCHED_COST = [
+	([], 0),
+	([[3, 4]], 3),
+	([[3, 4], [5, 6]], 9),
+	([[3, 4], [5, 6], [7, 8]], 16),
+	([[10,20],[30,200],[400,50],[30,20]], 110),
+	([[259,770],[448,54],[926,667],[184,139],[840,118],[577,469]], 1859),
+	([[515,563],[451,713],[537,709],[343,819],[855,779],[457,60],[650,359],[631,42]], 3086)
+]
+@mark.parametrize("test_costs, expected_response", TEST_TWO_CITY_SCHED_COST)
+def test_two_city_sched_cost(test_costs, expected_response):
+	response = two_city_sched_cost(test_costs)
+
+	assert response == expected_response
+
+
 TEST_TWO_SUM = [
 	([], 0, []),
 	([1], 0, []),
