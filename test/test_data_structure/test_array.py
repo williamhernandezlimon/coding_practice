@@ -4,138 +4,170 @@ from src.data_structure.array import *
 from pytest import mark
 
 
-TEST_ALIEN_SORT = [
-	([], "", None),
-	([], "abc", None),
-	(["app", "web"], "", None),
-	(["app", "web"], "webapp", False),
-	(["apple", "app"], "webapp", False),
-	(["app", "apple"], "aple", True),
-	(["web", "app"], "webapp", True),
-	(["hello", "leetcode"], "hlabcdefgijkmnopqrstuvwxyz", True),
-	(["word", "world", "row"], "worldabcefghijkmnpqrstuvxyz", False),
-	(["apple", "app"], "abcdefghijklmnopqrstuvwxyz", False)
-]
-@mark.parametrize("test_words, test_alphabet, expected_response", TEST_ALIEN_SORT)
+@mark.parametrize(
+	"test_words, test_alphabet, expected_response", 
+	[
+		([], "", None),
+		([], "abc", None),
+		(["app", "web"], "", None),
+		(["app", "web"], "webapp", False),
+		(["apple", "app"], "webapp", False),
+		(["app", "apple"], "aple", True),
+		(["web", "app"], "webapp", True),
+		(["hello", "leetcode"], "hlabcdefgijkmnopqrstuvwxyz", True),
+		(["word", "world", "row"], "worldabcefghijkmnpqrstuvxyz", False),
+		(["apple", "app"], "abcdefghijklmnopqrstuvwxyz", False)
+	]
+)
 def test_alien_sort(test_words, test_alphabet, expected_response):
 	response = alien_sort(test_words, test_alphabet)
 
 	assert response == expected_response
 
 
-TEST_CONFLICT = [
-	([], False),
-	([(1, [1, 1, 2], 10), (2, [1, 1, None], 10)], False),
-	([(1, [1, 1, 2], 10), (2, [1, 1, None], 20)], True),
-	([(1, [1, 1, 2], 10), (2, [1, 1, 2], 20)], True),
-]
-@mark.parametrize("test_array, expected_response", TEST_CONFLICT)
+@mark.parametrize(
+	"test_array, expected_response",
+	[
+		([], False),
+		([(1, [1, 1, 2], 10), (2, [1, 1, None], 10)], False),
+		([(1, [1, 1, 2], 10), (2, [1, 1, None], 20)], True),
+		([(1, [1, 1, 2], 10), (2, [1, 1, 2], 20)], True),
+	]
+)
 def test_conflict(test_array, expected_response):
 	response = conflict(test_array)
 
 	assert response == expected_response
 
 
-TEST_CONTAINS_DUPLICATES = [
-	([], False),
-	([1], False),
-	([1,1], True),
-	([1,2,3,4,5,6,7,1], True),
-	([1,2,3,4,5,6,7], False)
-]
-@mark.parametrize("test_array, expected_response", TEST_CONTAINS_DUPLICATES)
+@mark.parametrize(
+	"test_array, expected_response", 
+	[
+		([], False),
+		([1], False),
+		([1,1], True),
+		([1,2,3,4,5,6,7,1], True),
+		([1,2,3,4,5,6,7], False)
+	]
+
+)
 def test_contains_duplicates(test_array, expected_response):
 	response = contains_duplicates(test_array)
 
 	assert response == expected_response
 
 
-TEST_FIBONACCI_SEQUENCE = [
-	(0, 0),
-	(1, 1),
-	(2, 1),
-	(3, 2),
-	(4, 3),
-	(5, 5),
-	(6, 8),
-	(7, 13)
-]
-@mark.parametrize("test_num, expected_response", copy.deepcopy(TEST_FIBONACCI_SEQUENCE))
+@mark.parametrize(
+	"test_num, expected_response", 
+	[
+		(0, 0),
+		(1, 1),
+		(2, 1),
+		(3, 2),
+		(4, 3),
+		(5, 5),
+		(6, 8),
+		(7, 13)
+	]
+
+)
 def test_fibonacci_sequence(test_num, expected_response):
 	response = fibonacci_sequence(test_num)
 
 	assert response == expected_response
 
 
-@mark.parametrize("test_num, expected_response", copy.deepcopy(TEST_FIBONACCI_SEQUENCE))
+@mark.parametrize(
+	"test_num, expected_response", 
+	[
+		(0, 0),
+		(1, 1),
+		(2, 1),
+		(3, 2),
+		(4, 3),
+		(5, 5),
+		(6, 8),
+		(7, 13)
+	]
+
+)
 def test_fibonacci_sequence_inefficient(test_num, expected_response):
 	response = fibonacci_sequence_inefficient(test_num)
 
 	assert response == expected_response
 
 
-TEST_FIND_MISSING_POSITIVE = [
-	([], None),
-	([-1], 1),
-	([1], 2),
-	([1, -1], 2),
-	([1, 2], 3),
-	([3,4,-1,1], 2),
-	([7,8,9,11,12], 1)
-]
-@mark.parametrize("test_numbers, expected_response", TEST_FIND_MISSING_POSITIVE)
+@mark.parametrize(
+	"test_numbers, expected_response",
+	[
+		([], None),
+		([-1], 1),
+		([1], 2),
+		([1, -1], 2),
+		([1, 2], 3),
+		([3,4,-1,1], 2),
+		([7,8,9,11,12], 1)
+	]
+)
 def test_first_missing_positive(test_numbers, expected_response):
 	response = first_missing_positive(test_numbers)
 
 	assert response == expected_response
 
 
-TEST_FOUR_SUMS = [
-	([], 0, []),
-	([1, 2], 0, []),
-	([1, 2, 3, 4], 0, []),
-	([1, 2, 3, 4, 5], 0, []),
-	([1, 2, 3, 4, 5, 6], 0, []),
-	([1, 2, 3, 4, 5, 6, 7], 0, []),
-	([1, 2, 3, 4], 10, [[1, 2, 3, 4]]),
-	([3, 2, 1, 4], 10, [[1, 2, 3, 4]]),
-	([1, 1, 2, 3, 4], 10, [[1, 2, 3, 4]]),
-	([1, 1, 2, 2, 3, 3, 4, 4], 10, [[1, 1, 4, 4], [1, 2, 3, 4], [2, 2, 3, 3]]),
-	([1, 0, -1, 0, -2, 2], 0, [[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]]),
-	([-3,-2,-1,0,0,1,2,3], 0, [[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-3,0,1,2],[-2,-1,0,3],[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]),
-	([-1,0,-5,-2,-2,-4,0,1,-2], -9, [[-5,-4,-1,1],[-5,-4,0,0],[-5,-2,-2,0],[-4,-2,-2,-1]])
-]
-@mark.parametrize("test_list, test_target, expected_response", copy.deepcopy(TEST_FOUR_SUMS))
+@mark.parametrize(
+	"test_list, test_target, expected_response",
+	[
+		([], 0, []),
+		([1, 2], 0, []),
+		([1, 2, 3, 4], 0, []),
+		([1, 2, 3, 4, 5], 0, []),
+		([1, 2, 3, 4, 5, 6], 0, []),
+		([1, 2, 3, 4, 5, 6, 7], 0, []),
+		([1, 2, 3, 4], 10, [[1, 2, 3, 4]]),
+		([3, 2, 1, 4], 10, [[1, 2, 3, 4]]),
+		([1, 1, 2, 3, 4], 10, [[1, 2, 3, 4]]),
+		([1, 1, 2, 2, 3, 3, 4, 4], 10, [[1, 1, 4, 4], [1, 2, 3, 4], [2, 2, 3, 3]]),
+		([1, 0, -1, 0, -2, 2], 0, [[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]]),
+		([-3,-2,-1,0,0,1,2,3], 0, [[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-3,0,1,2],[-2,-1,0,3],[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]),
+		([-1,0,-5,-2,-2,-4,0,1,-2], -9, [[-5,-4,-1,1],[-5,-4,0,0],[-5,-2,-2,0],[-4,-2,-2,-1]])
+	]	
+
+)
 def test_four_sums(test_list, test_target, expected_response):
 	response = four_sums(test_list, test_target)
 
 	assert response == expected_response
 
 
-TEST_HIGHEST_POPULATION = [
-	([], float("-inf")),
-	([("p1", 1990, 2020)], 1990),
-	([("p1", 1990, 1990), ("p2", 1990, 1990)], 1990),
-	([("p1", 1990, 2020), ("p2", 1980, 2020)], 1990),
-	([("p1", 1990, 2020), ("p2", 1980, 2020), ("p3", 1980, 1980)], 1990),
-	([("p1", 1990, 2020), ("p2", 1980, 2020), ("p3", 1980, 1985), ("p4", 1980, 1983), ("p3", 1980, 1984)], 1980),
-]
-@mark.parametrize("test_population, expected_response", TEST_HIGHEST_POPULATION)
+@mark.parametrize(
+	"test_population, expected_response",
+	[
+		([], float("-inf")),
+		([("p1", 1990, 2020)], 1990),
+		([("p1", 1990, 1990), ("p2", 1990, 1990)], 1990),
+		([("p1", 1990, 2020), ("p2", 1980, 2020)], 1990),
+		([("p1", 1990, 2020), ("p2", 1980, 2020), ("p3", 1980, 1980)], 1990),
+		([("p1", 1990, 2020), ("p2", 1980, 2020), ("p3", 1980, 1985), ("p4", 1980, 1983), ("p3", 1980, 1984)], 1980)
+	]
+)
 def test_highest_population(test_population, expected_response):
 	response = highest_population(test_population)
 
 	assert response == expected_response
 
 
-TEST_LONGEST_CONSECUTIVE_SUBSEQUENCE = [
-	([], 0),
-	([1, 2], 2),
-	([1, 8, 8, 5, 2, 3], 3),
-	([1, 1, 1, 1], 1),
-	([-1, -2], 2),
-	([-10, -11, -12], 3)
-]
-@mark.parametrize("test_numbers, expected_response", TEST_LONGEST_CONSECUTIVE_SUBSEQUENCE)
+@mark.parametrize(
+	"test_numbers, expected_response",
+	[
+		([], 0),
+		([1, 2], 2),
+		([1, 8, 8, 5, 2, 3], 3),
+		([1, 1, 1, 1], 1),
+		([-1, -2], 2),
+		([-10, -11, -12], 3)
+	]
+)
 def test_longest_consecutive_subsequence(test_numbers, expected_response):
 	response = longest_consecutive_subsequence(test_numbers)
 
@@ -166,13 +198,15 @@ def test_padovan_sequence_inefficient(test_num, expected_response):
 	assert response == expected_response
 
 
-TEST_REMOVE_DUPLICATES = [
-	([], 0),
-	([1], 1),
-	([1,1,1,1,1], 1),
-	([1,1,2,2,3,3,4,4,5,5,6,6,7,7], 7)
-]
-@mark.parametrize("test_array, expected_response", TEST_REMOVE_DUPLICATES)
+@mark.parametrize(
+	"test_array, expected_response",
+	[
+		([], 0),
+		([1], 1),
+		([1,1,1,1,1], 1),
+		([1,1,2,2,3,3,4,4,5,5,6,6,7,7], 7)
+	]
+)
 def test_remove_duplicates(test_array, expected_response):
 	response = remove_duplicates(test_array)
 	
@@ -210,26 +244,39 @@ TEST_TWO_CITY_SCHED_COST = [
 	([[259,770],[448,54],[926,667],[184,139],[840,118],[577,469]], 1859),
 	([[515,563],[451,713],[537,709],[343,819],[855,779],[457,60],[650,359],[631,42]], 3086)
 ]
-@mark.parametrize("test_costs, expected_response", TEST_TWO_CITY_SCHED_COST)
+@mark.parametrize(
+	"test_costs, expected_response", 
+	[
+		([], 0),
+		([[3, 4]], 3),
+		([[3, 4], [5, 6]], 9),
+		([[3, 4], [5, 6], [7, 8]], 16),
+		([[10,20],[30,200],[400,50],[30,20]], 110),
+		([[259,770],[448,54],[926,667],[184,139],[840,118],[577,469]], 1859),
+		([[515,563],[451,713],[537,709],[343,819],[855,779],[457,60],[650,359],[631,42]], 3086)
+	]
+)
 def test_two_city_sched_cost(test_costs, expected_response):
 	response = two_city_sched_cost(test_costs)
 
 	assert response == expected_response
 
 
-TEST_TWO_SUM = [
-	([], 0, []),
-	([1], 0, []),
-	([1], 7, []),
-	([10, -3], 7, [0, 1]),
-	([0, 0], 0, [0, 1]),
-	([0, 1, 0], 0, [0, 2]),
-	([1, 1], 2, [0, 1]),
-	([1, 1], 5, []),
-	([1, 3, 2], 5, [1, 2]),
-	([1, 3, 6, 8, 9, 1], 2, [0, 5])
-]
-@mark.parametrize("test_num, test_target, expected_response", TEST_TWO_SUM)
+@mark.parametrize(
+	"test_num, test_target, expected_response",
+	[
+		([], 0, []),
+		([1], 0, []),
+		([1], 7, []),
+		([10, -3], 7, [0, 1]),
+		([0, 0], 0, [0, 1]),
+		([0, 1, 0], 0, [0, 2]),
+		([1, 1], 2, [0, 1]),
+		([1, 1], 5, []),
+		([1, 3, 2], 5, [1, 2]),
+		([1, 3, 6, 8, 9, 1], 2, [0, 5])
+	]
+)
 def test_two_sum(test_num, test_target, expected_response):
 	response = two_sum(test_num, test_target)
 
