@@ -354,22 +354,21 @@ def to_goat_latin(s: str) -> str:
 	# if not s: return ""
 	words = s.split()
 	vowels = {"a", "e", "i", "o", "u"}
-	goat_latin = ""
+	goat_latin = []
 
 	# loop through words
 	for i, word in enumerate(words, 1):
 		new_word = ""
 
 		if word[0].lower() in vowels:
-
 			new_word = word + "ma"
 		else:
 			new_word = word[1:] + word[0] + "ma"
 
-		goat_latin += new_word + ("a" * i) + " "
-
-		
-	return goat_latin[:-1] if goat_latin and goat_latin[-1] == " " else goat_latin
+		# append "a"
+		goat_latin.append(new_word + ("a" * i))
+	
+	return " ".join(goat_latin)
 
 
 # PRIVATE METHODS BELOW:
