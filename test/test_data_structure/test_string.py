@@ -172,5 +172,17 @@ def test_length_of_longest_substring(test_input, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize(
+	"test_s, expected_response", [
+		("", ""),
+		("I speak Goat Latin", "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"),
+		("The quick brown fox jumped over the lazy dog", "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa")
+	]
+)
+def test_to_goat_latin(test_s, expected_response):
+	response = string.to_goat_latin(test_s)
+
+	assert response == expected_response
+
 
 
