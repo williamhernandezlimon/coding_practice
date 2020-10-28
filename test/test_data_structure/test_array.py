@@ -203,11 +203,11 @@ def test_padovan_sequence_inefficient(test_num, expected_response):
 		([], [0]),
 		([0], [1]),
 		([1], [2]),
-		([12], [1, 3]),
-		([123], [1, 2, 4]),
+		([1, 2], [1, 3]),
+		([1, 2, 3], [1, 2, 4]),
 		([9], [1, 0]),
-		([99], [1, 0, 0]),
-		([999], [1, 0, 0, 0])
+		([9, 9], [1, 0, 0]),
+		([9, 9, 9], [1, 0, 0, 0])
 	]
 )
 def test_plus_one(test_digits, expected_response):

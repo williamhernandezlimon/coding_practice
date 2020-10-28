@@ -370,26 +370,23 @@ def plus_one(digits):
 		list of integers incremented by
 	complexity:
 		time: O(n)
-		space: O(n)
+		space: O(1)
 	"""
 	if not digits: return [0]
-	solution_int = 0
-
-	# convert to integer
-	for i, digit in enumerate(digits):
-		solution_int += digit * (10**i)
-
-	# increment by 1
-	solution_int += 1
-
-	# convert integer to list of integers
-	solution_list = []
-	while solution_int:
-	    solution_list.append(solution_int % 10)
-	    solution_int //= 10
-
-	return solution_list[::-1]
-
+	
+	# loop through digits starting from end
+	i = len(digits) - 1
+	while i >= 0:
+		if digits[i] < 9:
+			# increment current digit and return list
+			digits[i] += 1
+			return digits
+		else:
+			digits[i] = 0
+		i -= 1
+	
+	# add 1 
+	return [1] + digits
 
 def remove_duplicates(array):
 	"""
