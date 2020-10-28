@@ -388,6 +388,7 @@ def plus_one(digits):
 	# add 1 
 	return [1] + digits
 
+
 def remove_duplicates(array):
 	"""
 	Remove all duplicates from sorted array "in place"
