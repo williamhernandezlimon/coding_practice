@@ -358,6 +358,37 @@ def padovan_sequence_inefficient(num: int) -> int:
 	return padovan_sequence_inefficient(num - 2) + padovan_sequence_inefficient(num - 3)
 
 
+def plus_one(digits):
+	"""
+	Given a list of integers, representing an integer, increment by one
+	Example: 
+		[1,2,3] => [1,2,4] => (123 + 1 = 124)
+		[4,3,2,1] => [4,3,2,2] => (4321 + 1 = 4322)
+	digits:
+		list of integers representing the integer
+	return:
+		list of integers incremented by
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+	if not digits: return [0]
+	
+	# loop through digits starting from end
+	i = len(digits) - 1
+	while i >= 0:
+		if digits[i] < 9:
+			# increment current digit and return list
+			digits[i] += 1
+			return digits
+		else:
+			digits[i] = 0
+		i -= 1
+	
+	# add 1 
+	return [1] + digits
+
+
 def remove_duplicates(array):
 	"""
 	Remove all duplicates from sorted array "in place"

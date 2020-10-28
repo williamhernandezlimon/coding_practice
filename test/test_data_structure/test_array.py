@@ -199,6 +199,24 @@ def test_padovan_sequence_inefficient(test_num, expected_response):
 
 
 @mark.parametrize(
+	"test_digits, expected_response", [
+		([], [0]),
+		([0], [1]),
+		([1], [2]),
+		([1, 2], [1, 3]),
+		([1, 2, 3], [1, 2, 4]),
+		([9], [1, 0]),
+		([9, 9], [1, 0, 0]),
+		([9, 9, 9], [1, 0, 0, 0])
+	]
+)
+def test_plus_one(test_digits, expected_response):
+	response = plus_one(test_digits)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_array, expected_response",
 	[
 		([], 0),
