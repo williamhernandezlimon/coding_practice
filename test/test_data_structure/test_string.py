@@ -22,6 +22,42 @@ def test_compress(test_s, expected_response):
 
 	assert response == expected_response
 
+
+@mark.parametrize(
+	"test_hostnames_range, test_hosts, expected_response", [
+		("", {}, []),
+		("web0001-1000.facebook.com", {}, []),
+		("web0001-1000.facebook.com", {
+										"web0001.facebook.com": {
+											"instances": {
+												"app": 1,
+												"docker": 2,
+												"instana": 3
+											}
+										},
+										"web0002.facebook.com": {
+											"instances": {
+												"app": 2,
+												"docker": 2,
+												"instana": 3
+											}
+										},
+										"web1000.facebook.com": {
+											"instances": {
+												"app": 4,
+												"docker": 2,
+												"instana": 3
+											}
+										}
+									}, ["web0001.facebook.com", "web0002.facebook.com"])
+	]
+)
+def test_get_bad_hosts(test_hostnames_range, test_hosts, expected_response):
+	response = string.get_bad_hosts(test_hostnames_range, test_hosts)
+
+	assert response == expected_response
+
+
 TEST_GET_LARGER = [
 	("", "", ""),
 	("", "-", "-"),
