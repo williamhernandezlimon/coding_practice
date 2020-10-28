@@ -45,6 +45,41 @@ def compress(s):
 	return "".join(compressed_string)
 
 
+def get_bad_hosts(hostnames_range, hosts):
+	"""
+	Given a range of hostnames, email me a single list of hosts running the wrong number of instances of a process.
+	Don't worry about authentication, assume ssh keys are in place for user 'root'.
+ 	Hostname range: web0001-1000.facebook.com
+	Process name: "app"
+	Number of running "app" instances when healthy: 4	
+	hostnames_range:
+		string containing the range of hosts
+	hosts:
+		map of hosts, used to check instances
+	"""
+	# TODO: store names in a class
+	instance_name = "app"
+	start = "0001"
+	end = "1000"
+
+	bad_hosts = []
+	# loop through all hosts
+	for i in range(int(start), int(end) + 1):
+		# convert "i" integer, to string, with proper padding
+		i_str = str(i).zfill(4)
+		hostname = f"web{i_str}.facebook.com"
+
+		# get number of running app
+		app_instance_count = hosts.get(hostname, {}).get("instances", {}).get("app", 0)
+
+		# append bad hosts
+		if hostname in hosts and app_instance_count != 4:
+			bad_hosts.append(hostname)
+
+
+	return bad_hosts
+
+
 def get_larger(s1, s2):
 	"""
 	Return the larger string delimeted by '-'
