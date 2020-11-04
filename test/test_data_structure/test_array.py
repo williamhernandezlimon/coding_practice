@@ -174,6 +174,24 @@ def test_longest_consecutive_subsequence(test_numbers, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize(
+	"test_nums, expected_response", [
+		([], float("-inf")),
+		([1], 1),
+		([1, 2], 3),
+		([1, -1], 1),
+		([-2,1,-3,4,-1,2,1,-5,4], 6)
+	]
+
+)
+def test_max_subarray(test_nums, expected_response):
+	response = max_subarray_ptrs(test_nums)
+	assert response == expected_response
+
+	response = max_subarray_dp(test_nums)
+	assert response == expected_response
+
+
 TEST_PADOVAN_SEQUENCE = [
 	(0, 1),
 	(1, 1),
