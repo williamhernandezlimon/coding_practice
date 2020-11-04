@@ -290,6 +290,74 @@ def longest_consecutive_subsequence(numbers):
 	return max_consecutive_numbers
 
 
+def max_subarray_dp(nums):
+	"""
+	Find the contiguous subarray, which has the largest sum of values.
+	This method uses dynamic programming
+	nums:
+		list of signed integers
+	return:
+		largest subarray value
+	complexity:
+		time: O(n)
+		space: O(n)
+	"""
+	# empty nums
+	if not nums: return float("-inf")
+
+	# allocate memory for maxes of each index
+	maxes = [0] * len(nums)
+
+	# set base case
+	maxes[0] = nums[0]
+
+
+	# check all numbers
+	for i, current_number in enumerate(nums[1:], 1):
+		previous_number = maxes[i - 1]
+
+		# max between extending array or starting a new sub-array
+		maxes[i] = max(previous_number + current_number, current_number)
+
+	return max(maxes)
+
+
+def max_subarray_ptrs(nums):
+	"""
+	Find the contiguous subarray, which has the largest sum of values.
+	This method uses pointers
+	nums:
+		list of signed integers
+	return:
+		largest subarray value
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+	max_sum = float("-inf")
+	sub_sum = 0
+	start = 0
+	end = 0
+	i = 0
+
+	# loop through list
+	for j, number in enumerate(nums):
+		sub_sum += number
+
+		# new max found
+		if sub_sum > max_sum:
+			max_sum = sub_sum
+			start = i
+			end = j
+
+		# anything less than 0 is useless
+		if sub_sum < 0:
+			i += 1
+			sub_sum = 0
+
+	return max_sum
+
+
 def two_city_sched_cost(costs):
 	"""
 	A company is planning to interview 2n people. 
