@@ -4,11 +4,11 @@ from src.data_structure.linked_list import *
 from pytest import mark
 
 
-TEST_REVERSE = [
-	([], None),
-	(['A', 'B', 'C', 'D', 'E'], ['E', 'D', 'C', 'B', 'A'])
-]
-@mark.parametrize("test_list, expected_response", TEST_REVERSE)
+@mark.parametrize("test_list, expected_response", [
+		([], None),
+		(['A', 'B', 'C', 'D', 'E'], ['E', 'D', 'C', 'B', 'A'])
+	]
+)
 def test_reverse(test_list, expected_response):
 	"""
 	Tests linked list was properly reversed
@@ -27,12 +27,12 @@ def test_reverse(test_list, expected_response):
 		back_ptr -= 1
 
 
-TEST_NUMBERS = [
-	([2, 4, 3], [5, 6, 4], 807),
-	([2], [5, 2], 27),
-	([1, 4], [1], 42)
-]
-@mark.parametrize("test_number1, test_number2, expected_response", TEST_NUMBERS)
+@mark.parametrize("test_number1, test_number2, expected_response", [
+		([2, 4, 3], [5, 6, 4], 807),
+		([2], [5, 2], 27),
+		([1, 4], [1], 42)
+	]
+)
 def test_add_two_numbers(test_number1, test_number2, expected_response):
 	ll1 = create_linked_list(test_number1)
 	ll2 = create_linked_list(test_number2)
