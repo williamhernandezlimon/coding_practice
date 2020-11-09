@@ -320,6 +320,20 @@ def reverse_integer(number: int) -> int:
 	return reverse if is_positive else reverse * -1
 
 
+def reverse_words(s: str) -> str:
+	"""
+	Given a string of words. Reverse the words delimited by space
+	s:
+		string of words delimited by space
+	return:
+		s string in reverse order
+	complexity:
+		time: O(n)
+		space: O(n)
+	"""
+	return " ".join(s.split()[::-1])
+	
+
 def roman_to_integer(roman_number: str) -> int:
 	"""
 	Convert string roman numbers to integer value

@@ -144,6 +144,19 @@ def test_reverse_integer(test_number, expected_response):
 
 
 @mark.parametrize(
+	"test_s, expected_response", [
+		("", ""),
+		("hello", "hello"),
+		("hello world how are you", "you are how world hello"),
+	]
+)
+def test_reverse_words(test_s, expected_response):
+	response = string.reverse_words(test_s)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_roman_number, expected_response", [
 		("I", 1),
 		("V", 5),
