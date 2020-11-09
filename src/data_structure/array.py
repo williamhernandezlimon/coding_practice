@@ -259,6 +259,43 @@ def highest_population(population):
 	return max_year
 
 
+def jump1(nums):
+	"""
+	Given an array of non-negative integers, you are initially positioned at the first index of the array.
+	Each element in the array represents your maximum jump length at that position.
+	Determine if you are able to reach the last index.
+
+	Example:
+		Input: nums = [2,3,1,1,4]
+		Output: true
+		Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+	nums:
+		list of numbers
+	return:
+		return true if we can reach the end
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+	# base case
+	steps = nums[0] if nums else 0
+	if len(nums) == 1 and steps >= 0: return True
+
+	# current steps
+	i = 1
+	while steps and i < len(nums):
+	    # remove 1 step count
+	    steps -= 1
+	    
+	    # get max steps value
+	    steps = max(steps, nums[i])
+
+	    # take a step in nums
+	    i += 1
+	    
+	return i >= len(nums)
+
+
 def longest_consecutive_subsequence(numbers):
 	"""
 	Find the longest consecutive subsequence from a given amount of numbers
