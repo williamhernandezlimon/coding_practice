@@ -607,14 +607,19 @@ def two_sum(nums, target):
 		space: O(n)
 	"""
 	m = {}
-	for j, num in enumerate(nums):
+
+	# loop though all nums
+	for i, num in enumerate(nums):
+		# get new target
 		new_target = target - num
+
+		# if target in map: return current index and index in map
 		if new_target in m:
-			i = m[new_target]
-			return [i, j]
-		else:
-			m[num] = j
-	
+			return [m[new_target], i]
+
+		# add number to max and its index
+		m[num] = i
+
 	return []
 
 
