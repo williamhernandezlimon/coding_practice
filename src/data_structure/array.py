@@ -259,6 +259,81 @@ def highest_population(population):
 	return max_year
 
 
+def jump1(nums):
+	"""
+	Given an array of non-negative integers, you are initially positioned at the first index of the array.
+	Each element in the array represents your maximum jump length at that position.
+	Determine if you are able to reach the last index.
+
+	Example:
+		Input: nums = [2,3,1,1,4]
+		Output: true
+		Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+	nums:
+		list of steps (integers)
+	return:
+		return true if we can reach the end
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+	# base case
+	steps = nums[0] if nums else 0
+	if len(nums) == 1 and steps >= 0: return True
+
+	# current steps
+	i = 1
+	while steps and i < len(nums):
+	    # remove 1 step count
+	    steps -= 1
+	    
+	    # get max steps value
+	    steps = max(steps, nums[i])
+
+	    # take a step in nums
+	    i += 1
+	    
+	return i >= len(nums)
+
+
+def jump2(nums):
+	"""
+	Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
+	Each element in the array represents your maximum jump length at that position.
+	Your goal is to reach the last index in the minimum number of jumps.
+	You can assume that you can always reach the last index.
+
+	Example:
+		Input: nums = [2,3,1,1,4]
+		Output: 2
+		Explanation: The minimum number of jumps to reach the last index is 2. 
+					 Jump 1 step from index 0 to 1, then 3 steps to the last index.
+
+	nums:
+		list of steps (integers)
+	return:
+		minimum number of jumps
+	"""
+	# start from beginning
+	curStep = 0
+	i = 0
+	level = 0
+
+	while curStep < len(nums) - 1:
+	    level += 1
+	    
+	    # update prestep
+	    preStep = curStep
+	    
+	    # traverse of prestep level to find max step
+	    # of this level
+	    while i <= preStep:
+	        curStep = max(curStep, i + nums[i])
+	        i += 1
+
+	return level
+
+
 def longest_consecutive_subsequence(numbers):
 	"""
 	Find the longest consecutive subsequence from a given amount of numbers
