@@ -158,6 +158,19 @@ def test_highest_population(test_population, expected_response):
 
 
 @mark.parametrize(
+	"test_nums, expected_response", [
+		([0], True),
+		([1], True),
+		([2,3,1,1,4], True)
+	]
+)
+def test_jump1(test_nums, expected_response):
+	response = jump1(test_nums)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_numbers, expected_response",
 	[
 		([], 0),
