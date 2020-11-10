@@ -160,6 +160,66 @@ def dijkstras(graph, start):
 	return distances, path
 
 
+def word_search(board, word):
+	"""
+	Given a 2D board and a word, find if the word exists in the grid.
+
+	The word can be constructed from letters of sequentially adjacent cells, 
+	where "adjacent" cells are horizontally or vertically neighboring. 
+	The same letter cell may not be used more than once.
+	board:
+		list of lists, 2d array containing word search
+	word:
+		the word to be found in the board
+	complexity:
+		time: O(m*n), due to 
+		space: O(m*n), due to recurssion
+		where m and n are the rows and columns respectfully
+	"""
+    # loop through all rows
+    for i in range(len(board)):
+        # loop through all columns
+        for j in range(len(board[i])):
+            # if first_element == current_word and _dfs_search(i, j, board, word)
+            if word[0] == board[i][j] and _dfs_search(i, j, 0, board, word):
+                return True
+
+    # no match found
+    return False
+
+
+def _dfs_search(i, j, word_index, board, word):
+    # base case 
+    if len(word) == word_index:
+        return True
+
+
+    # check within bounds
+    if i < 0 or i >= len(board) or \
+        j < 0 or j >= len(board[i]) or \
+        word[word_index] != board[i][j]: 
+        return False
+
+    # save visited
+    saved_char =  board[i][j]
+
+    # mark as visited
+    board[i][j] = " "
+
+    # check neighbors
+    top = _dfs_search(i + 1, j, word_index + 1, board, word)
+    bottom = _dfs_search(i - 1, j, word_index + 1, board, word)
+    left = _dfs_search(i, j + 1, word_index + 1, board, word)
+    right = _dfs_search(i, j - 1, word_index + 1, board, word)
+    if top or bottom or left or right:
+    	return True
+
+    # reset to unvisited
+    board[i][j] = saved_char
+
+    return False
+
+
 def _pop_min_map_value(q):
 	"""
 	Given a map of key,values return the key,value
