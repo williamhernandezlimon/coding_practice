@@ -176,48 +176,47 @@ def word_search(board, word):
 		space: O(m*n), due to recurssion
 		where m and n are the rows and columns respectfully
 	"""
-    # loop through all rows
-    for i in range(len(board)):
-        # loop through all columns
-        for j in range(len(board[i])):
-            # if first_element == current_word and _dfs_search(i, j, board, word)
-            if word[0] == board[i][j] and _dfs_search(i, j, 0, board, word):
-                return True
+	# loop through rows
+	for row in range(len(board)):
+		# loop through columns
+		for column in range(len(board[row])):
+			# run dfs
+			# if dfs_run == true: return true
+			if word[0] == board[row][column] and _dfs_search(board, word, row, column, 0):
+				return True
 
-    # no match found
-    return False
-
-
-def _dfs_search(i, j, word_index, board, word):
-    # base case 
-    if len(word) == word_index:
-        return True
+	# no match found
+	return False
 
 
-    # check within bounds
-    if i < 0 or i >= len(board) or \
-        j < 0 or j >= len(board[i]) or \
-        word[word_index] != board[i][j]: 
-        return False
+def _dfs_search(board, word, row, column, index):
+	# base case: word found
+	if index == len(word): return True
 
-    # save visited
-    saved_char =  board[i][j]
+	# out of bounds check: top, bottom, left, and right
+	# also check letter's don't match
+	print(f"row: {row} column: {column} index: {index} board: {len(board)} x {len(board[0])} len(word): {len(word)}")
+	if row < 0 or row >= len(board) \
+		or column < 0 or column >= len(board[row]) \
+		or word[index] != board[row][column]:
+		return False
 
-    # mark as visited
-    board[i][j] = " "
+	# temporarily modify board to track visited
+	saved_letter = board[row][column]
+	board[row][column] = "*"
 
-    # check neighbors
-    top = _dfs_search(i + 1, j, word_index + 1, board, word)
-    bottom = _dfs_search(i - 1, j, word_index + 1, board, word)
-    left = _dfs_search(i, j + 1, word_index + 1, board, word)
-    right = _dfs_search(i, j - 1, word_index + 1, board, word)
-    if top or bottom or left or right:
-    	return True
+	# keep checking word search: top, bottom, left, and right
+	if _dfs_search(board, word, row + 1, column, index + 1) \
+		or _dfs_search(board, word, row - 1, column, index + 1) \
+		or _dfs_search(board, word, row, column + 1, index + 1) \
+		or _dfs_search(board, word, row, column - 1, index + 1):
+		return True
 
-    # reset to unvisited
-    board[i][j] = saved_char
+	# revert board
+	board[row][column] = saved_letter
 
-    return False
+	return False
+
 
 
 def _pop_min_map_value(q):
