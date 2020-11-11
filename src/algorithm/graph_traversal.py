@@ -189,6 +189,39 @@ def word_search(board, word):
 	return False
 
 
+def max_unique_length(array):
+	"""
+	Given an array of strings arr. String s is a concatenation 
+	of a sub-sequence of arr which have unique characters.
+
+	Return the maximum possible length of s.
+
+	complexity:
+		time: O(n^2)
+		space: O(n)
+	"""
+	if not array: return 0
+	
+	uniq_concats = [""]
+
+	# loop thorugh all strings
+	for s in array:
+
+		# skip loop in not unique
+		if len(set(s)) != len(s):
+			continue
+		
+		# loop through all unique concat  
+		# (copy uniq_concact to avoid infinite loop)
+		for s_uniq in uniq_concats[:]:
+			# if two string unique, append to uniq_concat
+			concat = s + s_uniq
+			if len(set(concat)) == len(concat):
+				uniq_concats.append(concat)
+
+	return len(max(uniq_concats, key=len))
+
+
 def _dfs_search(board, word, row, column, index):
 	# base case: word found
 	if index == len(word): return True
