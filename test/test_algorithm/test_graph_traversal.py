@@ -65,6 +65,20 @@ def test_dijkstras(test_graph, test_start, expected_response_visited, expected_r
 
 
 @mark.parametrize(
+	"test_array, expected_response", [
+		([], 0),
+		(["un", "iq", 'ue'], 4),
+		(["cha","r","act","ers"], 6),
+		(["abcdefghijklmnopqrstuvwxyz"], 26)
+	]
+)
+def test_max_unique_length(test_array, expected_response):
+	response = max_unique_length(test_array)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_board, test_word, expected_response", [
 		([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "HELLO", False),
 		([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCB", False),
