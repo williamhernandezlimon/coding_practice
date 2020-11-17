@@ -29,12 +29,15 @@ def max_depth(root):
 	"""
 	Returns the max depth of a binary tree
 	"""
-	if root == None: return 0
-	else:
-		left_depth = 1 + max_depth(root.left)
-		right_depth = 1 + max_depth(root.right)
+	if not root: return 0
 
-		return max(left_depth, right_depth)
+	left_depth = 1 + max_depth(root.left)
+	right_depth = 1 + max_depth(root.right)
+
+	return max(left_depth, right_depth)
+
+
+
 
 def is_symmetric_iterative(root):
 	"""
