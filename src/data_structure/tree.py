@@ -37,8 +37,6 @@ def max_depth(root):
 	return max(left_depth, right_depth)
 
 
-
-
 def is_symmetric_iterative(root):
 	"""
 	Returns True if tree is symmetric
