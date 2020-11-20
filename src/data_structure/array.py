@@ -552,6 +552,54 @@ def remove_duplicates(array):
 	return len(array)
 
 
+def submatrix_sum(matrix, start_coordinate, end_coordinate):
+	"""
+	Given a matrix and starting and ending coordinates, 
+	that define a submatrix, return the total of the submatrix
+	matrix:
+		list of list of integers
+	start_coordinate:
+		(start_column, start_row)
+	end_coordinate:
+		(end_column, end_row)
+	complexity:
+		time:
+			O(mxn)
+		space:
+			O(1)
+	return:
+		sum of defined submatrix
+	"""
+	# get starting row and column
+	column = start_coordinate[0]
+	row = start_coordinate[1]
+
+	total = 0
+
+	# store column and row bounds
+	end_column = end_coordinate[0]
+	end_row = end_coordinate[1]
+
+	empty_matrix = not matrix or not matrix[0]
+	out_of_bounds = len(matrix) <= end_row or len(matrix[0]) <= end_column or \
+		column < 0 or row < 0
+	if empty_matrix or out_of_bounds: return 0
+
+	# loop while until rows within bounds
+	while row <= end_row:
+		# reset column count
+		column = start_coordinate[0]
+		# loop while column within bounds
+		while column <= end_column:
+			# store sum
+			total += matrix[row][column]
+			column += 1
+
+		row += 1
+
+	return total
+
+
 def three_sums(nums):
 	"""
 	Find a list of non-duplicate order of numbers that add up to zero

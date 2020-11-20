@@ -276,6 +276,28 @@ def test_remove_duplicates(test_array, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize(
+	"test_matrix, test_start_coordinate, test_end_coordinate, expected_response", [
+		([[]], (0,0), (2,2), 0),
+		([[1,2,3],[4,5,6],[7,8,9]], (0,0), (0,0), 1),
+		([[1,2,3],[4,5,6],[7,8,9]], (-1,0), (0,0), 0),
+		([[1,2,3],[4,5,6],[7,8,9]], (10,0), (0,0), 0),
+		([[1,2,3],[4,5,6],[7,8,9]], (0,0), (2,2), 45),
+		([
+			[0, 2, 5, 4, 1],
+			[4, 8, 2, 3, 7],
+			[6, 3, 4, 6, 2],
+			[7, 3, 1, 8, 3],
+			[1, 5, 7, 9, 4]
+		], (1,1), (3,3), 38)
+	]
+)
+def test_submatrix_sum(test_matrix, test_start_coordinate, test_end_coordinate, expected_response):
+	response = submatrix_sum(test_matrix, test_start_coordinate, test_end_coordinate)
+
+	assert response == expected_response
+
+
 TEST_THREE_SUMS = [
 	([], []),
 	([1, 2], []),
