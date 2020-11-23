@@ -26,6 +26,32 @@ def test_reverse(test_list, expected_response):
 		front_ptr += 1
 		back_ptr -= 1
 
+@mark.parametrize(
+		"test_list, expected_response", [
+		([], None),
+		([1, 2, 3], [1, 2, 3]),
+		([1, 2, 3, 1, 1, 1], [1, 2, 3]),
+		([1, 2, 3, 1, 1, 1], [1, 2, 3]),
+		([1, 1, 2, 2, 3, 3], [1, 2, 3]),
+	]
+)
+def test_remove_duplicates(test_list, expected_response):
+	ll1 = create_linked_list(test_list)
+	# TODO: data doesn't have to be a linked
+	ll2 = create_linked_list(expected_response)
+	
+	remove_duplicates(ll1)
+
+	# use pointers to check data valid
+	p1 = ll1.head if ll1 else None
+	p2 = ll2.head if ll2 else None
+
+	while p1 and p2:
+		assert p1.data == p2.data
+		p1 = p1.next
+		p2 = p2.next
+	
+	assert not p1 and not p2
 
 @mark.parametrize("test_number1, test_number2, expected_response", [
 		([2, 4, 3], [5, 6, 4], 807),
