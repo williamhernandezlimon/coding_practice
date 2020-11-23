@@ -261,6 +261,35 @@ def highest_population(population):
 	return max_year
 
 
+def is_sum_possible(nums, target):
+	"""
+	Recursively checks  a list of numbers sum up to the target
+	nums:
+		list of numbers
+	target:
+		the target number that the list of nums should be added to
+	return:
+		True if there are numbers in nums that add up to target
+		False otherwise
+	complexity:
+		time:
+			O(2^n)
+		space:
+			O(n)
+	"""
+	# run out of numbers
+	if not nums: 
+		if target == 0: return True
+		else: return False
+
+	# base case
+	number = nums[0]
+	if (target - number) == 0: return True
+
+	# (don't use the current value) or (do use the current value)
+	return is_sum_possible(nums[1:], target) or is_sum_possible(nums[1:], target - number)
+
+
 def jump1(nums):
 	"""
 	Given an array of non-negative integers, you are initially positioned at the first index of the array.
