@@ -33,6 +33,37 @@ def add_two_numbers(l1: LinkedList, l2: LinkedList) -> int:
 
 	return n1 + n2
 
+
+def remove_duplicates(ll: LinkedList) -> LinkedList:
+	"""
+	Remove duplicates in linked list using a set
+	ll:
+		linked list of nodes
+	complexity:
+		time: O(n)
+		space: O(n)
+	"""
+	# empty case
+	if not ll or not ll.head: return None
+
+	current = ll.head
+	s = {current.data}
+	prev = current
+	current = current.next
+	while current:
+		# remove duplicate
+		if current.data in s:
+			prev.next = current.next
+			current = current.next 	
+		else:
+			# add data set
+			s.add(current.data)
+
+			# continue traversing
+			prev = prev.next
+			current = current.next
+
+
 def reverse(ll: LinkedList) -> LinkedList:
 	"""
 	Given a linked list, reverse the entire linked list
