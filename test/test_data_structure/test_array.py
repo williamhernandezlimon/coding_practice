@@ -158,6 +158,24 @@ def test_highest_population(test_population, expected_response):
 
 
 @mark.parametrize(
+	"test_nums, test_target, expected_response", [
+		([], 1, False),
+		([2, 3], 1, False),
+		([], 0, True),
+		([1, 2, 3, 4], 10, True),
+		([1, 2, 3, 4], 6, True),
+		([1, 2, 1, 3], 2, True),
+		([1, 2, 1, 3], 7, True),
+		([1, 10, 20, 30], 41, True)
+	]
+)
+def test_is_sum_possible(test_target, test_nums, expected_response):
+	response = is_sum_possible(test_nums, test_target)
+	
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_nums, expected_response", [
 		([0], True),
 		([1], True),
