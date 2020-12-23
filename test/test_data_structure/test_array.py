@@ -141,6 +141,24 @@ def test_four_sums(test_list, test_target, expected_response):
 
 
 @mark.parametrize(
+	"test_nums, test_target, expected_response", [
+		([1], 2, None),
+		([1], 1, 0),
+		([1,2,3], 2, 1),
+		# nums below are sorted, but rotated
+		([4,5,0,1,2,3], 0, 2),
+		([4,5,6,0,1,2,3], 0, 3),
+		
+
+	]
+)
+def test_get_index(test_nums, test_target, expected_response):
+	response = get_index(test_nums, test_target)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_population, expected_response",
 	[
 		([], float("-inf")),
