@@ -219,6 +219,23 @@ def four_sums(nums, target):
 	return sums
 
 
+def get_index(nums, target):
+	"""
+	Given a sorted integer array, in ascending order, get the index of the target.
+	nums:
+		list of sorted numbers, please note the numbers can be rotated
+		rotation example:
+			[4,5,0,1,2,3]
+			note rotation at index 1
+	target:
+		the number we are trying to find the index for
+	complexity:
+		time: O(log(n))
+		space: O(log(n))
+	"""
+	return _get_index_helper(nums, target, 0, len(nums)-1)
+
+
 def highest_population(population):
 	"""
 	Assume population data structure is built properly, with correct tuple structure.
@@ -701,3 +718,48 @@ def two_sum(nums, target):
 
 	return []
 
+
+def _get_index_helper(nums, target, start, end):
+	"""
+	Helper method for get_index.
+	Please see get_index for additional details
+	"""
+	mid = start +  (end - start)//2
+	
+	# index found
+	if nums[mid] == target:
+		return mid
+
+	# does not exist
+	if end-start <= 0:
+		return None
+
+	# note: select which half of array to traverse
+
+	# 0 - mid ordered? 
+		# check if in range
+		# else mid - end
+	# mid - end ordered?
+		# check if in range
+		# else 0 - mid
+	# return non exists
+	
+	# check first half is ascending order
+	if nums[start] <= nums[mid]:
+		# get first half if in range 
+		if nums[start] <= target and target <= nums[mid]:
+			return _get_index_helper(nums, target, start, mid-1)
+		# otherwise get second half
+		else:
+			return _get_index_helper(nums, target, mid, end)
+
+	elif nums[mid] <= nums[end]:
+		# get second half if in range
+		if nums[mid] <= target and target <= nums[-1]:
+			return _get_index_helper(nums, target, mid, end)
+		# otherwise get first half
+		else:
+			return _get_index_helper(nums, target, start, mid-1)
+	else:
+		print(f"Should not be here!!!")
+		return []
