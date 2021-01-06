@@ -101,6 +101,59 @@ def contains_duplicates(array):
 	return False
 
 
+def equi(a):
+	"""
+	An array A consisting of N integers is given. An equilibrium index of this array is any integer P such that 0 ≤ P < N and the sum of elements of lower indices is equal to the sum of elements of higher indices, i.e.
+	A[0] + A[1] + ... + A[P−1] = A[P+1] + ... + A[N−2] + A[N−1].
+	Sum of zero elements is assumed to be equal to 0. This can happen if P = 0 or if P = N−1.
+
+	For example, consider the following array A consisting of N = 8 elements:
+
+	  A[0] = -1
+	  A[1] =  3
+	  A[2] = -4
+	  A[3] =  5
+	  A[4] =  1
+	  A[5] = -6
+	  A[6] =  2
+	  A[7] =  1
+	P = 1 is an equilibrium index of this array, because:
+
+	A[0] = −1 = A[2] + A[3] + A[4] + A[5] + A[6] + A[7]
+	P = 3 is an equilibrium index of this array, because:
+
+	A[0] + A[1] + A[2] = −2 = A[4] + A[5] + A[6] + A[7]
+	P = 7 is also an equilibrium index, because:
+
+	A[0] + A[1] + A[2] + A[3] + A[4] + A[5] + A[6] = 0
+	"""
+	if len(a) < 1: return -1
+
+	# create hashmap
+	m = {}
+
+	# store map value of index 0, 
+	# 	key is index and
+	#  	value is array of len 2.
+	#		0th value is left and 1st value is right
+	left = 0
+	right = 0
+	for value in a[1:]:
+		right += value
+	m[0] = [left, right]
+
+
+	for j, value in enumerate(a[1:], 1):
+		left = m[j-1][0] + a[j-1]  # previous left + previous element
+		right = m[j-1][1] - a[j]  # previous right - current element
+		m[j] = [left, right]
+
+		if left == right:
+			return j
+
+	return -1
+
+
 def fibonacci_sequence(num: int) -> int:
 	"""
 	Calculate the fibonacci sequence from num
