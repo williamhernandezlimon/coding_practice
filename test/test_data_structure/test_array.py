@@ -56,6 +56,18 @@ def test_contains_duplicates(test_array, expected_response):
 
 	assert response == expected_response
 
+@mark.parametrize(
+	"test_array, expected_response", [
+		([-1,3,-4,5,1,-6,2,1], 1),
+		([-1,3,-4], -1)
+	]
+)
+def test_equi(test_array, expected_response):
+	response = equi(test_array)
+
+	assert response == expected_response
+
+
 
 @mark.parametrize(
 	"test_num, expected_response", 

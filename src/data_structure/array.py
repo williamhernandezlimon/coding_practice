@@ -101,6 +101,36 @@ def contains_duplicates(array):
 	return False
 
 
+def equi(a):
+	"""
+	An array A consisting of N integers is given. An equilibrium index of this array is any integer P such that 0 ≤ P < N and the sum of elements of lower indices is equal to the sum of elements of higher indices, i.e.
+	A[0] + A[1] + ... + A[P−1] = A[P+1] + ... + A[N−2] + A[N−1].
+	Sum of zero elements is assumed to be equal to 0. This can happen if P = 0 or if P = N−1.
+	a:
+		list containing the numbers
+	Complexity:
+		Time: O(n)
+		Space: O(1)
+	"""
+	if len(a) < 1: return -1
+
+	# get the sum of all values
+	sums = 0
+	for value in a:
+		sums += value
+
+	# check left and right sides
+	left = 0
+	right = 0
+	for i, value in enumerate(a):
+		right = sums - (left + value)
+		if left == right:
+			return i
+		left += value
+
+	return -1
+
+
 def fibonacci_sequence(num: int) -> int:
 	"""
 	Calculate the fibonacci sequence from num
