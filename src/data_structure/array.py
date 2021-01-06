@@ -110,31 +110,23 @@ def equi(a):
 		list containing the numbers
 	Complexity:
 		Time: O(n)
-		Space: O(n)
+		Space: O(1)
 	"""
 	if len(a) < 1: return -1
 
-	# create hashmap
-	m = {}
+	# get the sum of all values
+	sums = 0
+	for value in a:
+		sums += value
 
-	# store map value of index 0, 
-	# 	key is index and
-	#  	value is array of len 2.
-	#		0th value is left and 1st value is right
+	# check left and right sides
 	left = 0
 	right = 0
-	for value in a[1:]:
-		right += value
-	m[0] = [left, right]
-
-
-	for j, value in enumerate(a[1:], 1):
-		left = m[j-1][0] + a[j-1]  # previous left + previous element
-		right = m[j-1][1] - a[j]  # previous right - current element
-		m[j] = [left, right]
-
+	for i, value in enumerate(a):
+		right = sums - (left + value)
 		if left == right:
-			return j
+			return i
+		left += value
 
 	return -1
 
