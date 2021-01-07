@@ -511,6 +511,39 @@ def max_subarray_ptrs(nums):
 	return max_sum
 
 
+def minion_game(s):
+	"""
+	There are 2 players, Kevin and Stuart, where each player gets a point
+	for each occurence of the substring in the string
+
+	complexity:
+		time: O(n)
+		space: O(1)
+
+	"""
+	# store vowels in set
+	vowels = {'A','E','I','O','U'}
+
+	kevsc = 0
+	stusc = 0
+	for i in range(len(s)):
+	    if s[i] in vowels:
+	        kevsc += (len(s)-i)
+	    else:
+	        stusc += (len(s)-i)
+
+	# announce winner
+	if kevsc > stusc:
+	    winner, score =  "Kevin", kevsc
+	elif kevsc < stusc:
+	    winner, score = "Stuart", stusc
+	else:
+	    winner, score = "Draw", kevsc
+
+	print(f"{winner} {score}")
+	return (winner, score)
+
+
 def two_city_sched_cost(costs):
 	"""
 	A company is planning to interview 2n people. 
