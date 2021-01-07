@@ -273,7 +273,7 @@ def test_max_subarray(test_nums, expected_response):
 		("WW", ("Stuart", 3)),
 		("A", ("Kevin", 1)),
 		("AA", ("Kevin", 3)),
-		("", ("Stuart", 0))
+		("", ("Draw", 0))
 	]
 )
 def test_minion_game(test_s, expected_response):

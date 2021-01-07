@@ -511,31 +511,36 @@ def max_subarray_ptrs(nums):
 	return max_sum
 
 
-def minion_game(string):
+def minion_game(s):
 	"""
 	There are 2 players, Kevin and Stuart, where each player gets a point
 	for each occurence of the substring in the string
 
 	complexity:
-		time: O(n^2)
+		time: O(n)
 		space: O(1)
 
 	"""
 	# store vowels in set
-	vowels = {'a','e','i','o','u'}
+	vowels = {'A','E','I','O','U'}
 
-	# store player values
-	players = {'Stuart': 0, 'Kevin': 0}
+	kevsc = 0
+	stusc = 0
+	for i in range(len(s)):
+	    if s[i] in vowels:
+	        kevsc += (len(s)-i)
+	    else:
+	        stusc += (len(s)-i)
 
-	# loop through all permutations of letter
-	for i, s_i in enumerate(string):
-	    player = 'Kevin' if s_i.lower() in vowels else 'Stuart'
-	    for _ in string[i:]:
-	        players[player] += 1
+	# announce winner
+	if kevsc > stusc:
+	    winner, score =  "Kevin", kevsc
+	elif kevsc < stusc:
+	    winner, score = "Stuart", stusc
+	else:
+	    winner, score = "Draw", kevsc
 
-	winner = max(players, key=players.get)
-	score = players[winner]
-
+	print(f"{winner} {score}")
 	return (winner, score)
 
 
