@@ -257,13 +257,28 @@ def test_longest_consecutive_subsequence(test_numbers, expected_response):
 		([1, -1], 1),
 		([-2,1,-3,4,-1,2,1,-5,4], 6)
 	]
-
 )
 def test_max_subarray(test_nums, expected_response):
 	response = max_subarray_ptrs(test_nums)
 	assert response == expected_response
 
 	response = max_subarray_dp(test_nums)
+	assert response == expected_response
+
+
+@mark.parametrize(
+	"test_s, expected_response", [
+		("BANANA", ("Stuart", 12)),
+		("W", ("Stuart", 1)),
+		("WW", ("Stuart", 3)),
+		("A", ("Kevin", 1)),
+		("AA", ("Kevin", 3)),
+		("", ("Stuart", 0))
+	]
+)
+def test_minion_game(test_s, expected_response):
+	response = minion_game(test_s)
+
 	assert response == expected_response
 
 
