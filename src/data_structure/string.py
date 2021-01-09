@@ -108,6 +108,22 @@ def get_larger(s1, s2):
 	return s1 if len(l1) > len(l2) else s2
 
 
+def countCounterfeit(serialNumbers):
+	"""
+	serialNumbers:
+		a list of strings containing representing serialNumber
+	return:
+		denominations added together, for all valid serialNumbers
+	"""
+	total = 0
+	for serialNumber in serialNumbers:
+		if _serialNumberIsValid(serialNumber):
+			denomination = int(serialNumber[7:-1])
+			total += denomination
+
+	return total
+
+
 def is_palindrome_integer(num: int) -> bool:
 	"""
 	Checks to see if the integer is a valid palindrome
@@ -442,3 +458,53 @@ def _expand_from_middle(s: str, left: int, right: int) -> int:
 		right += 1
 
 	return right - left - 1
+
+
+def _serialNumberIsValid(serialNumber):
+	"""
+	This method checks:
+		1. serialNumber is valid and there are 10-12 characters
+		2. The next 4 characters represent the year the note was
+		   printed and will always be between 1900 and 2019 inclusive
+		3. The next characters represent the currency denomination
+		4. The next char should be the last char of the serial number
+		   which must end with only one uppercase English letter
+	serialNumber:
+		string which is used to perform checks
+	return:
+		True if all checks are true otherwise False
+	"""
+	try:
+		# validate string
+		errorMsg = f"{serialNumber} is not a valid string"
+		assert serialNumber.isidentifier()
+
+		# validate length
+		errorMsg = f"{serialNumber} is not within 10-12 characters"
+		assert 10 <= len(serialNumber) and len(serialNumber) <= 12
+		
+		# validate beginning
+		chars = serialNumber[:3] 
+		errorMsg = f"{chars}, first 3 chars, are not distinct uppercase chars"
+		assert chars.isalpha() and chars.isupper() and len(set(chars)) == 3
+
+		# validate year
+		year = serialNumber[3:7]
+		errorMsg = f"{year} year is not between 1900 & 2019 inclusive"
+		assert year.isnumeric() and 1900 <= int(year) and int(year) <= 2019
+		
+		# validate denomination
+		denomination = serialNumber[7:-1]
+		denominations = {10, 20, 50, 100, 200, 500, 1000}
+		errorMsg = f"{denomination} is an invalid denomination"
+		assert denomination.isnumeric() and int(denomination) in denominations
+
+		# validate ending
+		lastChar = serialNumber[-1]
+		errorMsg = f"{lastChar} the last char is not an alpha uppercase char"
+		assert lastChar.isalpha() and lastChar.isupper()
+	except AssertionError:
+		# LOGGER.info(errorMsg)
+		return False
+
+	return True

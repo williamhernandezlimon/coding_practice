@@ -56,6 +56,22 @@ def test_contains_duplicates(test_array, expected_response):
 
 	assert response == expected_response
 
+
+@mark.parametrize(
+	"test_array, expected_response", [
+		# minimum 2 elements expected
+		([1, 2], 1),
+		([2, 1], 0),
+		([4, 13, 10, 21, 20], 1),
+		([5, 8, 5, 11, 4, 6], 2)
+	]
+)
+def test_customSort(test_array, expected_response):
+	response = customSort(test_array)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_array, expected_response", [
 		([-1,3,-4,5,1,-6,2,1], 1),

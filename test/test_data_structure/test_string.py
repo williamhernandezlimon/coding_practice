@@ -78,6 +78,34 @@ def test_get_larger(test_s1, test_s2, expected_response):
 
 
 @mark.parametrize(
+	"test_serialNumber, expected_response", [
+		([], 0),
+		(["1"], 0),
+		(["AVG190420T"], 20),
+		(["RTF20001000Z"], 1000),
+		(["QWER201850G"], 0),
+		(["AFA199620E"], 0),
+		(["ERT1947200T"], 200),
+		(["RTY20202004"], 0),
+		(["DRV1984500Y"], 500),
+		(["A201550B"], 0),
+		(["ABB19991000Z"], 0),
+		(["XYZ200019Z"], 0),
+		(["SCD203010T"], 0),
+		(["A201550B", "ABB19991000Z", "XYZ200019Z", "ERF200220", 
+			"SCD203010T"], 0),
+		(["QDB2012R20B", "RED190250E", "RFV201111T", "TYU20121000E", 
+			"AAA198710B", "AbC200010E"], 1050),
+
+	]
+)
+def test_countCounterfeit(test_serialNumber, expected_response):
+	response = string.countCounterfeit(test_serialNumber)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_str_list, expected_response", [
 		([""], ""),
 		(["caa", "", "a", "acb"], ""),
