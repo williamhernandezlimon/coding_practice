@@ -101,6 +101,41 @@ def contains_duplicates(array):
 	return False
 
 
+def customSort(array):
+	"""
+	This method: 
+		custom sorts the array, using minimum moves. Custom sorts means
+		that all even numbers will be placed on the left
+		and all odd numbers will be placed on the right. 
+		This means [6, 4, 7, 5] is considered sorted
+		A move consists of swapping 2 elements.
+		We can expect a minimum of 2 elements
+	array:
+		list of integers that will be sorted
+	return:
+		integer representing the minimum number of moves required to custom sort
+	"""
+	left = 0
+	right = len(array) - 1
+	moves = 0
+
+	while left < right:
+		if array[left] % 2 == 0:
+			# even placed correctly
+			left += 1
+		elif array[right] % 2 == 1:
+			# odd placed correctly
+			right -= 1
+		else:
+			# swap misplaced even & odd
+			array[left], array[right] = array[right], array[left]
+			left += 1
+			right -= 1
+			moves += 1
+
+	return moves
+
+
 def equi(a):
 	"""
 	An array A consisting of N integers is given. An equilibrium index of this array is any integer P such that 0 ≤ P < N and the sum of elements of lower indices is equal to the sum of elements of higher indices, i.e.
