@@ -293,6 +293,119 @@ def longest_palindrome(s: str) -> str:
 	return s[start:end+1]
 
 
+def solution1(s):
+	"""
+	Tesla question 1:
+	You are given a string S consisting of N letters a oand or b. 
+	I non move you can swap letter for the other letter
+	Write a solution that gives the minimum number of counts
+
+	baaabbaabbba
+     f
+        b
+
+	"""
+	front_ptr = 0
+	back_ptr = 1
+	swaps_count = 0
+	while back_ptr < len(s):
+		# not equal
+		if s[back_ptr] != s[front_ptr]:
+			# reset front ptr
+			front_ptr = back_ptr
+			# move
+			back_ptr += 1
+			
+			
+		else:
+			# needs a swap letter
+			if (back_ptr - front_ptr) == 2:
+				swaps_count += 1
+			# move
+			back_ptr += 1
+
+
+	return swaps_count
+
+
+def solution2(S, C):
+	"""
+	Tesla question 2:
+	You are given string S. Deletion of the kth letter S costs c[k]. 
+	After deleting letter the costs of deleting other letters do not change
+
+	"abccbd" [0,1,2,3,4,5]
+
+	"""
+	if len(S) != len(C):
+		return 0
+	
+	cost = 0
+	i = 1
+	for i, char in enumerate(S[0:-1], 1):
+		if S[i] == S[i-1]:
+			# get the min cost
+			min_cost = min(C[i], C[i-1])
+			max_cost = max(C[i], C[i-1])
+
+			cost += min_cost
+			C[i] = max_cost
+
+
+	return cost
+
+
+def solution3(T, R):
+	"""
+	Nathan has completed his very first programming test and is 
+	now wondering about his score. He received an email 
+	contaiing the final report
+	Assume that N is an integer within the range [1...300]
+	Each string in array R has one of the following values: 
+
+
+	every test case has given one of the following results: 
+	"Ok" "Wrong answer" "TIme limit exceeded" or "Runtime error"
+
+
+	#######
+	if only one test case; named: [task name] + [group name]
+
+	if more than one, extended by lower case letter different from each test case
+
+
+	score is number of groups program passed * 100 / total number of groups
+	if fraction, rounded to highest integer
+	"""
+	i = 0
+
+	# key contians the group name
+	# value 0 contains test count value 1 contains passing count
+	groups= {}  
+	for i in range(len(T)):
+		# get group name
+		group_name = T[i] if T[i][-1].isnumeric() else T[i][:-1]
+		score = 1 if R[i] == "OK" else 0
+		if group_name in groups:
+			# increment test count
+			groups[group_name][0] += 1
+			# store score
+			groups[group_name][0] += score
+		else:
+			# store test count and score
+			groups[group_name] = [1, score]
+
+
+	# get score from groups
+	score = 0
+	for group in groups:
+		if groups[group][0] == groups[group][1]:
+			score += 1
+
+
+	return (score * 100)//len(groups)
+
+
 def max_vowels(string, substring_length):
 	"""
 	string: contains a sequence of chartacter, used to search for vowels

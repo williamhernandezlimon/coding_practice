@@ -2,6 +2,57 @@
 from src.data_structure import string
 from pytest import mark
 
+# solution 1
+@mark.parametrize(
+	"test_s, expected_response", [
+		("baaaaa", 1),  # "baaaba"
+		("baaabbaabbba", 2),
+		("baabab", 0),
+		("", 0)
+	]
+)
+def test_solution1(test_s, expected_response):
+	response = string.solution1(test_s)
+
+	assert response == expected_response
+
+# solution 2
+@mark.parametrize(
+	"test_s, test_c, expected_response", [
+		("", [1], 0),
+		("a", [], 0),
+		("", [], 0),
+		("abccbd", [0,1,2,3,4,5], 2),
+		("aabbcc", [1,2,1,2,1,2], 3),
+		("aaaa", [3,4,5,6], 12),
+		("ababa", [10,5,10,5,10], 0),
+	]
+)
+def test_solution2(test_s, test_c, expected_response):
+	response = string.solution2(test_s, test_c)
+
+	assert response == expected_response
+
+
+# solution 3
+@mark.parametrize(
+	"test_t, test_r, expected_response", [
+		(
+			["test1a", "test2", "test1b", "test1c", "test3"], 
+			[
+				"Wrong answer", "OK", "Runtime error", "OK", 
+				"Time limit exceeded"
+			],
+			33
+		)
+
+	]
+)
+def test_solution3(test_t, test_r, expected_response):
+	response = string.solution3(test_t, test_r)
+
+	assert response == expected_response
+	
 
 @mark.parametrize(
 	"test_s, expected_response", [
