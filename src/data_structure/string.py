@@ -295,34 +295,32 @@ def longest_palindrome(s: str) -> str:
 
 def solution1(s):
 	"""
-	You are given a string S consisting of N letters a oand or b. I non move you can swap letter for the other letter
-	Write a solution that give 
+	Tesla question 1:
+	You are given a string S consisting of N letters a oand or b. 
+	I non move you can swap letter for the other letter
+	Write a solution that gives the minimum number of counts
 
 	baaabbaabbba
      f
         b
 
-
 	"""
 	front_ptr = 0
 	back_ptr = 1
 	swaps_count = 0
-	front_letter = s[0]
 	while back_ptr < len(s):
 		# not equal
 		if s[back_ptr] != s[front_ptr]:
-			# move and reset
+			# reset front ptr
 			front_ptr = back_ptr
-			front_letter = s[front_ptr]
-			
+			# move
 			back_ptr += 1
 			
 			
 		else:
-			# needs a swap
+			# needs a swap letter
 			if (back_ptr - front_ptr) == 2:
 				swaps_count += 1
-				front_letter = 'a' if front_letter == 'b' else 'a'
 			# move
 			back_ptr += 1
 
@@ -332,15 +330,19 @@ def solution1(s):
 
 def solution2(S, C):
 	"""
-	You are given string S. Deletion of the kth letter S costs c[k]. After deelint letter the costs of deleting other letters do not chanvge
+	Tesla question 2:
+	You are given string S. Deletion of the kth letter S costs c[k]. 
+	After deleting letter the costs of deleting other letters do not change
 
 	"abccbd" [0,1,2,3,4,5]
 
 	"""
+	if len(S) != len(C):
+		return 0
+	
 	cost = 0
 	i = 1
 	for i, char in enumerate(S[0:-1], 1):
-		# print(f"S: {S} i: {i} len: {len(S)}")
 		if S[i] == S[i-1]:
 			# get the min cost
 			min_cost = min(C[i], C[i-1])
@@ -349,19 +351,21 @@ def solution2(S, C):
 			cost += min_cost
 			C[i] = max_cost
 
-		# i += 1
 
 	return cost
 
 
 def solution3(T, R):
 	"""
-	Nathan has completed his very first programming test and is now wondering about his score. He received an email contaiing the final report
+	Nathan has completed his very first programming test and is 
+	now wondering about his score. He received an email 
+	contaiing the final report
 	Assume that N is an integer within the range [1...300]
 	Each string in array R has one of the following values: 
 
 
-	every test case has given one of the following results: "Ok" "Wrong answer" "TIme limit exceeded" or "Runtime error"
+	every test case has given one of the following results: 
+	"Ok" "Wrong answer" "TIme limit exceeded" or "Runtime error"
 
 
 	#######
@@ -378,7 +382,7 @@ def solution3(T, R):
 	# key contians the group name
 	# value 0 contains test count value 1 contains passing count
 	groups= {}  
-	while i < len(T):
+	for i in range(len(T)):
 		# get group name
 		group_name = T[i] if T[i][-1].isnumeric() else T[i][:-1]
 		score = 1 if R[i] == "OK" else 0
@@ -391,8 +395,6 @@ def solution3(T, R):
 			# store test count and score
 			groups[group_name] = [1, score]
 
-		i += 1
-
 
 	# get score from groups
 	score = 0
@@ -402,13 +404,6 @@ def solution3(T, R):
 
 
 	return (score * 100)//len(groups)
-
-
-
-
-
-
-
 
 
 def max_vowels(string, substring_length):
