@@ -76,6 +76,20 @@ def test_compress(test_s, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_n, expected_response", [
+		(1, "1"),
+		(2, "11"),
+		(3, "21"),
+		(4, "1211"),
+		(5, "111221")
+	]
+)
+def test_count_and_say(test_n, expected_response):
+	response = string.count_and_say(test_n)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_hostnames_range, test_hosts, expected_response", [
 		("", {}, []),
