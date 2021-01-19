@@ -45,6 +45,61 @@ def compress(s):
 	return "".join(compressed_string)
 
 
+def count_and_say(n):
+	"""
+	Recursively calculated the count and say of a given integer.
+	Uses a list to join strings at the end to save memory
+	Since strings are immutable
+
+	Example count and say for n = 4
+	1  		# 1
+	11  	# 2  (one 1)
+	21		# 3  (two 1)
+	1211 	# 4  (one 2 one 1)
+
+	n:
+		integer to calculate the count and say for 
+	return:
+		count and say of parameter n
+	"""
+	# base case
+	if n == 1:
+		return "1"
+
+	# recurse down to base case
+	n_str = count_and_say(n-1)
+
+	# recursive up construct count & say
+	count = 0
+	prev = ""
+	say = ""
+	cs = []
+	# loop through every char in n
+	for i in range(len(n_str)):
+		say = n_str[i]
+		# increase count if chars same or if first char
+		if prev == say or not prev:
+			count += 1
+
+		# append to count and say if not same chars
+		else:
+			# append count and say
+			cs.append(str(count))
+			cs.append(prev)
+			count = 1
+
+		# track previous
+		prev = say
+
+	# check if there's previous
+	if prev:
+		cs.append(str(count))
+		cs.append(prev)
+
+
+	return "".join(cs)
+
+
 def get_bad_hosts(hostnames_range, hosts):
 	"""
 	Given a range of hostnames, email me a single list of hosts running the wrong number of instances of a process.
