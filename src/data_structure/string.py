@@ -495,6 +495,41 @@ def roman_to_integer(roman_number: str) -> int:
 	return total
 
 
+def str_str(haystack, needle):
+	"""
+	Return the first index of the first occurence of needle in the haystack.
+	-1 if needle is not part of the haystack
+	
+	haystack:
+		string containing all possible characters
+	needle:
+		string containing the target substring to match from haystack
+	complexity:
+		time: O(n^2)
+		space: O(1)
+     
+	"""
+	# empty cases
+	if len(haystack) == 0 and len(needle) == 0:
+		return 0
+
+	n_ptr = 0
+	h_ptr = 0
+	while h_ptr < len(haystack) and n_ptr < len(needle):
+		# matched
+		if haystack[h_ptr] == needle[n_ptr]:
+			n_ptr += 1 
+		# no match: reset ptrs
+		else:
+			h_ptr = h_ptr - n_ptr
+			n_ptr = 0
+		
+		h_ptr += 1
+
+	index = h_ptr-n_ptr if n_ptr == len(needle) else -1
+	return index
+
+
 def to_goat_latin(s: str) -> str:
 	"""
 	A sentence S is given, composed of words separated by spaces. 
