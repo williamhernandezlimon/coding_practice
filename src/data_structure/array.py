@@ -117,10 +117,10 @@ def climb_stairs(n):
 	if n < 0:
 		return 0
 
-	combinations = [1, 2]
+	combinations = {0: 1}
+	combinations[1] = 2
 	for i in range(2, n):
-		i_value = combinations[i-2] + combinations[i-1]
-		combinations.append(i_value)
+		combinations[i] = combinations[i-2] + combinations[i-1]
 
 	return combinations[n-1]
 
