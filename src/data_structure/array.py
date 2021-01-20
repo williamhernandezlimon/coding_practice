@@ -101,6 +101,36 @@ def contains_duplicates(array):
 	return False
 
 
+def climb_stairs(n):
+	"""
+	Recursively calculates the number of ways 'n' can be split
+	via 1 & 2.
+	n:
+		the number to find total number of combinations
+	complexity:
+		time:
+			O(2^n)
+		space:
+			O(n)
+	Example:
+	2 -> 2 # 1 1 or 2
+	3 -> 3 # 1 1 1 or 1 2 or 2 1
+
+					3
+			2				1
+		0		1				0
+					0
+	"""
+	# base case: if n is 0 return 1
+	if n == 0:
+		return 1
+	if n < 1:
+		return 0
+
+	# recursively count all options
+	return climb_stairs(n-2) + climb_stairs(n-1)
+
+
 def customSort(array):
 	"""
 	This method: 
