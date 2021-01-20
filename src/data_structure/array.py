@@ -101,6 +101,30 @@ def contains_duplicates(array):
 	return False
 
 
+def climb_stairs(n):
+	"""
+	Calculates the number of ways 'n' can be split.
+	Uses memoization
+	via 1 & 2.
+	n:
+		the number to find total number of combinations
+	complexity:
+		time:
+			O(n)
+		space:
+			O(n)
+	"""
+	if n < 0:
+		return 0
+
+	combinations = [1, 2]
+	for i in range(2, n):
+		i_value = combinations[i-2] + combinations[i-1]
+		combinations.append(i_value)
+
+	return combinations[n-1]
+
+
 def customSort(array):
 	"""
 	This method: 
