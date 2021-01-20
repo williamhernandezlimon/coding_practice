@@ -58,6 +58,20 @@ def test_contains_duplicates(test_array, expected_response):
 
 
 @mark.parametrize(
+	"test_n, expected_response", [
+		(1, 1),
+		(2, 2),
+		(3, 3),	
+		# (3, 3)
+	]
+)
+def test_climb_stairs(test_n, expected_response):
+	response = climb_stairs(test_n)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_array, expected_response", [
 		# minimum 2 elements expected
 		([1, 2], 1),
