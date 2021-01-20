@@ -91,16 +91,19 @@ def test_max_depth(test_root, expected_response):
 
 @mark.parametrize(
 	"test_root, expected_response", [
-		# (create_tree_symmetric(), True),  # TODO: fix unit tests
+		(create_tree_symmetric(), True),
 		(create_tree_asymmetric(), False),
 		(create_tree(), False),
-		# (NodeBinary(7, None, None), True),
+		(NodeBinary(7, None, None), True),
 		(None, True)
 	]
 )
 def test_is_symmetric(test_root, expected_response):
-	response = is_symmetric_iterative(test_root)
+	# response = is_symmetric_iterative(test_root)
 
+	# assert response == expected_response
+
+	response = is_symmetric(test_root)
 	assert response == expected_response
 
 
