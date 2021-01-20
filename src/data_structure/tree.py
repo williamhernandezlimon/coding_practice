@@ -78,6 +78,61 @@ def is_symmetric_iterative(root):
 	return True
 
 
+def is_symmetric(root):
+	"""
+	Returns True if tree is symmetric
+	
+	[1,2,2,3,4,4,3]
+
+
+
+	left_order = 1 2 3 4 2 4 3
+	right_order = 1 2 3 4 2 4 3
+
+	"""
+	# empty tree
+	if not root:
+		return True
+
+	# get left order
+	left_order = []
+	_get_left_order(root, left_order)
+
+	# get right order
+	right_order = []
+	_get_right_order(root, right_order)
+	
+	# compare left and right order lists are the same
+	print(f"left_order: {left_order} right_order: {right_order}")
+	if len(left_order) == len(right_order):
+		for i in range(len(left_order)):
+			if left_order[i] != right_order[i]:
+				return False
+		return True
+
+	return False
+	
+
+def _get_left_order(node, order):
+	if not node:
+		order.append(None)
+		return None
+
+	order.append(node.value)
+	_get_left_order(node.left, order)
+	_get_left_order(node.right, order)
+
+
+def _get_right_order(node, order):
+	if not node:
+		order.append(None)
+		return None
+
+	order.append(node.value)
+	_get_right_order(node.right, order)
+	_get_right_order(node.left, order)
+
+
 def in_order_traversal(root):
 	if root:
 		in_order_traversal(root.left)
