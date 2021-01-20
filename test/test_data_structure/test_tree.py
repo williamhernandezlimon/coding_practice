@@ -99,11 +99,8 @@ def test_max_depth(test_root, expected_response):
 	]
 )
 def test_is_symmetric(test_root, expected_response):
-	# response = is_symmetric_iterative(test_root)
-
-	# assert response == expected_response
-
 	response = is_symmetric(test_root)
+	
 	assert response == expected_response
 
 
