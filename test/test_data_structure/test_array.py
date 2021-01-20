@@ -62,7 +62,7 @@ def test_contains_duplicates(test_array, expected_response):
 		(1, 1),
 		(2, 2),
 		(3, 3),	
-		# (3, 3)
+		(38, 63245986)
 	]
 )
 def test_climb_stairs(test_n, expected_response):
