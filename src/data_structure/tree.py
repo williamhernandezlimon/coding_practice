@@ -40,56 +40,25 @@ def max_depth(root):
 def is_symmetric(root):
 	"""
 	Returns True if tree is symmetric
-	
-	[1,2,2,3,4,4,3]
-
-
-
-	left_order = 1 2 3 4 2 4 3
-	right_order = 1 2 3 4 2 4 3
-
 	"""
 	# empty tree
 	if not root:
 		return True
 
-	# get left order
-	left_order = []
-	_get_left_order(root, left_order)
+	# helper method
+	def _is_mirror(node1, node2):
+		# empty case
+		if not node1 or not node2:
+			return node1 == node2
 
-	# get right order
-	right_order = []
-	_get_right_order(root, right_order)
-	
-	# compare left and right order lists are the same
-	print(f"left_order: {left_order} right_order: {right_order}")
-	if len(left_order) == len(right_order):
-		for i in range(len(left_order)):
-			if left_order[i] != right_order[i]:
-				return False
-		return True
+		if node1.value != node2.value:
+			return False
 
-	return False
-	
+		return _is_mirror(node1.left, node2.right) and \
+			_is_mirror(node1.right, node2.left)
 
-def _get_left_order(node, order):
-	if not node:
-		order.append(None)
-		return None
-
-	order.append(node.value)
-	_get_left_order(node.left, order)
-	_get_left_order(node.right, order)
-
-
-def _get_right_order(node, order):
-	if not node:
-		order.append(None)
-		return None
-
-	order.append(node.value)
-	_get_right_order(node.right, order)
-	_get_right_order(node.left, order)
+	return _is_mirror(root.left, root.right) and \
+		 _is_mirror(root.right, root.left)
 
 
 def in_order_traversal(root):
