@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 import logging 
+from src.data_structure.node import *
+
 
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
@@ -93,6 +95,23 @@ def level_order_traversal(root):
 		if leaf.right:
 			queue.append(leaf.right)
 
+
+def sorted_array_to_bst(nums):
+	"""
+	Convert array to BST
+	Complexity:
+		time: O(n)
+		space: O(n)
+	"""
+	if not nums:
+		return None
+
+	mid = len(nums) // 2
+	left = sorted_array_to_bst(nums[0:mid])
+	right = sorted_array_to_bst(nums[mid+1:])
+
+	return NodeBinary(nums[mid], left, right)
+	 	
 
 def valid_tree(tree_map, root):
 	"""
