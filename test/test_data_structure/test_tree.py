@@ -156,6 +156,27 @@ def test_level_order_traversal(capsys, test_tree, expected_response):
 	assert captured.out == expected_response
 
 
+@mark.parametrize("test_nums, expected_response", [
+		([-10,-3,0,5,9], [-10, -3, 0, 5, 9])
+	]
+)
+def test_sorted_array_to_bst(test_nums, expected_response):
+	root = sorted_array_to_bst(test_nums)
+
+	# helper traversal
+	def post_order_traversal(root, response):
+		if not root:
+			return None
+		post_order_traversal(root.left, response)
+		response.append(root.value)
+		post_order_traversal(root.right, response)
+
+	response = []
+	post_order_traversal(root, response)
+
+	assert response == expected_response
+
+
 @mark.parametrize("test_tree_map, test_root, expected_response", [
 		({}, 1, False),  # empty map
 		({1: [2]}, 1, True),
