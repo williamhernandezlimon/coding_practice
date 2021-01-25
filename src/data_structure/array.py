@@ -570,6 +570,46 @@ def max_subarray_ptrs(nums):
 	return max_sum
 
 
+def merge(nums1, n, nums2, m):
+	"""
+	Merge 2 sorted arrays to merge into nums1 & nums2 into nums1
+	nums1:
+		sorted array of integers, with dead space elements
+		len(nums1) == n + m
+	n:
+		the amount of relevant integers
+	nums2:
+		sorted array of integers
+	m:
+		the amount of relevant integers in m
+	return:
+		nums1 sorted containing integers from nums2
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+	# we assume enough space in nums1 to hold nums2
+	if m + n != len(nums1):
+		return None
+
+	# start at the end of nums1 & nums2
+	# loop until reached start of nums1 and nums2 or 
+	i = m - 1
+	j = n - 1
+	k = len(nums1) - 1
+	while i >= 0 or j >= 0:
+		# i >= j
+		if j < 0 or (i >= 0 and nums1[i] >= nums2[j]):
+			nums1[k] = nums1[i]
+			i -= 1
+		# i < j
+		else:
+			nums1[k] = nums2[j]
+			j -= 1
+		# reduce k
+		k -= 1
+
+
 def minion_game(s):
 	"""
 	There are 2 players, Kevin and Stuart, where each player gets a point
