@@ -297,6 +297,18 @@ def test_max_subarray(test_nums, expected_response):
 
 
 @mark.parametrize(
+	"test_nums1, test_n, test_nums2, test_m, expected_response", [
+		([1,2,3,0,0,0], 3, [2,5,6], 3, [1,2,2,3,5,6]),
+		([4,5,6,0,0,0], 3, [1,2,3], 3, [1,2,3,4,5,6])
+	]
+)
+def test_merge(test_nums1, test_n, test_nums2, test_m, expected_response):
+	merge(test_nums1, test_n, test_nums2, test_m)
+
+	assert test_nums1 == expected_response
+
+
+@mark.parametrize(
 	"test_s, expected_response", [
 		("BANANA", ("Stuart", 12)),
 		("W", ("Stuart", 1)),

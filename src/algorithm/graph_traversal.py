@@ -160,6 +160,32 @@ def dijkstras(graph, start):
 	return distances, path
 
 
+def has_cycle(head):
+	"""
+	Given a linked list, return if a cycle exists
+	head:
+		the head of the linked list
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+	if not head:
+		return False
+
+	node = head
+	node_2x = head
+	while node_2x and node_2x.next:
+		node_2x = node_2x.next.next
+
+		# cycle detected
+		if node_2x and node_2x == node:
+			return True
+
+		node = node.next
+
+	return False
+
+
 def word_search(board, word):
 	"""
 	Given a 2D board and a word, find if the word exists in the grid.
