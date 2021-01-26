@@ -179,6 +179,33 @@ def countCounterfeit(serialNumbers):
 	return total
 
 
+def is_palindrome(s):
+	"""
+	Check if valid palindrome. Only check for alphanumeric chars.
+	Ignore case
+	s:
+		string to check palindrome
+	return:
+		True if s is valid palindrome else False
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+	l, r = 0, len(s) - 1
+	while l < r:
+	    if not s[l].isalnum():
+	        l += 1
+	    elif not s[r].isalnum():
+	        r -= 1
+	    else:
+	        if s[l].lower() != s[r].lower():
+	            return False
+	        else:
+	            l += 1
+	            r -= 1
+	return True
+
+
 def is_palindrome_integer(num: int) -> bool:
 	"""
 	Checks to see if the integer is a valid palindrome
