@@ -273,6 +273,21 @@ def test_roman_to_integer(test_roman_number, expected_response):
 
 
 @mark.parametrize(
+	"test_s, expected_response", [
+		("A man, a plan, a canal: Panama", True),
+		("race a car", False),
+		(".,", True),
+		(".a", True),
+		("0P", False)
+	]
+)
+def test_is_palindrom(test_s, expected_response):
+	response = string.is_palindrome(test_s)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_number, expected_response", [
 		(-1, False),
 		(-11, False),

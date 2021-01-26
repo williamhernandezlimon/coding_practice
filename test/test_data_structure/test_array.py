@@ -182,6 +182,35 @@ def test_four_sums(test_list, test_target, expected_response):
 	assert response == expected_response
 
 
+
+@mark.parametrize(
+	"test_num_rows, expected_response", [
+		(0, []),
+		(1, [[1]]),
+		(5, [
+			     [1],
+			    [1,1],
+			   [1,2,1],
+			  [1,3,3,1],
+			 [1,4,6,4,1]
+		]),
+		(6, [
+			     [1],
+			    [1,1],
+			   [1,2,1],
+			  [1,3,3,1],
+			 [1,4,6,4,1],
+			[1,5,10,10,5,1]
+		]),
+	]
+)
+def test_generate(test_num_rows, expected_response):
+	response = generate(test_num_rows)
+
+	assert response == expected_response
+
+
+
 @mark.parametrize(
 	"test_nums, test_target, expected_response", [
 		([1], 2, None),
@@ -215,6 +244,22 @@ def test_highest_population(test_population, expected_response):
 	response = highest_population(test_population)
 
 	assert response == expected_response
+
+
+
+
+@mark.parametrize(
+	"test_nums1, test_nums2, expected_response", [
+		([1,2,2,1], [2,2], [2,2]),
+		([4,9,5], [9,4,9,8,4], [9,4]),
+		([1,2], [1,1], [1]),
+	]
+)
+def test_intersect(test_nums1, test_nums2, expected_response):
+	response = intersect(test_nums1, test_nums2)
+	
+	assert response == expected_response
+
 
 
 @mark.parametrize(
@@ -277,6 +322,31 @@ def test_longest_consecutive_subsequence(test_numbers, expected_response):
 	response = longest_consecutive_subsequence(test_numbers)
 
 	assert response == expected_response
+
+
+@mark.parametrize(
+	"test_nums, expected_response", [
+		([3,2,3], 3),
+		([2,2,1,1,1,2,2], 2),
+	]
+)
+def test_majority_element(test_nums, expected_response):
+	response = majority_element(test_nums)
+	
+	assert response == expected_response
+
+
+@mark.parametrize(
+	"test_prices, expected_response", [
+		([7,1,5,3,6,4], 5),
+		([7,6,4,3,1], 0)
+	]
+)
+def test_max_profit(test_prices, expected_response):
+	response = max_profit(test_prices)
+	
+	assert response == expected_response
+
 
 
 @mark.parametrize(

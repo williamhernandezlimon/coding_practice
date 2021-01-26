@@ -308,6 +308,49 @@ def four_sums(nums, target):
 	return sums
 
 
+def generate(num_rows):
+	"""
+	Generate the pascal triangle for a given number of rows
+	num_rows:
+		the number of rows the pascal triangle should have
+	return:
+		pascal triangle, with the number of num_rows
+	complexity:
+		time: O(nxm), where n is num_rows and m is len(num_rows)
+		space: O(nxm)
+	"""
+	# base case if 0
+	if num_rows == 0:
+		return []
+
+	rows = [[1]]
+	i = 1
+	# loop while num_rows
+	while i < num_rows:
+		# get prev list
+		top_row = rows[i - 1]
+		# start 1
+		j = 1
+		# make new list with 1 inside, rows
+		r = [1]
+
+		# loop start < list len -1
+		while j < len(top_row):
+			# append top_left + top_right
+			top_left = top_row[j-1]
+			top_right = top_row[j]
+			r.append(top_left + top_right)
+			j += 1
+		# append 1 at end
+		r.append(1)
+		# add new row and increment i
+		rows.append(r)
+		i += 1
+
+	# return rows
+	return rows
+
+
 def get_index(nums, target):
 	"""
 	Given a sorted integer array, in ascending order, get the index of the target.
@@ -365,6 +408,41 @@ def highest_population(population):
 			max_year = year
 
 	return max_year
+
+
+def intersect(nums1, nums2):
+	"""
+	Get intersect of numbers between nums1 & nums2
+	nums1:
+		unsorted integer array
+	nums2:
+		unsorted integer array
+	return:
+		the intersect of numbers between nums1 & nums2
+	complexity:
+		time: O(n+m)
+		space: O(n)
+	"""
+	visited = {}
+	larger = nums1 if len(nums1) >= len(nums2) else nums2
+	smaller = nums1 if len(nums1) < len(nums2) else nums2
+
+	# loop through smaller to store int as key and count as value
+	for i in smaller:
+		if i in visited:
+			visited[i] += 1
+		else:
+			visited[i] = 1
+
+	intersect = []
+	# loop through larger
+	for i in larger:
+		# if int in map, append to intersect and decrement from map
+		if i in visited and visited[i] > 0:
+			intersect.append(i)
+			visited[i] -= 1
+
+	return intersect
 
 
 def is_sum_possible(nums, target):
@@ -532,6 +610,63 @@ def max_subarray_dp(nums):
 		maxes[i] = max(previous_number + current_number, current_number)
 
 	return max(maxes)
+
+
+def majority_element(nums):
+	"""
+	Find and return the integer that occurs most frequently
+	Assume there's an integer that occurs most frequently
+	nums:
+		list of integers
+	return:
+		gets the integer that occurs most frequently in the list
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+	frequency = 0
+	majority_element = None
+	# loop thorugh elements
+	for num in nums:
+		# if frequency == 0:
+		if frequency == 0:
+			# save current element, as new majority, and frequency as 1
+			majority_element = num
+			frequency = 1
+		# elif element == majority element:
+		elif num == majority_element:
+			# increment value
+			frequency += 1
+		# else
+		else:
+			# decrement value
+			frequency -= 1
+
+	return majority_element
+
+
+def max_profit(prices):
+	"""	
+	Given prices, find the max profit for buying/selling stock market
+	prices:
+		integer stock market prices
+	return:
+		max profit from buying/selling
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+
+	# initialze min
+	min_price = float("inf")
+	max_profit = float("-inf")
+	# loop through prices starting from 1
+	for price in prices:
+		min_price = min(min_price, price)
+		# store min & max based on 
+		max_profit = max(max_profit, price - min_price)
+	
+	return max_profit
 
 
 def max_subarray_ptrs(nums):
