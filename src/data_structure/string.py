@@ -265,6 +265,63 @@ def is_valid_parenthesis(string: str) -> bool:
 	return len(stack) == 0
 
 
+def get_substr(l):
+    """
+    Affirm coding challenge
+    Get the shortest substr in a map
+	Input: ['cheapair', 'cheapoair', 'peloton', 'pelican']
+	Output: {
+	 'cheapair': 'pa',  # every other 1-2 len substr overlaps with 'cheapoair'
+	 'cheapoair': 'po',  # 'oa' would also be acceptable
+	 'peloton': 't',   # this single letter doesn't occur in any other name
+	 'pelican': 'ca',  # 'li', 'ic', or 'an' would also be acceptable  
+	}
+	  
+    """
+    # empty case
+    if not l:
+        return {}
+    
+    # calculate and store all possible substring as set for every string
+    map1 = {}
+    for s in l:
+        map1[s] = set()
+        # stores all possible for s
+        i = 0
+        while i < len(s) - 1:
+            j = i + 1
+            while j < len(s):
+                map1[s].add(s[i:j])
+                j += 1
+            i += 1
+
+    map2 = {}
+    # for each element in l, check if the combination exists in c
+    for k in map1:
+        unique_substrings = map1[k]
+        
+        # get sets from other keys in map
+        for k2 in map1:
+            # don't compare between sets of same key
+            if k != k2:
+                other_set = map1[k2]
+                # print(f"current_set: {current_set}")
+                # print(f"other_set: {other_set}")
+                # print(f"unique_substrings: {unique_substrings}")
+                # print(f"other_set: {other_set}")
+                unique_substrings = unique_substrings.difference(other_set)
+                # print(f"intersection: {unique_substrings}\n\n")
+
+
+                    
+        # get min len of unique_substrings
+        # add to map2 with the correspoinding key
+        map2[k] = min(unique_substrings, key=len)
+    
+    # return the min size substr
+    return map2
+
+
 def length_of_longest_substring(string: str) -> int:
 	# string:
 	# 	contains the string we check for longest substring
@@ -289,6 +346,66 @@ def length_of_longest_substring(string: str) -> int:
 		max_length = max(max_length, back_ptr - front_ptr)
 
 	return max_length
+
+
+def letter_combination(digits):
+	"""
+	"23"
+    get 2's combination and append with 3's combination
+
+	"234"
+	get 2's combination and append with 3's combination
+	get 2's combination and append with 4's combination
+	get 3's combination and append with 4's combination
+
+	use current element combination to append with following combinations
+	"""
+	# store combination mapping
+	m = {
+		"2": ['a', 'b', 'c'],
+		"3": ['d', 'e', 'f'],
+		"4": ['g', 'h', 'i'],
+		"5": ['j', 'k', 'l'],
+		"6": ['m', 'n', 'o'],
+		"7": ['p', 'q', 'r', 's'],
+		"8": ['t', 'u', 'v'],
+		"9": ['w', 'x', 'y', 'z']
+	}
+	# check if empty sring 
+	if not digits:
+		return []
+
+	# check if string len == 1
+	if len(digits) == 1:
+		combination = m[digits] if digits in m else []
+		return combination
+
+
+	# merge helper method
+	def _merge(combination, a1, a2):
+		for i in a1:
+			for j in a2:
+				print(f"appending {i}{j}")
+				combination.append(f"{i}{j}")
+
+
+	combination = []
+	# for every element in digits, up to [-1]
+	for i, num_i in enumerate(digits[:-1]):
+		print(f"num_i: {num_i} m: {m}")
+		if num_i not in m:
+			continue
+		combination_i = m[num_i]
+		print(f"i: {i} num_i: {num_i} combination_i: {combination_i}")
+		# append with next digit's combination, starting from 1
+		for j, num_j in enumerate(digits[i+1:], i+1):
+			if num_j not in m:
+				continue
+			combination_j = m[num_j]
+			print(f"combination_i: {combination_i} combination_j: {combination_j}")
+			_merge(combination, combination_i, combination_j)
+
+	return combination
 
 
 def longest_common_prefix(strs):
@@ -374,6 +491,27 @@ def longest_palindrome(s: str) -> str:
 
 	return s[start:end+1]
 
+
+def single_number(nums):
+	"""
+	Given a list of integers. Find the number that occurs only once.
+	All other numbers always occur twice.
+	nums:
+		list of integers
+	return:
+		duplicate number
+	complexity:
+		time: O(n)
+		space: O(n)
+
+
+
+	([4,1,2,1,2], 4),
+	
+	"""
+	nums_sum = 0
+	for num in nums:
+		nums_sum += 
 
 def solution1(s):
 	"""

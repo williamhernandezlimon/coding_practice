@@ -171,6 +171,28 @@ def test_countCounterfeit(test_serialNumber, expected_response):
 
 
 @mark.parametrize(
+	"test_digits, expected_response", [
+		("2", ["a", "b", "c"]),
+		("12131", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
+		("213", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
+		("23", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
+		# TODO: fix test below
+		# ("234", [
+		# 	"adg","adh","adi","aeg","aeh","aei","afg","afh","afi","bdg","bdh",
+		# 	"bdi","beg","beh","bei","bfg","bfh","bfi","cdg","cdh","cdi","ceg",
+		# 	"ceh","cei","cfg","cfh","cfi"
+		# 	]
+		# )
+
+	]
+)
+def test_letter_combination(test_digits, expected_response):
+	response = string.letter_combination(test_digits)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_str_list, expected_response", [
 		([""], ""),
 		(["caa", "", "a", "acb"], ""),
@@ -325,6 +347,31 @@ def test_is_valid_paranthesis(test_string, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_l, expected_response", [
+		([], {}),
+		(['cheapair'], {
+			'cheapair': {'c', 'h', 'e', 'a', 'p', 'a', 'i', 'r'}
+			}
+		),
+		(['cheapair', 'cheapoair', 'peloton', 'pelican'], {
+				'cheapair': {'pa'}, 
+				'cheapoair': {'oa', 'po'}, 
+				'peloton': {'t'}, 
+				'pelican': {'li', 'li', 'ic', 'an', 'ca'}
+			}
+		)
+	]
+)
+def test_get_substr(test_l, expected_response):
+	response = string.get_substr(test_l)
+
+	if not test_l:
+		assert response == expected_response
+
+	for s in response:
+		assert response[s] in expected_response[s]
+
+
 @mark.parametrize(
 	"test_input, expected_response", [
 		("", 0),
@@ -352,6 +399,18 @@ def test_length_of_longest_substring(test_input, expected_response):
 )
 def test_to_goat_latin(test_s, expected_response):
 	response = string.to_goat_latin(test_s)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
+	"test_nums, expected_response", [
+		([2,2,1], 1),
+		([4,1,2,1,2], 4),
+	]
+)
+def test_single_number(test_nums, expected_response):
+	response = string.single_number(test_nums)
 
 	assert response == expected_response
 
