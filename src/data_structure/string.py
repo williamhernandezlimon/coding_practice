@@ -432,6 +432,39 @@ def longest_palindrome(s: str) -> str:
 	return s[start:end+1]
 
 
+def single_number(nums):
+	"""
+	Given a list of integers. Find the number that occurs only once.
+	All other numbers always occur twice.
+	nums:
+		list of integers
+	return:
+		duplicate number
+	complexity:
+		time: O(n)
+		space: O(n)
+	"""
+	# store into map
+	# where key is integer and value is frequency
+	m = {}
+	for num in nums:
+		# exists in map: ++1
+		if num in m:
+			m[num] += 1
+
+			# does not exist in map: set to 1
+		else:
+			m[num] = 1
+
+
+	# find the key with value of 1
+	for key in m:
+		if m[key] == 1:
+			return key
+
+	return None
+
+
 def solution1(s):
 	"""
 	Tesla question 1:
