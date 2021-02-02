@@ -348,6 +348,66 @@ def length_of_longest_substring(string: str) -> int:
 	return max_length
 
 
+def letter_combination(digits):
+	"""
+	"23"
+    get 2's combination and append with 3's combination
+
+	"234"
+	get 2's combination and append with 3's combination
+	get 2's combination and append with 4's combination
+	get 3's combination and append with 4's combination
+
+	use current element combination to append with following combinations
+	"""
+	# store combination mapping
+	m = {
+		"2": ['a', 'b', 'c'],
+		"3": ['d', 'e', 'f'],
+		"4": ['g', 'h', 'i'],
+		"5": ['j', 'k', 'l'],
+		"6": ['m', 'n', 'o'],
+		"7": ['p', 'q', 'r', 's'],
+		"8": ['t', 'u', 'v'],
+		"9": ['w', 'x', 'y', 'z']
+	}
+	# check if empty sring 
+	if not digits:
+		return []
+
+	# check if string len == 1
+	if len(digits) == 1:
+		combination = m[digits] if digits in m else []
+		return combination
+
+
+	# merge helper method
+	def _merge(combination, a1, a2):
+		for i in a1:
+			for j in a2:
+				print(f"appending {i}{j}")
+				combination.append(f"{i}{j}")
+
+
+	combination = []
+	# for every element in digits, up to [-1]
+	for i, num_i in enumerate(digits[:-1]):
+		print(f"num_i: {num_i} m: {m}")
+		if num_i not in m:
+			continue
+		combination_i = m[num_i]
+		print(f"i: {i} num_i: {num_i} combination_i: {combination_i}")
+		# append with next digit's combination, starting from 1
+		for j, num_j in enumerate(digits[i+1:], i+1):
+			if num_j not in m:
+				continue
+			combination_j = m[num_j]
+			print(f"combination_i: {combination_i} combination_j: {combination_j}")
+			_merge(combination, combination_i, combination_j)
+
+	return combination
+
+
 def longest_common_prefix(strs):
 	"""
 	Get the longest common prefix, for a given list of strings
@@ -443,27 +503,15 @@ def single_number(nums):
 	complexity:
 		time: O(n)
 		space: O(n)
+
+
+
+	([4,1,2,1,2], 4),
+	
 	"""
-	# store into map
-	# where key is integer and value is frequency
-	m = {}
+	nums_sum = 0
 	for num in nums:
-		# exists in map: ++1
-		if num in m:
-			m[num] += 1
-
-			# does not exist in map: set to 1
-		else:
-			m[num] = 1
-
-
-	# find the key with value of 1
-	for key in m:
-		if m[key] == 1:
-			return key
-
-	return None
-
+		nums_sum += 
 
 def solution1(s):
 	"""
