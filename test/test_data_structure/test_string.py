@@ -171,6 +171,28 @@ def test_countCounterfeit(test_serialNumber, expected_response):
 
 
 @mark.parametrize(
+	"test_digits, expected_response", [
+		("2", ["a", "b", "c"]),
+		("12131", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
+		("213", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
+		("23", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
+		# TODO: fix test below
+		# ("234", [
+		# 	"adg","adh","adi","aeg","aeh","aei","afg","afh","afi","bdg","bdh",
+		# 	"bdi","beg","beh","bei","bfg","bfh","bfi","cdg","cdh","cdi","ceg",
+		# 	"ceh","cei","cfg","cfh","cfi"
+		# 	]
+		# )
+
+	]
+)
+def test_letter_combination(test_digits, expected_response):
+	response = string.letter_combination(test_digits)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_str_list, expected_response", [
 		([""], ""),
 		(["caa", "", "a", "acb"], ""),
