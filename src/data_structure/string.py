@@ -265,6 +265,63 @@ def is_valid_parenthesis(string: str) -> bool:
 	return len(stack) == 0
 
 
+def get_substr(l):
+    """
+    Affirm coding challenge
+    Get the shortest substr in a map
+	Input: ['cheapair', 'cheapoair', 'peloton', 'pelican']
+	Output: {
+	 'cheapair': 'pa',  # every other 1-2 len substr overlaps with 'cheapoair'
+	 'cheapoair': 'po',  # 'oa' would also be acceptable
+	 'peloton': 't',   # this single letter doesn't occur in any other name
+	 'pelican': 'ca',  # 'li', 'ic', or 'an' would also be acceptable  
+	}
+	  
+    """
+    # empty case
+    if not l:
+        return {}
+    
+    # calculate and store all possible substring as set for every string
+    map1 = {}
+    for s in l:
+        map1[s] = set()
+        # stores all possible for s
+        i = 0
+        while i < len(s) - 1:
+            j = i + 1
+            while j < len(s):
+                map1[s].add(s[i:j])
+                j += 1
+            i += 1
+
+    map2 = {}
+    # for each element in l, check if the combination exists in c
+    for k in map1:
+        unique_substrings = map1[k]
+        
+        # get sets from other keys in map
+        for k2 in map1:
+            # don't compare between sets of same key
+            if k != k2:
+                other_set = map1[k2]
+                # print(f"current_set: {current_set}")
+                # print(f"other_set: {other_set}")
+                # print(f"unique_substrings: {unique_substrings}")
+                # print(f"other_set: {other_set}")
+                unique_substrings = unique_substrings.difference(other_set)
+                # print(f"intersection: {unique_substrings}\n\n")
+
+
+                    
+        # get min len of unique_substrings
+        # add to map2 with the correspoinding key
+        map2[k] = min(unique_substrings, key=len)
+    
+    # return the min size substr
+    return map2
+
+
 def length_of_longest_substring(string: str) -> int:
 	# string:
 	# 	contains the string we check for longest substring

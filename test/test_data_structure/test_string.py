@@ -325,6 +325,31 @@ def test_is_valid_paranthesis(test_string, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_l, expected_response", [
+		([], {}),
+		(['cheapair'], {
+			'cheapair': {'c', 'h', 'e', 'a', 'p', 'a', 'i', 'r'}
+			}
+		),
+		(['cheapair', 'cheapoair', 'peloton', 'pelican'], {
+				'cheapair': {'pa'}, 
+				'cheapoair': {'oa', 'po'}, 
+				'peloton': {'t'}, 
+				'pelican': {'li', 'li', 'ic', 'an', 'ca'}
+			}
+		)
+	]
+)
+def test_get_substr(test_l, expected_response):
+	response = string.get_substr(test_l)
+
+	if not test_l:
+		assert response == expected_response
+
+	for s in response:
+		assert response[s] in expected_response[s]
+
+
 @mark.parametrize(
 	"test_input, expected_response", [
 		("", 0),
