@@ -404,6 +404,18 @@ def test_to_goat_latin(test_s, expected_response):
 
 
 @mark.parametrize(
+	"test_nums, expected_response", [
+		([2,2,1], 1),
+		([4,1,2,1,2], 4),
+	]
+)
+def test_single_number(test_nums, expected_response):
+	response = string.single_number(test_nums)
+
+	assert response == expected_response
+
+
+@mark.parametrize(
 	"test_haystack, test_needle, expected_response", [
 		("", "", 0),
 		("", "a", -1),
