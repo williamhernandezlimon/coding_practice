@@ -768,6 +768,25 @@ def str_str(haystack, needle):
 	return index
 
 
+def title_to_number(s):
+	"""
+	Convert string into the integer column number value of Excel sheet  
+	s:
+		only cosists of uppercase English letters
+		is between "A" and "FXSHRXW"
+	"""
+	total = 0
+	# for ever char in s
+	for i, c in enumerate(reversed(s)):
+		# add current char value to total
+		val = (ord(c) - 65) + 1
+		# print(f"i: {i} c: {c} val: {val} s: {s}")
+		total += 26**i * val
+
+
+	return total
+
+
 def to_goat_latin(s: str) -> str:
 	"""
 	A sentence S is given, composed of words separated by spaces. 
