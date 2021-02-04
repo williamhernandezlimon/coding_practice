@@ -53,6 +53,26 @@ def test_remove_duplicates(test_list, expected_response):
 	
 	assert not p1 and not p2
 
+
+@mark.parametrize("test_ll_list, test_n, expected_response", [
+		([1,2,3,4,5], 2, [1,2,3,5]),
+		([1, 2], 1, [1]),
+		([1], 1, []),
+	]
+)
+def test_remove_nth_node_from_end(test_ll_list, test_n, expected_response):
+	test_head = create_linked_list(test_ll_list).head
+	test_head = remove_nth_node_from_end(test_head, test_n)
+
+	i = 0
+	while test_head and i < len(expected_response):
+		assert test_head.data == expected_response[i]
+		i += 1
+		test_head = test_head.next
+
+	assert test_head == None and i == len(expected_response)
+
+
 @mark.parametrize("test_number1, test_number2, expected_response", [
 		([2, 4, 3], [5, 6, 4], 807),
 		([2], [5, 2], 27),
@@ -79,10 +99,10 @@ def create_linked_list(list: LinkedList) -> LinkedList:
 		return None
 	assert len(list) > 0, "The array cannot be empty."
 	
-	ll = LinkedList(Node(list[0]))
+	head = LinkedList(Node(list[0]))
 	for i in list[1:]:
-		add(ll, Node(i))
-	return ll
+		add(head, Node(i))
+	return head
 
 def to_list(ll: LinkedList) -> list:
 	l = []
