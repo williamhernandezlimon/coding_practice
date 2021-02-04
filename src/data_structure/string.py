@@ -509,9 +509,27 @@ def single_number(nums):
 	([4,1,2,1,2], 4),
 	
 	"""
-	nums_sum = 0
+	# store into map
+	# where key is integer and value is frequency
+	m = {}
 	for num in nums:
-		nums_sum += 
+		# exists in map: ++1
+		if num in m:
+			m[num] += 1
+
+			# does not exist in map: set to 1
+		else:
+			m[num] = 1
+
+
+	# find the key with value of 1
+	for key in m:
+		if m[key] == 1:
+			return key
+
+	return None
+
+
 
 def solution1(s):
 	"""
