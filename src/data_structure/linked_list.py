@@ -64,6 +64,41 @@ def remove_duplicates(ll: LinkedList) -> LinkedList:
 			current = current.next
 
 
+def remove_nth_node_from_end(head, n):
+	"""
+	Remove the nth node from the end of linked list
+	head:
+		head of linked list, containing first node
+	return:
+		head to the modified linked list
+	complexity:
+		time: O(n)
+		space: O(1)
+	"""
+	# walk n steps
+	i = 0
+	tail = head
+	while i < n and tail:
+		tail = tail.next
+		i += 1
+
+	# n is larger than LL len
+	if not tail:
+		return head.next
+
+	# walk until end is reached
+	prev = head
+	while tail.next:
+		tail = tail.next
+		prev = prev.next
+
+	# remove nth node
+	prev.next = prev.next.next
+
+
+	return head
+
+
 def reverse(ll: LinkedList) -> LinkedList:
 	"""
 	Given a linked list, reverse the entire linked list
