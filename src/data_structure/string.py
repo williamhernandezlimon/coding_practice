@@ -509,9 +509,27 @@ def single_number(nums):
 	([4,1,2,1,2], 4),
 	
 	"""
-	nums_sum = 0
+	# store into map
+	# where key is integer and value is frequency
+	m = {}
 	for num in nums:
-		nums_sum += 
+		# exists in map: ++1
+		if num in m:
+			m[num] += 1
+
+			# does not exist in map: set to 1
+		else:
+			m[num] = 1
+
+
+	# find the key with value of 1
+	for key in m:
+		if m[key] == 1:
+			return key
+
+	return None
+
+
 
 def solution1(s):
 	"""
@@ -748,6 +766,25 @@ def str_str(haystack, needle):
 
 	index = h_ptr-n_ptr if n_ptr == len(needle) else -1
 	return index
+
+
+def title_to_number(s):
+	"""
+	Convert string into the integer column number value of Excel sheet  
+	s:
+		only cosists of uppercase English letters
+		is between "A" and "FXSHRXW"
+	"""
+	total = 0
+	# for ever char in s
+	for i, c in enumerate(reversed(s)):
+		# add current char value to total
+		val = (ord(c) - 65) + 1
+		# print(f"i: {i} c: {c} val: {val} s: {s}")
+		total += 26**i * val
+
+
+	return total
 
 
 def to_goat_latin(s: str) -> str:

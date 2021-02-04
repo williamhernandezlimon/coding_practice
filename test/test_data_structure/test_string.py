@@ -387,6 +387,18 @@ def test_length_of_longest_substring(test_input, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_s, expected_response", [
+		("A", 1),
+		("AB", 28),
+		("ZY", 701),
+	]
+)
+def test_title_to_number(test_s, expected_response):
+	response = string.title_to_number(test_s)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_s, expected_response", [
 		("", ""),
