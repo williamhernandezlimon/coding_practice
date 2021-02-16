@@ -87,3 +87,16 @@ def test_max_profit_time_optimized(test_prices, test_max_transactions, expected_
 	response = max_profit_time_optimized(test_prices, test_max_transactions)
 	
 	assert response == expected_response
+
+
+@mark.parametrize("test_n, expected_response", [
+		(0, 0),
+		(3, 0),
+		(5, 1),
+		(30, 7),
+	]
+)
+def test_trailing_zeros(test_n, expected_response):
+	response = trailing_zeros(test_n)
+
+	assert response == expected_response
