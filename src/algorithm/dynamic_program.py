@@ -299,6 +299,31 @@ def get_median(array1, array2):
 	return median
 
 
+def trailing_zeros(n):
+	"""
+	Given a number, n. Find how many trailing zeros there are,
+	for the fibonacci sequence number.
+	n:
+		interger, to get the fib number and trailing zeros
+	return:
+		return the number of trailing zeros
+	"""
+
+	# get factorial value
+	factorial = 1
+	i = 1
+	while i <= n:
+		factorial *= i
+		i += 1
+
+	# get trailing zeros count from factorial
+	trailing_zeros_count = 0
+	while factorial % 10 == 0:
+		factorial //= 10
+		trailing_zeros_count += 1
+
+
+	return trailing_zeros_count
 
 # def get_first_missing_positive(array):
 # 	"""
