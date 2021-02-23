@@ -394,6 +394,21 @@ def test_minion_game(test_s, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize(
+	"test_nums, expected_response", [
+		([0], [0]),
+		([1], [1]),
+		([0, 1], [1, 0]),
+		([0,1,0,3,12], [1,3,12,0,0]),
+		([4,2,4,0,0,3,0,5,1,0], [4,2,4,3,5,1,0,0,0,0])
+	]
+)
+def test_move_zeros(test_nums, expected_response):
+	move_zeros(test_nums)
+
+	assert test_nums == expected_response
+
+
 TEST_PADOVAN_SEQUENCE = [
 	(0, 1),
 	(1, 1),
