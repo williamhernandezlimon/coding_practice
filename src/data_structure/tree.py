@@ -96,6 +96,53 @@ def level_order_traversal(root):
 			queue.append(leaf.right)
 
 
+def level_order_list(root):
+	"""
+	    3
+	   / \
+	  9  20
+	/   /  \
+   3   15   7
+	"""
+	# base case: empty root
+	if not root:
+		return []
+
+	# track of q
+	q = [root]
+	# track of levels
+	levels = [[root.value]]
+
+	# loop while q not empty
+	while q:
+		# get level and size of q
+		level = []
+		parent_count = len(q)
+
+		# traverse to get children for all parents
+		for i in range(parent_count):
+			# get parent
+			parent = q.pop(0)
+
+			# add children to q and level
+			left = parent.left if parent and parent.left else None
+			if left:
+				q.append(left)
+				level.append(left.value)
+
+			right = parent.right if parent and parent.right else None
+			if right:
+				q.append(right)
+				level.append(right.value)
+
+		# add level to levels, only non-empty level
+		if level:
+			levels.append(level)
+
+	# return levels
+	return levels
+
+
 def sorted_array_to_bst(nums):
 	"""
 	Convert array to BST

@@ -156,6 +156,20 @@ def test_level_order_traversal(capsys, test_tree, expected_response):
 	assert captured.out == expected_response
 
 
+@mark.parametrize("test_root, expected_response", [
+		(None, []),
+		(create_tree(), [[3],[9,20],[15,7]])
+		# TODO: 
+		# 	input: [1,2,3,4,null,null,5]
+		#	output: [[1],[2,3],[4,5]]
+	]
+)
+def test_level_order_list(test_root, expected_response):
+	response = level_order_list(test_root)
+
+	assert response == expected_response
+
+
 @mark.parametrize("test_nums, expected_response", [
 		([-10,-3,0,5,9], [-10, -3, 0, 5, 9])
 	]
