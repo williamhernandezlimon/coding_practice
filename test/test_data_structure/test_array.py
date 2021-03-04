@@ -466,6 +466,19 @@ def test_remove_duplicates(test_array, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_nums, expected_response", [
+		([2,0,2,1,1,0], [0,0,1,1,2,2]),
+		([2,0,1], [0,1,2]),
+		([0], [0]),
+		([1], [1]),
+	]
+)
+def test_sort_colors(test_nums, expected_response):
+	sort_colors(test_nums)
+
+	assert test_nums == expected_response
+
+
 @mark.parametrize(
 	"test_matrix, test_start_coordinate, test_end_coordinate, expected_response", [
 		([[]], (0,0), (2,2), 0),
