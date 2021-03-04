@@ -4,6 +4,46 @@ from src.data_structure.tree import *
 from pytest import mark
 from sys import stderr
 
+
+def array_to_tree(l):
+	"""
+	left = 2 * i + 1
+	right = 2 * i + 2
+	"""
+	# add root to q
+	root = NodeBinary(l[0], None, None)
+	q = [root]
+	i = 0
+	# loop while q
+	while q:
+		# pop parent
+		p = q.pop(0)
+
+		# set parent's left/right and add to q
+		li = 2 * i + 1  # left index
+		lv = l[li] if li < len(l) else None  # left value
+		left = NodeBinary(lv, None, None) if lv==0 or lv else None
+		if left:
+			q.append(left)
+
+		ri = 2 * i + 2  # right index
+		rv = l[ri] if ri < len(l) else None  # right value
+		right = NodeBinary(rv, None, None) if rv==0 or rv else None
+		if right:
+			q.append(right)
+
+		if p:
+			p.left = left
+			p.right = right
+			print(f"p.value: {p.value} p.left: {p.left} p.right: {p.right}")
+		else:
+			print("p has no value")
+		# increment i
+		i += 1
+
+	return root
+	
+
 def create_tree():
 	"""
 	    3
