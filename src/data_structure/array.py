@@ -786,7 +786,7 @@ def move_zeros(nums):
 	return:
 		return nums list, where all zeros are moved to the right
 	"""
-	i = 0 
+	i = 0
 	j = 1
 	# loop until j < len(nums)
 	while j < len(nums):
@@ -931,19 +931,18 @@ def sort_colors(nums):
 	Sort the colors red, white, and blue. Where each color has the value 0,1,2
 	respectively. 
 	"""
-    red, white, blue = 0, 0, len(nums)-1
-    
-    while white <= blue:
-        if nums[white] == 0:
-            nums[red], nums[white] = nums[white], nums[red]
-            white += 1
-            red += 1
-        elif nums[white] == 1:
-            white += 1
-        else:
-            nums[white], nums[blue] = nums[blue], nums[white]
-            blue -= 1
+	red, white, blue = 0, 0, len(nums)-1
 
+	while white <= blue:
+	    if nums[white] == 0:
+	        nums[red], nums[white] = nums[white], nums[red]
+	        white += 1
+	        red += 1
+	    elif nums[white] == 1:
+	        white += 1
+	    else:
+	        nums[white], nums[blue] = nums[blue], nums[white]
+	        blue -= 1
 
 
 def submatrix_sum(matrix, start_coordinate, end_coordinate):
