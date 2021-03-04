@@ -103,49 +103,41 @@ def level_order_list(root):
 	  9  20
 	/   /  \
    3   15   7
-
-
-
-	[9,20]
-	[9,20]
-	[[3],[9,20],]
-
-	q: [15,7]
-	l: [[3], [9,20], [15,17]] 
-	p: 
-	
 	"""
 	# base case: empty root
 	if not root:
 		return []
-	# return []
 
 	# track of q
 	q = [root]
 	# track of levels
 	levels = [[root.value]]
 
-
 	# loop while q not empty
 	while q:
-		# pop parent
-		parent = q.pop(0)
+		# get level and size of q
 		level = []
-		# add left and right to q 
-		left = parent.left
-		if left:
-			q.append(left)
-			level.append(left.value)
+		parent_count = len(q)
 
-		# add left and right to new array & append to levels
-		right = parent.right
-		if right and right.value:
-			q.append(right)
-			level.append(right.value)
+		# traverse to get children for all parents
+		for i in range(parent_count):
+			# get parent
+			parent = q.pop(0)
 
-		if level and right.value:
+			# add children to q and level
+			left = parent.left if parent and parent.left else None
+			if left:
+				q.append(left)
+				level.append(left.value)
+
+			right = parent.right if parent and parent.right else None
+			if right:
+				q.append(right)
+				level.append(right.value)
+
+		# add level to levels, only non-empty level
+		if level:
 			levels.append(level)
-
 
 	# return levels
 	return levels
