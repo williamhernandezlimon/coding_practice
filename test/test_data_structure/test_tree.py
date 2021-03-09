@@ -210,6 +210,15 @@ def test_level_order_list(test_root, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_root, test_k, expected_response", [
+		([3,1,4,None,2], 1, 1)
+	]
+)
+def test_kth_smallest(test_root, test_k, expected_response):
+	test_tree = array_to_tree(test_root)
+	response = kth_smallest(test_tree, test_k)
+
+	assert response == expected_response
 @mark.parametrize("test_nums, expected_response", [
 		([-10,-3,0,5,9], [-10, -3, 0, 5, 9])
 	]
