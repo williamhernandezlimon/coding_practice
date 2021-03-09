@@ -143,6 +143,33 @@ def level_order_list(root):
 	return levels
 
 
+def kth_smallest(root, k):
+	"""
+
+	"""
+	# traverse to the very left before decrementing
+	# keep track of decrementing k
+	# keep track of current node
+	values = []
+	def traverse(root, values):
+		# base case
+		if not root:
+			return None
+		# go left
+		if root.left:
+			traverse(root.left, values)
+		
+		# track values
+		values.append(root.value)
+
+		# go right
+		if root.right:
+			traverse(root.right, values)
+
+	traverse(root, values)
+	kth = values[k-1] if k >= 0 else None
+	
+	return kth
 def sorted_array_to_bst(nums):
 	"""
 	Convert array to BST
