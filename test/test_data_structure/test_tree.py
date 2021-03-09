@@ -235,6 +235,25 @@ def test_kth_smallest(test_root, test_k, expected_response):
 	response = kth_smallest(test_tree, test_k)
 
 	assert response == expected_response
+
+
+@mark.parametrize("test_root, test_p, test_q, expected_response", [
+		([3,5,1,6,2,0,8,None,None,7,4], 5, 1, 3),
+		([3,5,1,6,2,0,8,None,None,7,4], 5, 4, 5),
+		([3,5,1,6,2,0,8,None,None,7,4], 6, 0, 3)
+	]
+)
+def test_lowest_common_ancestor(test_root, test_p, test_q, expected_response):
+	test_root = array_to_tree(test_root)
+	test_p = find_node(test_root, test_p)
+	test_q = find_node(test_root, test_q)
+
+	assert test_root and test_p and test_q, "Invalid test parameters"
+	
+	response = lowest_common_ancestor(test_root, test_p, test_q)
+	assert response and response.value == expected_response
+
+
 @mark.parametrize("test_nums, expected_response", [
 		([-10,-3,0,5,9], [-10, -3, 0, 5, 9])
 	]
