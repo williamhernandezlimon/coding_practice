@@ -170,6 +170,54 @@ def kth_smallest(root, k):
 	kth = values[k-1] if k >= 0 else None
 	
 	return kth
+
+
+def lowest_common_ancestor(root, p, q):
+	"""
+	[3,5,1,6,2,0,8,null,null,7,4]
+	6
+	0
+
+					3
+			5				1
+		6		2		0		8
+							7		4
+	"""
+	# search method
+	def is_ancestor(root, descendant):
+		if root == None:
+			return False
+		if root == descendant:
+			return True
+		return is_ancestor(root.left, descendant) or is_ancestor(root.right, descendant)
+
+	def get_parent(root, p, q):
+		# TODO: this method is wrong
+		if not root:
+			return None
+		print(f"root.value: {root.value}")
+		if root.value == p or root.value == q or \
+			root.left == p or root.right == p or \
+			root.right == q or root.right == q:
+			print(f"ROOT FOUND! left")
+
+			return root
+		parent = get_parent(root.left, p, q)
+		if not parent:
+			parent = get_parent(root.right, p, q)
+		
+		return parent
+
+	# check if q in p: return p
+	if is_ancestor(p, q):
+		return p
+	# check if p in q: return q
+	if is_ancestor(q, p) :
+		return q
+	# return parent of p or q
+	return get_parent(root, p, q)
+
+
 def sorted_array_to_bst(nums):
 	"""
 	Convert array to BST
