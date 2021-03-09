@@ -35,14 +35,12 @@ def array_to_tree(l):
 		if p:
 			p.left = left
 			p.right = right
-			print(f"p.value: {p.value} p.left: {p.left} p.right: {p.right}")
 		else:
 			print("p has no value")
 		# increment i
 		i += 1
 
 	return root
-	
 
 def create_tree():
 	"""
@@ -97,6 +95,24 @@ def create_tree_asymmetric():
 	root = NodeBinary(1, left_leaf, right_leaf)	
 	return root
 
+
+def find_node(root, value):
+	# empty root
+	if not root:
+		return None
+
+	# node found
+	if root.value == value:
+		return root
+
+	# search left
+	node = find_node(root.left, value)
+
+	# search right
+	if not node:
+		node = find_node(root.right, value)
+
+	return node
 
 
 @mark.parametrize(
