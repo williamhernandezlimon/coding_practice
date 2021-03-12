@@ -4,6 +4,22 @@ from src.data_structure.linked_list import *
 from pytest import mark
 
 
+@mark.parametrize("test_head, expected_response", [
+		([], False),
+		([1], True),
+		([1,2], False),
+		([1,2,1], True),
+		([1,2,2,1], True)
+	]
+)
+def test_is_palindrome(test_head, expected_response):
+	ll = create_linked_list(test_head) if test_head else None
+	head = ll.head if ll else None
+	response = is_palindrome(head)
+
+	assert response == expected_response
+
+
 @mark.parametrize("test_list, expected_response", [
 		([], None),
 		(['A', 'B', 'C', 'D', 'E'], ['E', 'D', 'C', 'B', 'A'])
