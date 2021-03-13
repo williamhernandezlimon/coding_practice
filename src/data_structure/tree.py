@@ -183,39 +183,26 @@ def lowest_common_ancestor(root, p, q):
 		6		2		0		8
 							7		4
 	"""
-	# search method
-	def is_ancestor(root, descendant):
-		if root == None:
-			return False
-		if root == descendant:
-			return True
-		return is_ancestor(root.left, descendant) or is_ancestor(root.right, descendant)
+	# get ancestor method
 
-	def get_parent(root, p, q):
-		# TODO: this method is wrong
-		if not root:
-			return None
-		print(f"root.value: {root.value}")
-		if root.value == p or root.value == q or \
-			root.left == p or root.right == p or \
-			root.right == q or root.right == q:
-			print(f"ROOT FOUND! left")
+	# if root is None:
+	if not root:
+		# return None
+		return None
+	# if root == p or q:
+	if root == p or root == q:
+		# return root
+		return root 
+	 
+	left = lowest_common_ancestor(root.left, p, q)
+	right = lowest_common_ancestor(root.right, p, q)
 
-			return root
-		parent = get_parent(root.left, p, q)
-		if not parent:
-			parent = get_parent(root.right, p, q)
-		
-		return parent
+	lca = root if left and right else None
+	if not lca:
+		lca = left if left else right
 
-	# check if q in p: return p
-	if is_ancestor(p, q):
-		return p
-	# check if p in q: return q
-	if is_ancestor(q, p) :
-		return q
-	# return parent of p or q
-	return get_parent(root, p, q)
+	return lca
+
 
 
 def sorted_array_to_bst(nums):
