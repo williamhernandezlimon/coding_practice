@@ -4,6 +4,29 @@ from src.data_structure.linked_list import *
 from pytest import mark
 
 
+@mark.parametrize("test_ll, test_node, expected_response", [
+		([4,5,1,9], 5, [4,1,9]),
+		([0,1], 0, [1]),
+		([-3,5,-99], -3, [5,-99])
+	]
+)
+def test_delete_node(test_ll, test_node, expected_response):
+	ll = create_linked_list(test_ll)
+	p = ll.head
+	node = None
+	# find node
+	while p:
+		if p.data == test_node:
+			node = p
+			break
+		p = p.next
+	if node:
+		delete_node(node)
+	l = to_list(ll)
+
+	assert l == expected_response
+
+
 @mark.parametrize("test_head, expected_response", [
 		([], False),
 		([1], True),
