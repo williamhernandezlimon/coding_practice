@@ -37,12 +37,18 @@ def add_two_numbers(l1: LinkedList, l2: LinkedList) -> int:
 def is_palindrome(head):
 	"""
 	Check if the linked list is a palindrome
+	head:
+		head of the LinkedList
+	complexity:
+		time: O(N)
+		space: O(1)
 	"""
 	if not head:
 		return False
 	if not head.next:
 		return True
 
+	# TODO: Update to find middle and reverse at the same time
 	# get mid point
 	fast = head
 	slow = head
