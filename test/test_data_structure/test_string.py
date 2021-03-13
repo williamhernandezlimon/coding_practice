@@ -90,6 +90,18 @@ def test_count_and_say(test_n, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_n, expected_response", [
+		(0, []),
+		(1, ["()"]),
+		(3, ["((()))","(()())","(())()","()(())","()()()"])
+	]
+)
+def test_generate_parenthesis(test_n, expected_response):
+	response = string.generate_parenthesis(test_n)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_hostnames_range, test_hosts, expected_response", [
 		("", {}, []),
