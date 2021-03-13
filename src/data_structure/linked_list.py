@@ -34,6 +34,21 @@ def add_two_numbers(l1: LinkedList, l2: LinkedList) -> int:
 	return n1 + n2
 
 
+def delete_node(node):
+	"""
+	Delete the given node. Assume node is not a tail.
+	node:
+		a node from a LinkedList
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	if not node or not node.next:
+		return None
+	node.data = node.next.data
+	node.next = node.next.next
+
+
 def is_palindrome(head):
 	"""
 	Check if the linked list is a palindrome
