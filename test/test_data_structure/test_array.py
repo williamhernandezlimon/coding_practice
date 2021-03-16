@@ -394,6 +394,19 @@ def test_minion_game(test_s, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_nums, expected_response", [
+		([3,0,1], 2),
+		([0,1], 2),
+		([9,6,4,2,3,5,7,0,1], 8),
+		([0], 1)
+	]
+)
+def test_missing_number(test_nums, expected_response):
+	response = missing_number(test_nums)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_nums, expected_response", [
 		([0], [0]),
