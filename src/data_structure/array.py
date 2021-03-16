@@ -778,6 +778,28 @@ def minion_game(s):
 	return (winner, score)
 
 
+def missing_number(nums):
+	"""
+	Return the missing number in nums
+	nums:
+		contains integer numbers from 0-n, where there's 1 missing n
+	return:
+		missing number
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	# caclulate the expected total & calculate actual total
+	total = 0
+	total_nums = 0
+	for i, num in enumerate(nums, 1):
+		total += i
+		total_nums += num
+
+	# compare the 2 to find the missing number
+	return total - total_nums
+
+
 def move_zeros(nums):
 	"""
 	nums:
