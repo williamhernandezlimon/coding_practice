@@ -4,6 +4,44 @@ from src.data_structure.tree import *
 from pytest import mark
 from sys import stderr
 
+
+def array_to_tree(l):
+	"""
+	left = 2 * i + 1
+	right = 2 * i + 2
+	"""
+	# add root to q
+	root = NodeBinary(l[0], None, None)
+	q = [root]
+	i = 0
+	# loop while q
+	while q:
+		# pop parent
+		p = q.pop(0)
+
+		# set parent's left/right and add to q
+		li = 2 * i + 1  # left index
+		lv = l[li] if li < len(l) else None  # left value
+		left = NodeBinary(lv, None, None) if lv==0 or lv else None
+		if left:
+			q.append(left)
+
+		ri = 2 * i + 2  # right index
+		rv = l[ri] if ri < len(l) else None  # right value
+		right = NodeBinary(rv, None, None) if rv==0 or rv else None
+		if right:
+			q.append(right)
+
+		if p:
+			p.left = left
+			p.right = right
+		else:
+			print("p has no value")
+		# increment i
+		i += 1
+
+	return root
+
 def create_tree():
 	"""
 	    3
@@ -57,6 +95,24 @@ def create_tree_asymmetric():
 	root = NodeBinary(1, left_leaf, right_leaf)	
 	return root
 
+
+def find_node(root, value):
+	# empty root
+	if not root:
+		return None
+
+	# node found
+	if root.value == value:
+		return root
+
+	# search left
+	node = find_node(root.left, value)
+
+	# search right
+	if not node:
+		node = find_node(root.right, value)
+
+	return node
 
 
 @mark.parametrize(
@@ -168,6 +224,34 @@ def test_level_order_list(test_root, expected_response):
 	response = level_order_list(test_root)
 
 	assert response == expected_response
+
+
+@mark.parametrize("test_root, test_k, expected_response", [
+		([3,1,4,None,2], 1, 1)
+	]
+)
+def test_kth_smallest(test_root, test_k, expected_response):
+	test_tree = array_to_tree(test_root)
+	response = kth_smallest(test_tree, test_k)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_root, test_p, test_q, expected_response", [
+		([3,5,1,6,2,0,8,None,None,7,4], 5, 1, 3),
+		([3,5,1,6,2,0,8,None,None,7,4], 5, 4, 5),
+		([3,5,1,6,2,0,8,None,None,7,4], 6, 0, 3)
+	]
+)
+def test_lowest_common_ancestor(test_root, test_p, test_q, expected_response):
+	test_root = array_to_tree(test_root)
+	test_p = find_node(test_root, test_p)
+	test_q = find_node(test_root, test_q)
+
+	assert test_root and test_p and test_q, "Invalid test parameters"
+	
+	response = lowest_common_ancestor(test_root, test_p, test_q)
+	assert response and response.value == expected_response
 
 
 @mark.parametrize("test_nums, expected_response", [

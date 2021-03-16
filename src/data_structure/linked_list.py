@@ -34,6 +34,78 @@ def add_two_numbers(l1: LinkedList, l2: LinkedList) -> int:
 	return n1 + n2
 
 
+def delete_node(node):
+	"""
+	Delete the given node. Assume node is not a tail.
+	node:
+		a node from a LinkedList
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	if not node or not node.next:
+		return None
+	node.data = node.next.data
+	node.next = node.next.next
+
+
+def is_palindrome(head):
+	"""
+	Check if the linked list is a palindrome
+	head:
+		head of the LinkedList
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	if not head:
+		return False
+	if not head.next:
+		return True
+
+	# TODO: Update to find middle and reverse at the same time
+	# get mid point
+	fast = head
+	slow = head
+	tail = None
+	while fast and fast.next:
+		fast = fast.next.next
+		tail = slow
+		slow = slow.next
+
+	# if odd, omit the middle node
+	if fast:
+		slow = slow.next
+
+	# detach and create 2 linked lists
+	new_head = slow
+	tail.next = None
+
+	# reverse first half unitl tail
+	prev = None
+	curr = head
+	while curr:
+		# set next
+		nxt = curr.next
+		# curr.next = prev
+		curr.next = prev
+		# move prev
+		prev = curr
+		# move curr
+		curr = nxt
+	head = prev
+
+	# check first half is the same as second half
+	while head and new_head:
+		if head.data != new_head.data:
+			return False
+		
+		head = head.next
+		new_head = new_head.next
+
+	return not head and not new_head
+
+
 def remove_duplicates(ll: LinkedList) -> LinkedList:
 	"""
 	Remove duplicates in linked list using a set

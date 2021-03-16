@@ -100,6 +100,36 @@ def count_and_say(n):
 	return "".join(cs)
 
 
+def generate_parenthesis(n):
+	"""
+	Generate all combinations of parenthesis
+	n:
+		integer, representing the number of parenthesis
+	return:
+		a list containing all parenthesis combinations
+	complexity:
+		time: O(n^2)
+		space: O(n)
+	"""
+	combinations = []
+	
+	def backtrace(combinations, max_length, open, closed, s):
+		# print(f"top open: {open} closed: {closed} s: {s}")
+		if s and len(s) == max_length * 2:
+			print(f"base open: {open} closed: {closed} s: {s}")
+			combinations.append(s)
+
+		if open < max_length:
+			# print(f"open: {open} closed: {closed} s: {s}")
+			backtrace(combinations, max_length, open+1, closed, s+"(")
+
+		if closed < open:
+			backtrace(combinations, max_length, open, closed+1, s+")")
+
+	backtrace(combinations, n, 0, 0, "")
+	return combinations
+
+
 def get_bad_hosts(hostnames_range, hosts):
 	"""
 	Given a range of hostnames, email me a single list of hosts running the wrong number of instances of a process.

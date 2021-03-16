@@ -433,6 +433,18 @@ def test_padovan_sequence_inefficient(test_num, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_nums, expected_response", [
+		([], []),
+		([1], [[1]]),
+		([1,2,3], [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]])
+	]
+)
+def test_permute(test_nums, expected_response):
+	response = permute(test_nums)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_digits, expected_response", [
 		([], [0]),
