@@ -875,6 +875,41 @@ def padovan_sequence_inefficient(num: int) -> int:
 	return padovan_sequence_inefficient(num - 2) + padovan_sequence_inefficient(num - 3)
 
 
+def permute(nums):
+	"""
+	Caclulate all permutations of order of list nums
+	nums:
+		list of unique integers
+	return:
+		all permutations from list nums
+	complexity:
+		time: O(N^2)
+		space: O(N)
+	"""
+	perms = []
+	temp = []
+
+	def backtrace(perms, temp, nums):
+		if temp and len(temp) == len(nums):
+			# make sure to copy temp, otherwise will be empty in the end
+			perms.append(temp.copy())
+		else:
+			# loop through everything but skip what has already been added
+			for num in nums:
+				# append if not in list
+				if num in temp: continue
+				temp.append(num)
+
+				# add other perms
+				backtrace(perms, temp, nums)
+
+				# remove num
+				temp.pop(-1)
+
+	backtrace(perms, temp, nums)
+	return perms
+
+
 def plus_one(digits):
 	"""
 	Given a list of integers, representing an integer, increment by one
