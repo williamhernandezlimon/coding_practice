@@ -336,6 +336,18 @@ def test_majority_element(test_nums, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_height, expected_response", [
+		([], 0),
+		([1,1], 1),
+		([1,8,6,2,5,4,8,3,7], 49)
+	]
+)
+def test_max_area(test_height, expected_response):
+	response = max_area(test_height)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_prices, expected_response", [
 		([7,1,5,3,6,4], 5),
