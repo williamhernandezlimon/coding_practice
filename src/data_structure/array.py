@@ -1013,57 +1013,43 @@ def remove_duplicates(array):
 
 def search(nums, target):
 	"""
-	nums = [4,5,6,7,0,1,2] target = 0
-	  	          p
-
-	  	    [4,5,6,7,8,9,0]
-	  	           p
-			[7,8,9,0]
-			[8,9,0]
-			[9,0]
-			
-	left: 0 
-
-	[1]
-	# assume target within range?
-	# no duplicates? 
-	# preserve nums?
-
+	Find the index of the target in nums
+	nums:
+		list of integers, non-duplicate. Sorted, but rotated at unknown pivot
+	return:
+		integer representing the index of target otherwise -1
+	complexity:
+		time: O(logN)
+		space: O(logN)
 	"""
-	# case of target > len
-	if target > len(nums) or not nums:
-		return -1
-	if len(nums) == 1:
-		return nums[0]
 
-	# find the pivot index
-	# keep splitting in half until smallest number found
-	def get_pivot(nums, start, end):
-		if start == end:
-			return start
+	def helper(nums, target, start, end):
+		if not nums or start > end: 
+			return -1		
+		# mid = start + ((end-start)//2)
+		mid = (start+end) // 2
+		if nums[mid] == target:
+			return mid
 
-		mid = start + ((end - start)//2)
+		# ascending
+		if nums[start] <= nums[mid]:
+			# within range
+			if nums[start] <= target and target <= nums[mid]:
+				end = mid-1
+			else:
+				start = mid+1
 
-		
-		if nums[start] > nums[mid-1]:
-			start, end = start, mid-1 
+		# descending
 		else:
-			start, end = mid, end
+			if nums[mid] <= target and target <= nums[end]:
+				start = mid + 1
+			else:
+				end = mid - 1
 
-		print(f"nums[{mid}]: {nums[mid]} start: {start} end: {end}")
-		return get_pivot(nums, start, end)
-
-
- 
-	pivot = get_pivot(nums, 0, len(nums)-1)
-	print(f"pivot: {pivot}")
-	
-	# loop from pivot, until target found
-	return (pivot + target) % len(nums)
-	# print(f"new_target: {target} nums: {nums} nums[target]: {nums[target]}")
+		return helper(nums, target, start, end)
 
 
-
+	return helper(nums, target, 0, len(nums)-1)
 
 
 def sort_colors(nums):
