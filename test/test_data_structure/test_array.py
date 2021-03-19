@@ -538,22 +538,30 @@ def test_submatrix_sum(test_matrix, test_start_coordinate, test_end_coordinate, 
 	assert response == expected_response
 
 
-TEST_THREE_SUMS = [
-	([], []),
-	([1, 2], []),
-	([1, 2, 3, 4], []),
-	([0, 0, 0], [[0, 0, 0]]),
-	([0, 0, 0, 1], [[0, 0, 0]]),
-	([-1, 0, 1, 2, -1, -4], [[-1, 0, 1], [-1, -1, 2]])
-]
-@mark.parametrize("test_list, expected_response", copy.deepcopy(TEST_THREE_SUMS))
+@mark.parametrize("test_list, expected_response", [
+		([], []),
+		([1, 2], []),
+		([1, 2, 3, 4], []),
+		([0, 0, 0], [[0, 0, 0]]),
+		([0, 0, 0, 1], [[0, 0, 0]]),
+		([-1, 0, 1, 2, -1, -4], [[-1, -1, 2], [-1, 0, 1]])
+	]
+)
 def test_three_sums(test_list, expected_response):
 	response = three_sums(test_list)
 
 	assert response == expected_response
 
 
-@mark.parametrize("test_list, expected_response", copy.deepcopy(TEST_THREE_SUMS))
+@mark.parametrize("test_list, expected_response", [
+		([], []),
+		([1, 2], []),
+		([1, 2, 3, 4], []),
+		([0, 0, 0], [[0, 0, 0]]),
+		([0, 0, 0, 1], [[0, 0, 0]]),
+		([-1, 0, 1, 2, -1, -4], [[-1, 0, 1], [-1, -1, 2]])
+	]
+)
 def test_three_sums_inefficient(test_list, expected_response):
 	response = three_sums_inefficient(test_list)
 
