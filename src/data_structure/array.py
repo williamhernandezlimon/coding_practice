@@ -1011,6 +1011,61 @@ def remove_duplicates(array):
 	return len(array)
 
 
+def search(nums, target):
+	"""
+	nums = [4,5,6,7,0,1,2] target = 0
+	  	          p
+
+	  	    [4,5,6,7,8,9,0]
+	  	           p
+			[7,8,9,0]
+			[8,9,0]
+			[9,0]
+			
+	left: 0 
+
+	[1]
+	# assume target within range?
+	# no duplicates? 
+	# preserve nums?
+
+	"""
+	# case of target > len
+	if target > len(nums) or not nums:
+		return None
+	if len(nums) == 1:
+		return nums[0]
+
+	# find the pivot index
+	# keep splitting in half until smallest number found
+	def get_pivot(nums, start, end):
+		if start == end:
+			return start
+
+		mid = start + ((end - start)//2)
+
+		
+		if nums[start] > nums[mid-1]:
+			start, end = start, mid-1 
+		else:
+			start, end = mid, end
+
+		print(f"nums[{mid}]: {nums[mid]} start: {start} end: {end}")
+		return get_pivot(nums, start, end)
+
+
+ 
+	pivot = get_pivot(nums, 0, len(nums)-1)
+	print(f"pivot: {pivot}")
+	
+	# loop from pivot, until target found
+	return (pivot + target) % len(nums)
+	# print(f"new_target: {target} nums: {nums} nums[target]: {nums[target]}")
+
+
+
+
+
 def sort_colors(nums):
 	"""
 	Sort the colors red, white, and blue. Where each color has the value 0,1,2
