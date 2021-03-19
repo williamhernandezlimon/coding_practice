@@ -580,6 +580,34 @@ def longest_consecutive_subsequence(numbers):
 	return max_consecutive_numbers
 
 
+def max_area(height):
+	"""
+	Given a list of integers, find the max area between them
+	height:
+		list of integers
+	return:
+		max area given heights
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	area = 0
+	i = 0
+	j = len(height) - 1
+	# traverse to find max area
+	while i < j:
+		# store max area
+		area = max(min(height[i], height[j]) * (j - i), area)
+
+		if height[i] < height[j]:
+			i += 1
+		else:
+			j -= 1
+	
+	# return max area
+	return area
+
+
 def max_subarray_dp(nums):
 	"""
 	Find the contiguous subarray, which has the largest sum of values.
@@ -776,6 +804,28 @@ def minion_game(s):
 
 	print(f"{winner} {score}")
 	return (winner, score)
+
+
+def missing_number(nums):
+	"""
+	Return the missing number in nums
+	nums:
+		contains integer numbers from 0-n, where there's 1 missing n
+	return:
+		missing number
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	# caclulate the expected total & calculate actual total
+	total = 0
+	total_nums = 0
+	for i, num in enumerate(nums, 1):
+		total += i
+		total_nums += num
+
+	# compare the 2 to find the missing number
+	return total - total_nums
 
 
 def move_zeros(nums):

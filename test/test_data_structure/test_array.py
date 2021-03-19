@@ -336,6 +336,18 @@ def test_majority_element(test_nums, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_height, expected_response", [
+		([], 0),
+		([1,1], 1),
+		([1,8,6,2,5,4,8,3,7], 49)
+	]
+)
+def test_max_area(test_height, expected_response):
+	response = max_area(test_height)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_prices, expected_response", [
 		([7,1,5,3,6,4], 5),
@@ -390,6 +402,19 @@ def test_merge(test_nums1, test_n, test_nums2, test_m, expected_response):
 )
 def test_minion_game(test_s, expected_response):
 	response = minion_game(test_s)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_nums, expected_response", [
+		([3,0,1], 2),
+		([0,1], 2),
+		([9,6,4,2,3,5,7,0,1], 8),
+		([0], 1)
+	]
+)
+def test_missing_number(test_nums, expected_response):
+	response = missing_number(test_nums)
 
 	assert response == expected_response
 
