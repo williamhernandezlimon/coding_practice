@@ -1032,7 +1032,7 @@ def search(nums, target):
 	"""
 	# case of target > len
 	if target > len(nums) or not nums:
-		return None
+		return -1
 	if len(nums) == 1:
 		return nums[0]
 

@@ -503,6 +503,19 @@ def test_remove_duplicates(test_array, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_nums, test_target, expected_response", [
+		([], 0, -1),
+		([2], 3, -1),
+		([2,1], 0, 1),
+		([4,5,6,7,0,1,2], 0, 4)
+	]
+)
+def test_search(test_nums, test_target, expected_response):
+	response = search(test_nums, test_target)
+
+	assert response == expected_response
+
+
 @mark.parametrize("test_nums, expected_response", [
 		([2,0,2,1,1,0], [0,0,1,1,2,2]),
 		([2,0,1], [0,1,2]),
