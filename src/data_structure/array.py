@@ -1086,16 +1086,40 @@ def three_sums(nums):
 	return:
 		three numbers that do not add up to zero
 	"""
+	# sort nums
+	nums.sort()
+
 	three_sums = []
-	for i, num_i in enumerate(nums[:-1]):
-		nums_set = set()
-		for j, num_j in enumerate(nums[i+1:], i+1):
-			target_num = 0 - num_i - num_j
-			if target_num in nums_set:
-				three_nums = sorted([num_i, num_j, target_num])
-				if three_nums not in three_sums:
-					three_sums.append(three_nums)
-			nums_set.add(num_j)
+	# loop i until i - 3
+	for i in range(len(nums)):
+		if i == 0 or (i > 0 and nums[i] != nums[i-1]):
+			j = i + 1
+			k = len(nums) - 1
+			# loop while j < k
+			while j < k:
+				# check if 3 numbers add up to 0
+				three_sum = nums[i] + nums[j] + nums[k]
+				print(f"three_sum: {three_sum} nums[{i}]: {nums[i]} j: {nums[j]} k: {nums[k]}")
+
+				# increment j if three_sum < 0
+				if three_sum < 0:
+					j += 1
+
+				# decrement k if three_sum > 0
+				elif three_sum > 0:
+					k -= 1
+
+				# match found
+				else:
+					sums = [nums[i], nums[j], nums[k]]
+					three_sums.append(sums)
+
+					while j < k and nums[j] == nums[j+1]:
+						j += 1
+					while j < k and nums[k] == nums[k-1]:
+						k -= 1
+					j + 1
+					k -= 1
 
 
 	return three_sums
