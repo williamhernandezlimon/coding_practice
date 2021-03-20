@@ -1,5 +1,59 @@
 #!/usr/bin/env python3
 
+
+def divide(dividend, divisor):
+	"""
+	Divide without using multiplication, division, or mod
+	TODO: update using bit-shifting
+	dividend:
+		integer numerator
+	divsor:
+		integer denominator
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	n, i = divisor, 0
+
+	if dividend > 0:
+		if divisor > 0:
+			while n <= dividend:
+				n += divisor
+				i += 1
+		elif divisor < 0:
+			# make divisor positive
+			divisor = abs(divisor)
+			n = divisor
+			while n <= dividend:
+				n += divisor
+				i -= 1
+		else:
+			return None
+	elif dividend < 0:
+		# make divisor negative
+		j = 0
+		while j < 2:  
+			n -= divisor
+			j += 1
+
+		if divisor > 0:
+			while n >= dividend:
+				n -= divisor
+				i -= 1
+		elif divisor < 0:
+			divisor = abs(divisor)
+			dividend = abs(dividend)
+			while n <= dividend:
+				n += divisor	
+				i += 1
+		else:
+			return None
+	else:
+		return 0
+
+	return i
+
+
 def target_sum(l, target):
 	"""
 		l: the list containing unsigned
