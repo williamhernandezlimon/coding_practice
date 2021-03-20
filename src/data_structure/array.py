@@ -1011,6 +1011,47 @@ def remove_duplicates(array):
 	return len(array)
 
 
+def search(nums, target):
+	"""
+	Find the index of the target in nums
+	nums:
+		list of integers, non-duplicate. Sorted, but rotated at unknown pivot
+	return:
+		integer representing the index of target otherwise -1
+	complexity:
+		time: O(logN)
+		space: O(logN)
+	"""
+
+	def helper(nums, target, start, end):
+		if not nums or start > end: 
+			return -1		
+		# mid = start + ((end-start)//2)
+		mid = (start+end) // 2
+		if nums[mid] == target:
+			return mid
+
+		# ascending
+		if nums[start] <= nums[mid]:
+			# within range
+			if nums[start] <= target and target <= nums[mid]:
+				end = mid-1
+			else:
+				start = mid+1
+
+		# descending
+		else:
+			if nums[mid] <= target and target <= nums[end]:
+				start = mid + 1
+			else:
+				end = mid - 1
+
+		return helper(nums, target, start, end)
+
+
+	return helper(nums, target, 0, len(nums)-1)
+
+
 def sort_colors(nums):
 	"""
 	Sort the colors red, white, and blue. Where each color has the value 0,1,2
