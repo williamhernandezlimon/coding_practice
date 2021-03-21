@@ -1052,6 +1052,42 @@ def search(nums, target):
 	return helper(nums, target, 0, len(nums)-1)
 
 
+def search_range(nums, target):
+	"""
+	Find the range of indicies where target is represented in nums
+	nums:
+		sorted integers, that could have duplicates
+	complexity:
+		time: O(logN)
+		space: O(1)
+	"""
+	# find first instance's index of target
+	index, start, end = -1, 0, len(nums) - 1
+	while start <= end:
+		mid = (start + end)//2
+		# target found
+		if nums[mid] == target:
+			index = mid
+			break
+
+		# target in left?
+		if nums[start] <= target and target <= nums[mid]:
+			end = mid - 1
+
+		# target in right?
+		else:
+			start = mid + 1
+
+	# move left and right to include all occurences of target
+	i, j = index, index
+	while i > 0 and nums[i-1] == target:
+		i -= 1
+	while j < len(nums)-1 and nums[j+1] == target:
+		j += 1
+
+	return [i, j]
+
+
 def sort_colors(nums):
 	"""
 	Sort the colors red, white, and blue. Where each color has the value 0,1,2
