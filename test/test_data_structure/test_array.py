@@ -518,6 +518,24 @@ def test_search(test_nums, test_target, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_nums, test_target, expected_response", [
+		([5,7,7,8,8,10], 8, [3,4]),
+		([5,7,7,8,8,10], 7, [1,2]),
+		([5,7,7,8,8,10], 5, [0,0]),
+		([5,7,7,8,8,10], 21, [-1,-1]),
+		([0], 0, [0,0]),
+		([0,1], 0, [0,0]),
+		([0,0], 0, [0,1]),
+		([1,4], 4, [1,1]),
+		([0,0,0,0,0,0,0], 0, [0,6]),
+	]
+)
+def test_search_range(test_nums, test_target, expected_response):
+	response = search_range(test_nums, test_target)
+
+	assert response == expected_response
+
+
 @mark.parametrize("test_nums, expected_response", [
 		([2,0,2,1,1,0], [0,0,1,1,2,2]),
 		([2,0,1], [0,1,2]),
