@@ -1011,6 +1011,26 @@ def remove_duplicates(array):
 	return len(array)
 
 
+def rotate(matrix):
+	"""
+	Rotate matrix 90 degrees clockwise
+	matrix:
+		NxN arrays 
+	complexity:
+		time: O(NxM)
+		space: O(1)
+	"""
+	if not matrix or not matrix[0]:
+		return
+
+	# flip top and bottom row
+	matrix[0], matrix[-1] = matrix[-1], matrix[0]
+
+	for i in range(len(matrix)):
+		for j in range(i):
+			matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+
 def search(nums, target):
 	"""
 	Find the index of the target in nums
