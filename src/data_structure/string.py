@@ -729,10 +729,7 @@ def min_cost(s, cost):
 	min_cost += group_sum - max_sum
 
 	return min_cost
-
-
-
-
+	
 
 def reverse_integer(number: int) -> int:
 	"""
