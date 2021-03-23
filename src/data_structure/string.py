@@ -707,46 +707,26 @@ def min_cost(s, cost):
 		correlating cost per char in s
 	complexity:
 		time: O(N)
-		space: O()
+		space: O(1)
 	"""
-	# special case
-	if len(s) != len(cost):
-		print(f"len(s): {len(s)} != len(cost): {len(cost)}")
-		return -1
+	# loop through all nums
+	min_cost = group_sum = max_sum = 0
+	for i in range(len(cost)):
+		# if prev is not duplicate
+		if i > 0 and s[i] != s[i-1]:
+			# add to min_cost
+			min_cost += group_sum - max_sum
+			# reset group sum
+			group_sum = 0
+			# reset max sum
+			max_sum = 0
 
-	# loop cost using 2 pointers to find duplicates
-	i = 0
-	j = i + 1
-	min_cost = 0
+		# set group sum
+		group_sum += cost[i]
+		# set max sum
+		max_sum = max(max_sum, cost[i])
 
-	# flag to track whether skipped index
-	skip_index = None
-	while j < len(cost):
-		# duplicate found
-		if s[i] == s[j]:
-			# if i is less
-			if cost[i] < cost[j]:
-				# set min cost
-				min_cost += cost[i]
-				# skip i to index
-				if skip_index:
-					i = skip_index + 1
-					# reset skip index
-					skip_index = None
-				else:
-					i += 1
-			# if j is less
-			else:
-				# set min cost
-				min_cost += cost[j]
-				# set skip index
-				skip_index = j
-		else:
-			i = skip_index + 1 if skip_index else i + 1
-			skip_index = None
-		
-		# always increment j
-		j += 1
+	min_cost += group_sum - max_sum
 
 	return min_cost
 
