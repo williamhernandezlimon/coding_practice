@@ -674,6 +674,41 @@ def solution3(T, R):
 	return (score * 100)//len(groups)
 
 
+def max_number_of_balloons(text):
+	"""
+	Find the number of instances "balloon" can be generated from text
+	text:
+		string of chars that could spell balloon
+	return:
+		total number of times baloon can be generated
+	complexity:
+		time:
+			O(N)
+		space:
+			O(1)
+	"""
+	# store all b,a,l,o,n char counts in map
+	ballon = {'b': 0, 'a': 0, 'l': 0, 'o': 0, 'n': 0}
+	for i in text:
+		if i in ballon:
+			ballon[i] += 1
+	print(f"ballon: {ballon}")
+
+	# divide l's and o's by 2
+	if 'l' in ballon:
+		ballon['l'] //= 2
+	if 'o' in ballon:
+		ballon['o'] //= 2
+
+	# get the min value from map
+	min_value = float("inf")
+	for v in ballon:
+		min_value = min(min_value, ballon[v])
+
+	print(f"min_value: {min_value}")
+	return min_value
+
+
 def max_vowels(string, substring_length):
 	"""
 	string: contains a sequence of chartacter, used to search for vowels
