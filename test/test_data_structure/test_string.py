@@ -237,6 +237,18 @@ def test_longest_palindrome(test_s, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_text, expected_response", [
+		("", 0),
+		("nlaebolko", 1),
+		("loonbalxballpoon", 2)
+	]
+)
+def test_max_number_of_balloons(test_text, expected_response):
+	response = string.max_number_of_balloons(test_text)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_str, test_substr_len, expected_response", [
 		("abciiidef", 3, 3),
