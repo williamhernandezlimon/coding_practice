@@ -697,6 +697,40 @@ def max_vowels(string, substring_length):
 	return vowel_count_max
 
 
+def min_cost(s, cost):
+	"""
+	Given s and proportional cost, mind the min cost to remove pair duplicates
+	such that.
+	s:
+		string containing chars
+	cost:
+		correlating cost per char in s
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	# loop through all nums
+	min_cost = group_sum = max_sum = 0
+	for i in range(len(cost)):
+		# if prev is not duplicate
+		if i > 0 and s[i] != s[i-1]:
+			# add to min_cost
+			min_cost += group_sum - max_sum
+			# reset group sum
+			group_sum = 0
+			# reset max sum
+			max_sum = 0
+
+		# set group sum
+		group_sum += cost[i]
+		# set max sum
+		max_sum = max(max_sum, cost[i])
+
+	min_cost += group_sum - max_sum
+
+	return min_cost
+	
+
 def reverse_integer(number: int) -> int:
 	"""
 	Given an unsigned integer, reverse the number.
