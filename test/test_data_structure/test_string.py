@@ -255,6 +255,21 @@ def test_max_vowels(test_str, test_substr_len, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_s, test_cost, expected_response", [
+		("abaac", [1,2,3,4,5], 3),
+		("aaaaa", [1,2,3,4,5], 10),
+		("abc", [1,2,3], 0),
+		("aabaa", [1,2,3,4,1], 2),
+		("aaabbbabbbb", [3,5,10,7,5,3,5,5,4,8,1], 26),
+		("aaabbbabbbb", [3,5,10,7,5,3,5,5,4,8,1], 26)
+	]
+)
+def test_min_cost(test_s, test_cost, expected_response):
+	response = string.min_cost(test_s, test_cost)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_number, expected_response", [
 		(123, 321),
