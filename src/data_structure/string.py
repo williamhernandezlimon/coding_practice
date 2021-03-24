@@ -390,52 +390,43 @@ def letter_combination(digits):
 
 	use current element combination to append with following combinations
 	"""
-	# store combination mapping
+	# map of digits
 	m = {
-		"2": ['a', 'b', 'c'],
-		"3": ['d', 'e', 'f'],
-		"4": ['g', 'h', 'i'],
-		"5": ['j', 'k', 'l'],
-		"6": ['m', 'n', 'o'],
-		"7": ['p', 'q', 'r', 's'],
-		"8": ['t', 'u', 'v'],
-		"9": ['w', 'x', 'y', 'z']
+		"2": "abc",
+		"3": "def",
+		"4": "ghi",
+		"5": "jkl",
+		"6": "mno",
+		"7": "pqrs",
+		"8": "tuv",
+		"9": "wxyz"
 	}
-	# check if empty sring 
-	if not digits:
-		return []
 
-	# check if string len == 1
-	if len(digits) == 1:
-		combination = m[digits] if digits in m else []
-		return combination
+	# combs array
+	path = []
+	combs = []
+	# recursively loop through all elements
+	def backtrace(index, p):
+		# if path == len(digits)
+		if len(p) == len(digits):
+			# append to combs
+			s = "".join(p)
+			combs.append(s)
+			return
+		# current letter poss + other letters poss
+		letters = m[digits[index]]
+		for letter in letters:
+			p.append(letter)
+			backtrace(index+1, p)
+			p.pop()
+
+	backtrace(0, path)
+	return combs
 
 
-	# merge helper method
-	def _merge(combination, a1, a2):
-		for i in a1:
-			for j in a2:
-				print(f"appending {i}{j}")
-				combination.append(f"{i}{j}")
 
 
-	combination = []
-	# for every element in digits, up to [-1]
-	for i, num_i in enumerate(digits[:-1]):
-		print(f"num_i: {num_i} m: {m}")
-		if num_i not in m:
-			continue
-		combination_i = m[num_i]
-		print(f"i: {i} num_i: {num_i} combination_i: {combination_i}")
-		# append with next digit's combination, starting from 1
-		for j, num_j in enumerate(digits[i+1:], i+1):
-			if num_j not in m:
-				continue
-			combination_j = m[num_j]
-			print(f"combination_i: {combination_i} combination_j: {combination_j}")
-			_merge(combination, combination_i, combination_j)
 
-	return combination
 
 
 def longest_common_prefix(strs):
@@ -672,6 +663,41 @@ def solution3(T, R):
 
 
 	return (score * 100)//len(groups)
+
+
+def max_number_of_balloons(text):
+	"""
+	Find the number of instances "balloon" can be generated from text
+	text:
+		string of chars that could spell balloon
+	return:
+		total number of times baloon can be generated
+	complexity:
+		time:
+			O(N)
+		space:
+			O(1)
+	"""
+	# store all b,a,l,o,n char counts in map
+	ballon = {'b': 0, 'a': 0, 'l': 0, 'o': 0, 'n': 0}
+	for i in text:
+		if i in ballon:
+			ballon[i] += 1
+	print(f"ballon: {ballon}")
+
+	# divide l's and o's by 2
+	if 'l' in ballon:
+		ballon['l'] //= 2
+	if 'o' in ballon:
+		ballon['o'] //= 2
+
+	# get the min value from map
+	min_value = float("inf")
+	for v in ballon:
+		min_value = min(min_value, ballon[v])
+
+	print(f"min_value: {min_value}")
+	return min_value
 
 
 def max_vowels(string, substring_length):

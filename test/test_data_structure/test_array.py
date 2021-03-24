@@ -584,6 +584,18 @@ def test_submatrix_sum(test_matrix, test_start_coordinate, test_end_coordinate, 
 	assert response == expected_response
 
 
+@mark.parametrize("test_n, expected_response", [
+		(0, []),
+		(1, [0]),
+		(5, [0, -1,1,-2,2])
+	]
+)
+def test_sum_zero(test_n, expected_response):
+	response = sum_zero(test_n)
+
+	assert response == expected_response
+
+
 TEST_THREE_SUMS = [
 	([], []),
 	([1, 2], []),

@@ -1178,6 +1178,36 @@ def submatrix_sum(matrix, start_coordinate, end_coordinate):
 	return total
 
 
+def sum_zero(n):
+	"""
+	Add n elements in array where their sum must be 0
+	n:
+		integer number that defines the number of elements
+	return:
+		list containing n elements that add up to zero
+	complexity:
+		time: O(N)
+		space: O(N)
+	"""
+	a = []
+	num = n
+	# if n and odd:
+	if num and num%2 == 1:
+		# add 0 to array
+		a.append(0)
+		# make num even
+		num -= 1
+
+	num //= 2
+	# add i, -i to array until n-1
+	for i in range(1, num+1):
+		a.append(-1*i)
+		a.append(i)
+
+	# return a
+	return a
+
+
 def three_sums(nums):
 	"""
 	Find a list of non-duplicate order of numbers that add up to zero

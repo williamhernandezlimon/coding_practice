@@ -185,16 +185,15 @@ def test_countCounterfeit(test_serialNumber, expected_response):
 @mark.parametrize(
 	"test_digits, expected_response", [
 		("2", ["a", "b", "c"]),
-		("12131", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
-		("213", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
+		# ("12131", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
+		# ("213", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
 		("23", ["ad","ae","af","bd","be","bf","cd","ce","cf"]),
-		# TODO: fix test below
-		# ("234", [
-		# 	"adg","adh","adi","aeg","aeh","aei","afg","afh","afi","bdg","bdh",
-		# 	"bdi","beg","beh","bei","bfg","bfh","bfi","cdg","cdh","cdi","ceg",
-		# 	"ceh","cei","cfg","cfh","cfi"
-		# 	]
-		# )
+		("234", [
+			"adg","adh","adi","aeg","aeh","aei","afg","afh","afi","bdg","bdh",
+			"bdi","beg","beh","bei","bfg","bfh","bfi","cdg","cdh","cdi","ceg",
+			"ceh","cei","cfg","cfh","cfi"
+			]
+		)
 
 	]
 )
@@ -233,6 +232,18 @@ def test_longest_common_prefix(test_str_list, expected_response):
 )
 def test_longest_palindrome(test_s, expected_response):
 	response = string.longest_palindrome(test_s)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_text, expected_response", [
+		("", 0),
+		("nlaebolko", 1),
+		("loonbalxballpoon", 2)
+	]
+)
+def test_max_number_of_balloons(test_text, expected_response):
+	response = string.max_number_of_balloons(test_text)
 
 	assert response == expected_response
 
