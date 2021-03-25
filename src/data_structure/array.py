@@ -87,6 +87,81 @@ def conflict(array):
 	return False
 
 
+def connect_four_winner(board, move, player):
+	"""
+	Check to see if the player is winner based on given move
+
+	0 0 0 0
+	0 0 0 0
+	0 0 0 0
+	1 1 1 1
+
+	"""
+	# check valid matrix
+	if not board:
+		return False
+
+	x, y = move[0], move[1]
+	# make move
+	board[y][x] = player
+	print(f"board: {board}")
+
+	# check if move is winning move for player
+	def helper(count, x, y):
+		print(f"count: {count} x: {x} y: {y}")
+		# base case
+		if count == 0:
+			return True
+
+		winner = False
+		# check up
+		if y+1 < len(board)-1:
+			print(f"checking up")
+			if board[y+1][x] == player and helper(count-1, x, y+1):
+				return True
+			# diagonal right
+			if x+1 < len(board[y])-1 and board[y+1][x+1] == player:
+				print(f"checking up diagonal")
+				if helper(count-1, x+1, y+1):
+					return True
+			
+			# diagonal left
+			if x-1 >= 0 and board[y+1][x-1] == player and helper(count-1, x-1, y+1):
+				return True
+
+		# check down
+		if y-1 >= 0:
+			print(f"checking down")
+			if board[y-1][x] == player and helper(count-1, x, y-1):
+				return True
+			# diagonal left
+			if x-1 >= 0 and board[y-1][x-1] == player and helper(count-1, x-1, y-1):
+				return True
+			
+			# diagonal right
+			if x+1 < len(board[y])-1 and board[y-1][x+1] == player:
+				print(f"checking up diagonal")
+				if helper(count-1, x+1, y-1):
+					return True
+
+		# check left
+		if x-1 >= 0:
+			print(f"checking left")
+			if board[y][x-1] == player and helper(count-1, x-1, y):
+				return True
+
+		# check right
+		if x+1 < len(board[y])-1 and board[y][x+1] == player:
+			print(f"checking right")
+			if helper(count-1, x+1, y):
+				return True
+
+		return False
+
+
+	return helper(3, move[0], move[1])
+
+
 def contains_duplicates(array):
 	"""
 	Check if there are duplicates
