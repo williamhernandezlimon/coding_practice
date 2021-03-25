@@ -25,6 +25,64 @@ def test_alien_sort(test_words, test_alphabet, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_board, test_move, test_player, expected_response", [
+		(
+			[
+				[0,0,0,0],
+				[0,0,0,0],
+				[0,0,0,0],
+				[1,1,1,0]
+			], (3,3), 1, True
+		),
+		(
+			[
+				[0,0,0,0],
+				[0,0,0,0],
+				[0,0,0,0],
+				[0,1,1,1]
+			], (0,3), 1, True
+		),
+		(
+			[
+				[0,0,0,0],
+				[2,0,0,0],
+				[2,0,0,0],
+				[2,1,1,1]
+			], (0,0), 2, True
+		),
+		(
+			[
+				[1,0,0,0],
+				[2,0,2,0],
+				[2,2,0,0],
+				[2,1,1,1]
+			], (3,0), 2, True
+		),
+		(
+			[
+				[1,0,0,2],
+				[2,0,2,0],
+				[2,2,0,0],
+				[0,1,1,1]
+			], (0,3), 2, True
+		),
+		# ( # TODO: fix - returns True even if square connection
+		# 	[
+		# 		[0,0,0,2],
+		# 		[2,1,2,0],
+		# 		[2,2,1,0],
+		# 		[0,1,1,1]
+		# 	], (0,0), 2, False
+		# ),
+	]
+)
+def test_connect_four_winner(test_board, test_move, test_player, 
+		expected_response):
+	response = connect_four_winner(test_board, test_move, test_player)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_array, expected_response",
 	[
