@@ -932,6 +932,53 @@ def move_zeros(nums):
 	return nums
 
 
+def number_of_islands(grid):
+	"""
+	Return the number of islands. Do not check diagonals.
+	grid:
+		list of list containing either "0" or "1"
+		where "1" represents land and "0" represents water
+	complexity:
+		time: O(NxM)
+		space: O(N+M)
+	"""
+	# helper method
+	def land_to_water(y, x):
+		# base case
+		if grid[y][x] == "0":
+			return
+
+		# convert current cell to water
+		grid[y][x] = "0"
+
+		# up
+		if y > 0:
+			land_to_water(y-1, x)
+		# down
+		if y < len(grid)-1:
+			land_to_water(y+1, x)			
+		# left
+		if x > 0:
+			land_to_water(y, x-1)
+		# right
+		if x < len(grid[y])-1:
+			land_to_water(y, x+1)
+
+	island_count = 0
+	# for each cell, run dfs checking island count
+	for y in range(len(grid)):
+		for x in range(len(grid[0])):
+			# if cell == 1:
+			if grid[y][x] == "1":
+				# change land (1) to water (0) for neighbors
+				land_to_water(y, x)
+				# increment island count
+				island_count += 1
+
+	# return island count
+	return island_count
+
+
 def two_city_sched_cost(costs):
 	"""
 	A company is planning to interview 2n people. 
