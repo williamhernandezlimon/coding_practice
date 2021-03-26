@@ -654,6 +654,36 @@ def test_sum_zero(test_n, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_grid, expected_response", [
+		(
+			[
+			  ["1","1","1","1","0"],
+			  ["1","1","0","1","0"],
+			  ["1","1","0","0","0"],
+			  ["0","0","0","0","0"]
+			], 1
+		),
+		(
+			[
+			  ["1","1","0","0","0"],
+			  ["1","1","0","0","0"],
+			  ["0","0","1","0","0"],
+			  ["0","0","0","1","1"]
+			], 3
+		),
+		(
+			[
+				[["1","1"]], 1
+			]
+		)
+	]
+)
+def test_number_of_islands(test_grid, expected_response):
+	response = number_of_islands(test_grid)
+
+	assert response == expected_response
+
+
 TEST_THREE_SUMS = [
 	([], []),
 	([1, 2], []),
