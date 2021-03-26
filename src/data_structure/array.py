@@ -945,7 +945,7 @@ def number_of_islands(grid):
 	# helper method
 	def land_to_water(y, x):
 		# base case
-		if grid[y][x] == "0":
+		if grid[y][x] != "1":
 			return
 
 		# convert current cell to water
