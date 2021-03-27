@@ -848,6 +848,31 @@ def merge(nums1, n, nums2, m):
 		k -= 1
 
 
+def minimum_path_sum(grid):
+	"""
+	Given a m x n grid filled with non-negative numbers, 
+	find a path from top left to bottom right, 
+	which minimizes the sum of all numbers along its path.
+	Note you can only move either down or right at any point in time.
+	Used dynamic programming
+	grid:
+		list of lists containing positive numbers.
+	"""
+	# for each cell, update cell to have new value (min(left, up))
+	for y in range(len(grid)):
+		for x in range(len(grid[y])):
+			up = grid[y-1][x] if y > 0 else float("inf")
+			left = grid[y][x-1] if x > 0 else float("inf")
+
+			if up == float("inf") and left == float("inf"):
+				continue
+
+			grid[y][x] += min(up, left)
+
+	# return bottom right cell value
+	return grid[-1][-1]
+
+
 def minion_game(s):
 	"""
 	There are 2 players, Kevin and Stuart, where each player gets a point
@@ -930,6 +955,53 @@ def move_zeros(nums):
 		j += 1
 
 	return nums
+
+
+def number_of_islands(grid):
+	"""
+	Return the number of islands. Do not check diagonals.
+	grid:
+		list of list containing either "0" or "1"
+		where "1" represents land and "0" represents water
+	complexity:
+		time: O(NxM)
+		space: O(N+M)
+	"""
+	# helper method
+	def land_to_water(y, x):
+		# base case
+		if grid[y][x] != "1":
+			return
+
+		# convert current cell to water
+		grid[y][x] = "0"
+
+		# up
+		if y > 0:
+			land_to_water(y-1, x)
+		# down
+		if y < len(grid)-1:
+			land_to_water(y+1, x)			
+		# left
+		if x > 0:
+			land_to_water(y, x-1)
+		# right
+		if x < len(grid[y])-1:
+			land_to_water(y, x+1)
+
+	island_count = 0
+	# for each cell, run dfs checking island count
+	for y in range(len(grid)):
+		for x in range(len(grid[0])):
+			# if cell == 1:
+			if grid[y][x] == "1":
+				# change land (1) to water (0) for neighbors
+				land_to_water(y, x)
+				# increment island count
+				island_count += 1
+
+	# return island count
+	return island_count
 
 
 def two_city_sched_cost(costs):
