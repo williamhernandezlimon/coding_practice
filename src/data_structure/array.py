@@ -848,6 +848,31 @@ def merge(nums1, n, nums2, m):
 		k -= 1
 
 
+def minimum_path_sum(grid):
+	"""
+	Given a m x n grid filled with non-negative numbers, 
+	find a path from top left to bottom right, 
+	which minimizes the sum of all numbers along its path.
+	Note you can only move either down or right at any point in time.
+	Used dynamic programming
+	grid:
+		list of lists containing positive numbers.
+	"""
+	# for each cell, update cell to have new value (min(left, up))
+	for y in range(len(grid)):
+		for x in range(len(grid[y])):
+			up = grid[y-1][x] if y > 0 else float("inf")
+			left = grid[y][x-1] if x > 0 else float("inf")
+
+			if up == float("inf") and left == float("inf"):
+				continue
+
+			grid[y][x] += min(up, left)
+
+	# return bottom right cell value
+	return grid[-1][-1]
+
+
 def minion_game(s):
 	"""
 	There are 2 players, Kevin and Stuart, where each player gets a point
