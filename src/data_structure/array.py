@@ -1291,6 +1291,44 @@ def search_range(nums, target):
 	return [i, j]
 
 
+def solution1(A):
+	"""
+	Microsoft OTS: fix bug return the smallest element from array
+
+	"""
+	# before:
+	# ans = 0
+	# after:
+    ans = A[0]  # should start from 0th element
+    for i in range(1, len(A)):
+        if A[i] < ans:
+            ans = A[i]
+    return ans
+
+
+def solution2(A):
+	"""
+	Microsoft OTS: 
+	Return 0 if there's a 0
+	Return 1 if sum is positive
+	Return -1 if sum is negative
+	"""
+	# neg_counter
+	neg_counter = 0
+	# loop through all elements
+	for i in range(len(A)):
+		# if i is 0: return 0
+		if A[i] == 0:
+			return 0
+
+		# if neg num: add to neg_counter
+		if A[i] < 0:
+			neg_counter += 1
+
+	# if neg_counter is even return 1 else -1
+	return 1 if neg_counter % 2 == 0 else -1
+
+
 def sort_colors(nums):
 	"""
 	Sort the colors red, white, and blue. Where each color has the value 0,1,2
