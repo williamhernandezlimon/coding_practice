@@ -27,6 +27,34 @@ def count_nodes(tree_map, start_node):
 	return total
 
 
+def good_nodes(root):
+	"""
+	Given a binary tree, return the number of good nodes. A node is good
+	if the value is smaller than all the nodes before it
+
+	root:
+		BinaryNode root
+	return:
+		number of good nodes
+	complexity:
+		time: O(N)
+		space: O(h)
+	"""
+	# run dfs
+	def helper(current, prev_max):
+		if not current:
+			return 0
+
+		# count = 0 if current < prev else 1
+		count = 0 if current.value < prev_max else 1
+
+		prev_max = max(current.value, prev_max)
+		# return count + dfs(left) + dfs(right) 
+		return count + helper(current.left, prev_max) + helper(current.right, prev_max)
+
+	return helper(root, float("-inf"))
+
+
 def max_depth(root):
 	"""
 	Returns the max depth of a binary tree
