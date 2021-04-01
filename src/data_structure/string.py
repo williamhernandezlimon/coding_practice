@@ -352,30 +352,34 @@ def get_substr(l):
     return map2
 
 
-def length_of_longest_substring(string: str) -> int:
-	# string:
-	# 	contains the string we check for longest substring
-	# return:
-	#	the longest substring 
-	front_ptr = 0
-	back_ptr = 0
-	max_length = 0 
-	char_map = {}
+def length_of_longest_substring(s: str) -> int:
+	"""
+	Given a string s, find the length of the longest substring 
+	without repeating characters.
+	s:
+		string containing string of chars
+	complexity:
+		time: O(N)
+		space: O(N)
+	"""
+	i, max_len = 0, 0
+	m = {}
 
-	while back_ptr < len(string):
-		char = string[back_ptr]
-		if char not in char_map:
-			# add new char and increase window size
-			char_map[char] = 1
-			back_ptr += 1
+	for j in range(len(s)):
+		# exists in map and i is the same
+		if s[j] in m and i <= m[s[j]]:
+			# update i last occurence + 1
+			i = m[s[j]] + 1
+
+		# does not exist
 		else:
-			# remove front element and reduce window size
-			del char_map[string[front_ptr]]
-			front_ptr += 1
+			# save max_len
+			max_len = max(max_len, j - i + 1)
+		# save index into map
+		m[s[j]] = j
 
-		max_length = max(max_length, back_ptr - front_ptr)
-
-	return max_length
+	# return max_len
+	return max_len
 
 
 def letter_combination(digits):

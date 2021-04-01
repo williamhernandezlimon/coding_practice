@@ -1004,6 +1004,39 @@ def number_of_islands(grid):
 	return island_count
 
 
+def trap(height):
+	"""
+	Given n non-negative integers representing an elevation map
+	where the width of each bar is 1, 
+	compute how much water it can trap after raining.
+	height:
+		string of unsigned integers representing the height of the wall
+	complexity:
+		time: O(N)
+		space: O(N)
+	"""
+	# store left max
+	left_map = {}
+	left_max = 0 
+	for i in range(len(height)):
+		left_max = max(height[i], left_max)
+		left_map[i] = left_max
+
+	# store right max
+	right_map = {}
+	right_max = 0
+	for i in range(len(height)-1, -1, -1):
+		right_max = max(height[i], right_max)
+		right_map[i] = right_max
+
+	# get min between left max & right max
+	total_water = 0
+	for i in range(len(height)):
+		total_water += min(left_map[i], right_map[i]) - height[i]
+
+	return total_water
+
+
 def two_city_sched_cost(costs):
 	"""
 	A company is planning to interview 2n people. 
@@ -1256,6 +1289,44 @@ def search_range(nums, target):
 		j += 1
 
 	return [i, j]
+
+
+def solution1(A):
+	"""
+	Microsoft OTS: fix bug return the smallest element from array
+
+	"""
+	# before:
+	# ans = 0
+	# after:
+    ans = A[0]  # should start from 0th element
+    for i in range(1, len(A)):
+        if A[i] < ans:
+            ans = A[i]
+    return ans
+
+
+def solution2(A):
+	"""
+	Microsoft OTS: 
+	Return 0 if there's a 0
+	Return 1 if sum is positive
+	Return -1 if sum is negative
+	"""
+	# neg_counter
+	neg_counter = 0
+	# loop through all elements
+	for i in range(len(A)):
+		# if i is 0: return 0
+		if A[i] == 0:
+			return 0
+
+		# if neg num: add to neg_counter
+		if A[i] < 0:
+			neg_counter += 1
+
+	# if neg_counter is even return 1 else -1
+	return 1 if neg_counter % 2 == 0 else -1
 
 
 def sort_colors(nums):

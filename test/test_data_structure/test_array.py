@@ -646,6 +646,31 @@ def test_search_range(test_nums, test_target, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_A, expected_response", [
+		([-1, 1, -2, 2], -2),
+		([-10, 1, -2, 2], -10),
+		([-1, 1, -2, -10], -10),
+		([-1, -10, -2, 2], -10),
+	]
+)
+def test_solution1(test_A, expected_response):
+	response = solution1(test_A)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_A, expected_response", [
+		([1,-2,-3,5], 1),
+		([1,2,3,-5], -1),
+		([1,2,0,-5], 0),
+	]
+)
+def test_solution2(test_A, expected_response):
+	response = solution2(test_A)
+
+	assert response == expected_response
+
+
 @mark.parametrize("test_nums, expected_response", [
 		([2,0,2,1,1,0], [0,0,1,1,2,2]),
 		([2,0,1], [0,1,2]),
@@ -741,6 +766,17 @@ def test_three_sums(test_list, expected_response):
 @mark.parametrize("test_list, expected_response", copy.deepcopy(TEST_THREE_SUMS))
 def test_three_sums_inefficient(test_list, expected_response):
 	response = three_sums_inefficient(test_list)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_height, expected_response", [
+		([0,1,0,2,1,0,1,3,2,1,2,1], 6),
+		([4,2,0,3,2,5], 9)	
+	]
+)
+def test_trap(test_height, expected_response):
+	response = trap(test_height)
 
 	assert response == expected_response
 

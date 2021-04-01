@@ -416,7 +416,8 @@ def test_get_substr(test_l, expected_response):
 		("abcabcbb", 3),
 		("abc", 3),
 		("a", 1),
-		("aaaaa", 1)
+		("aaaaa", 1),
+		("tmmzuxt", 5)
 	]
 )
 def test_length_of_longest_substring(test_input, expected_response):
