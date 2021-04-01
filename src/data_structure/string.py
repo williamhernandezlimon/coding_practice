@@ -353,10 +353,15 @@ def get_substr(l):
 
 
 def length_of_longest_substring(s: str) -> int:
-	# string:
-	# 	contains the string we check for longest substring
-	# return:
-	#	the longest substring 
+	"""
+	Given a string s, find the length of the longest substring 
+	without repeating characters.
+	s:
+		string containing string of chars
+	complexity:
+		time: O(N)
+		space: O(N)
+	"""
 	i, max_len = 0, 0
 	m = {}
 
