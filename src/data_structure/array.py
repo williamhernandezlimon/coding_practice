@@ -1004,6 +1004,39 @@ def number_of_islands(grid):
 	return island_count
 
 
+def trap(height):
+	"""
+	Given n non-negative integers representing an elevation map
+	where the width of each bar is 1, 
+	compute how much water it can trap after raining.
+	height:
+		string of unsigned integers representing the height of the wall
+	complexity:
+		time: O(N)
+		space: O(N)
+	"""
+	# store left max
+	left_map = {}
+	left_max = 0 
+	for i in range(len(height)):
+		left_max = max(height[i], left_max)
+		left_map[i] = left_max
+
+	# store right max
+	right_map = {}
+	right_max = 0
+	for i in range(len(height)-1, -1, -1):
+		right_max = max(height[i], right_max)
+		right_map[i] = right_max
+
+	# get min between left max & right max
+	total_water = 0
+	for i in range(len(height)):
+		total_water += min(left_map[i], right_map[i]) - height[i]
+
+	return total_water
+
+
 def two_city_sched_cost(costs):
 	"""
 	A company is planning to interview 2n people. 
