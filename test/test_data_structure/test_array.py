@@ -745,6 +745,17 @@ def test_three_sums_inefficient(test_list, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_height, expected_response", [
+		([0,1,0,2,1,0,1,3,2,1,2,1], 6),
+		([4,2,0,3,2,5], 9)	
+	]
+)
+def test_trap(test_height, expected_response):
+	response = trap(test_height)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_costs, expected_response", 
 	[
