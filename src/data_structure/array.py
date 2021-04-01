@@ -1299,11 +1299,11 @@ def solution1(A):
 	# before:
 	# ans = 0
 	# after:
-    ans = A[0]  # should start from 0th element
-    for i in range(1, len(A)):
-        if A[i] < ans:
-            ans = A[i]
-    return ans
+	ans = A[0]  # should start from 0th element
+	for i in range(1, len(A)):
+	    if A[i] < ans:
+	        ans = A[i]
+	return ans
 
 
 def solution2(A):
