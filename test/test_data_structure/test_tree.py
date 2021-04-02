@@ -132,6 +132,19 @@ def test_count_nodes(test_tree, test_node, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_root, expected_response", [
+		([3,1,4,3,None,1,5], 4),
+		([3,3,None,4,2], 3),
+		([9,None,3,6], 1)
+	]
+)
+def test_good_nodes(test_root, expected_response):
+	test_root = array_to_tree(test_root)
+	response = good_nodes(test_root)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_root, expected_response", [
 		(create_tree(), 3),
