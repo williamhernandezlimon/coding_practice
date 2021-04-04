@@ -448,6 +448,17 @@ def test_merge(test_nums1, test_n, test_nums2, test_m, expected_response):
 	assert test_nums1 == expected_response
 
 
+@mark.parametrize("test_arr, expected_response", [
+		([3,7,5,6,2], [6,7]),
+		([5,3,2,4,1,2], [4,5])
+	]
+)
+def test_minimal_heaviest_setA(test_arr, expected_response):
+	response = minimal_heaviest_setA(test_arr)
+
+	assert response == expected_response
+
+
 @mark.parametrize("test_grid, expected_response", [
 		(
 			[
@@ -682,6 +693,17 @@ def test_sort_colors(test_nums, expected_response):
 	sort_colors(test_nums)
 
 	assert test_nums == expected_response
+
+
+@mark.parametrize("test_n, test_m, test_h, test_v, expected_response", [
+		(3,3,[2],[2], 4),
+		(2,2,[1],[2], 4),
+	]
+)
+def test_storage(test_n, test_m, test_h, test_v, expected_response):
+	response = storage(test_n, test_m, test_h, test_v)
+
+	assert response == expected_response
 
 
 @mark.parametrize(

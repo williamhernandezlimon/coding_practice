@@ -848,6 +848,55 @@ def merge(nums1, n, nums2, m):
 		k -= 1
 
 
+def minimal_heaviest_setA(arr):
+	""""
+	Amazon Assessment question
+	An Amazon fullfillment associate gas a set of items that need to be
+	packed into two boxes. Given an integer array of the item weights (arr)
+	to be packed, divide the item weights into two subsets A and B for
+	packing into the associated boxes, while respecting the 
+	following conditions:
+		The intersection of A and B is null
+		The union A and B is equal to the original array
+		The number of elements in subsetA is minimal
+		The sum of A's weights is greater than the sum of B's weights
+	arr:
+		list of integers representing the weights.
+	return:
+		The subset A in increasing order where the sum of A's weights 
+		is greater than the sum of B's weight's. If more than one subset A
+		exists, return the one with the maximal total weight
+	complexity:
+		time: O(NlogN)
+		space: O(N) 
+			O(1) if pointer is returned instead of new list
+	"""
+	# sort arr
+	arr.sort()
+
+	# get the sum of all numbers in arr
+	total = sum(arr)
+
+	# track A and B sum
+	a_sum = 0
+	b_sum = total
+
+	# start from the greatest value, end of the array
+	# loop while in bounds and sum A < sum B
+	for i in range(len(arr)-1, -1, -1):
+		a_sum += arr[i]
+		b_sum -= arr[i]
+
+		if a_sum > b_sum:
+			break
+
+	a = arr[i:]
+	b = arr[0:i]
+
+	print(f"i: {i} a_sum: {a_sum} b_sum: {b_sum} a: {a} b: {b}")
+	return a
+
+
 def minimum_path_sum(grid):
 	"""
 	Given a m x n grid filled with non-negative numbers, 
@@ -1346,6 +1395,59 @@ def sort_colors(nums):
 	    else:
 	        nums[white], nums[blue] = nums[blue], nums[white]
 	        blue -= 1
+
+
+def storage(n, m, h, v):
+	"""
+	Amazon online assessment
+	Amazon is experimenting with a flexible storage system for their 
+	warehouses. The storage unit consists of a shelving system which 
+	is one meter deep with removable vertical and horizontal separators.
+	When all separators are installed, each storage space is 
+	one cubic meter (1'x1'x1'). 
+
+	n: horizontal separators
+	m: vertical separator
+	h: horizontals to be removed
+	v: verticals to be be removed
+	return: 
+		the volume of the alrgest space when a series of 
+		horizontal and vertical separators are removed.
+	complexity:
+		time: O(N)
+		space: O(N)
+	"""
+	max_h_gap = 0
+	max_v_gap = 0
+
+	# convert list to set for O(1) lookup time
+	h = set(h)
+	v = set(v)
+
+	# store max h gap
+	h_gap = 1
+	for i in range(n+1):
+		# if gap increment space
+		if i in h:
+			h_gap += 1
+		# if not gap, reset
+		else: 
+			h_gap = 1
+
+		max_h_gap = max(max_h_gap, h_gap)
+
+	# store max v gap
+	v_gap = 1
+	for i in range(m+1):
+		if i in v:
+			v_gap += 1
+		else:
+			v_gap = 1
+		max_v_gap = max(max_v_gap, v_gap)
+
+
+	# return max_h_gap * max_v_gap
+	return max_h_gap * max_v_gap
 
 
 def submatrix_sum(matrix, start_coordinate, end_coordinate):
