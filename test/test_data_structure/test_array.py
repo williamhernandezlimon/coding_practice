@@ -448,6 +448,17 @@ def test_merge(test_nums1, test_n, test_nums2, test_m, expected_response):
 	assert test_nums1 == expected_response
 
 
+@mark.parametrize("test_arr, expected_response", [
+		([3,7,5,6,2], [6,7]),
+		([5,3,2,4,1,2], [4,5])
+	]
+)
+def test_minimal_heaviest_setA(test_arr, expected_response):
+	response = minimal_heaviest_setA(test_arr)
+
+	assert response == expected_response
+
+
 @mark.parametrize("test_grid, expected_response", [
 		(
 			[
