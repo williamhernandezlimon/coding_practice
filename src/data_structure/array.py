@@ -848,6 +848,55 @@ def merge(nums1, n, nums2, m):
 		k -= 1
 
 
+def minimal_heaviest_setA(arr):
+	""""
+	Amazon Assessment question
+	An Amazon fullfillment associate gas a set of items that need to be
+	packed into two boxes. Given an integer array of the item weights (arr)
+	to be packed, divide the item weights into two subsets A and B for
+	packing into the associated boxes, while respecting the 
+	following conditions:
+		The intersection of A and B is null
+		The union A and B is equal to the original array
+		The number of elements in subsetA is minimal
+		The sum of A's weights is greater than the sum of B's weights
+	arr:
+		list of integers representing the weights.
+	return:
+		The subset A in increasing order where the sum of A's weights 
+		is greater than the sum of B's weight's. If more than one subset A
+		exists, return the one with the maximal total weight
+	complexity:
+		time: O(NlogN)
+		space: O(N) 
+			O(1) if pointer is returned instead of new list
+	"""
+	# sort arr
+	arr.sort()
+
+	# get the sum of all numbers in arr
+	total = sum(arr)
+
+	# track A and B sum
+	a_sum = 0
+	b_sum = total
+
+	# start from the greatest value, end of the array
+	# loop while in bounds and sum A < sum B
+	for i in range(len(arr)-1, -1, -1):
+		a_sum += arr[i]
+		b_sum -= arr[i]
+
+		if a_sum > b_sum:
+			break
+
+	a = arr[i:]
+	b = arr[0:i]
+
+	print(f"i: {i} a_sum: {a_sum} b_sum: {b_sum} a: {a} b: {b}")
+	return a
+
+
 def minimum_path_sum(grid):
 	"""
 	Given a m x n grid filled with non-negative numbers, 
