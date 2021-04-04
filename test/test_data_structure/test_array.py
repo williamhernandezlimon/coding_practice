@@ -695,6 +695,17 @@ def test_sort_colors(test_nums, expected_response):
 	assert test_nums == expected_response
 
 
+@mark.parametrize("test_n, test_m, test_h, test_v, expected_response", [
+		(3,3,[2],[2], 4),
+		(2,2,[1],[2], 4),
+	]
+)
+def test_storage(test_n, test_m, test_h, test_v, expected_response):
+	response = storage(test_n, test_m, test_h, test_v)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_matrix, test_start_coordinate, test_end_coordinate, expected_response", [
 		([[]], (0,0), (2,2), 0),
