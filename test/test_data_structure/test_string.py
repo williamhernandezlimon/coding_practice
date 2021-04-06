@@ -366,6 +366,20 @@ def test_is_palindrom_integer(test_number, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_instructions, expected_response", [
+		("GGLLGG", True),
+		("GG", False),
+		("GL", True),
+		("GLGLGGLGL", False),
+		("LLGRL", True)
+	]
+)
+def test_is_robot_bounded(test_instructions, expected_response):
+	response = string.is_robot_bounded(test_instructions)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_string, expected_response", [
 		("", True),

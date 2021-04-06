@@ -251,6 +251,47 @@ def is_palindrome_integer(num: int) -> bool:
 	return num_str == num_str[::-1]
 
 
+def is_robot_bounded(instructions):
+	"""s
+	"G": go straight 1 unit;
+	"L": turn 90 degrees to the left;
+	"R": turn 90 degrees to the right.
+	The robot performs the instructions given in order
+	 and repeats them forever.
+	The robot performs the instructions given in order
+	and repeats them forever.
+	return:
+		True if and only if there exists a circle in the plane such 
+		that the robot never leaves the circle.
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	# keep track of coordinate
+	c = [0,0]
+
+	# keep track of x,y face
+	face = [0,1]
+
+	# execute instructions
+	for i in instructions:
+		i = i.lower()
+		print(f"i: {i} c: {c} face: {face}")
+		# if right
+		if i == 'r':
+			face[0], face[1] = face[1], -face[0]
+		# if left
+		elif i == 'l':
+			face[0], face[1] = -face[1], face[0]
+		# if go
+		else:
+			c[0] += face[0]
+			c[1] += face[1]
+
+	# true if still at 0,0 or if not facing starting point (north)
+	return c == [0,0] or face != [0,1]
+
+
 def is_valid_parenthesis(string: str) -> bool:
 	"""
 	Return if parenthesis is valid.
