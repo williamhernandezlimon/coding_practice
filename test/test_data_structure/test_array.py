@@ -740,6 +740,17 @@ def test_sum_zero(test_n, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_time, expected_response", [
+		([30,20,150,100,40], 3),
+		([60,60,60], 3)
+	]
+)
+def test_num_pairs_divisible_by_60(test_time, expected_response):
+	response = num_pairs_divisible_by_60(test_time)
+
+	assert response == expected_response
+
+
 @mark.parametrize("test_grid, expected_response", [
 		(
 			[

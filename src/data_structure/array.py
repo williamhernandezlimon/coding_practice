@@ -1006,6 +1006,29 @@ def move_zeros(nums):
 	return nums
 
 
+def num_pairs_divisible_by_60(time):
+	"""
+	Given a list of songs where ith song has a duration of time[i] seconds,
+	get the number of pair songs for which their total duration in seconds
+	is divisible by 60
+	time:
+		seconds of song duration time
+	return:
+		number of pairs of songs for which their total duration in seconds
+		is divisible by 60
+	"""
+	c = [0] * 60
+	res = 0
+	for t in time:
+		# increment value of missing pair
+	    res += c[-t % 60]
+	    
+		# track seen value
+	    c[t % 60] += 1
+
+	return res
+
+
 def number_of_islands(grid):
 	"""
 	Return the number of islands. Do not check diagonals.
