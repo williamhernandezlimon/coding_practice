@@ -527,6 +527,23 @@ def test_missing_number(test_nums, expected_response):
 	assert response == expected_response
 
 
+
+@mark.parametrize("test_username, test_timestamp, test_website, expected_response", [
+		(
+			["joe","joe","joe","james","james","james","james","mary","mary","mary"], 
+			[1,2,3,4,5,6,7,8,9,10], 
+			["home","about","career","home","cart","maps","home","home","about","career"],
+			("home","about","career")
+		),
+	]
+)
+def test_most_visited_pattern(test_username, test_timestamp, test_website, expected_response):
+	response = most_visited_pattern(test_username, test_timestamp, test_website)
+
+	assert response == expected_response
+
+
+
 @mark.parametrize(
 	"test_nums, expected_response", [
 		([0], [0]),

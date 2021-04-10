@@ -977,6 +977,60 @@ def missing_number(nums):
 	return total - total_nums
 
 
+def most_visited_pattern(username, timestamp, website):
+	"""
+	A 3-sequence is a list of websites of length 3 sorted 
+	in ascending order by the time of their visits.  
+	(The websites in a 3-sequence are not necessarily distinct.)
+
+	Find the 3-sequence visited by the largest number of users. 
+	If there is more than one solution, 
+	return the lexicographically smallest such 3-sequence.
+	
+	username:
+		list of strings containing of the website visitors
+	timestamp:
+		list of strings containing the timestamp of the visitation
+	website:
+		list of strings containing the website that was visited
+	"""
+	# ---> [(3, 'joe', 'career'),....]
+	packed_tuple = zip(timestamp, username, website) 
+	# sort by timestamp (By default tuple always sorted by first item )
+	sorted_packed_tuple = sorted(packed_tuple) 
+
+	mapping = {}
+	for t, u, w in sorted_packed_tuple:
+		# joe: [home, about, career]  
+		# websites in list are in ascending timestamp order
+	    if u in mapping:
+	    	mapping[u].append(w)
+	    else:
+	    	mapping[u] = [w]
+
+	# use a dict for counting
+	counter_dict = {}
+	from itertools import combinations
+	for website_list in mapping.values():
+
+		# size of combination is set to 3 
+		combs = set(combinations(website_list, 3))
+		for comb in combs:
+			 # Tuple as key, counter as value: ('home', 'about', 'career') : 2
+			if comb in counter_dict:
+				counter_dict[comb] += 1      
+			else:
+				counter_dict[comb] = 1
+
+	# sort descending by value, then lexicographically
+	sorted_counter_dict = sorted(
+		counter_dict, 
+		key=lambda x: (-counter_dict[x], x)
+	)
+
+	return sorted_counter_dict[0]
+
+
 def move_zeros(nums):
 	"""
 	nums:
