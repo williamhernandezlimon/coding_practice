@@ -496,3 +496,14 @@ def test_str_str(test_haystack, test_needle, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_s, test_word_dict, expected_response", [
+		("leetcode", ["leet", "code"], True),
+		("applepenapple", ["apple", "pen"], True),
+		("catsandog", ["cats","dog","sand","and","cat"], False)
+	]
+)
+def test_word_break(test_s, test_word_dict, expected_response):
+	response = string.word_break(test_s, test_word_dict)
+
+	assert response == expected_response
+
