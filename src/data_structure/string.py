@@ -976,6 +976,35 @@ def to_goat_latin(s: str) -> str:
 	return " ".join(goat_latin)
 
 
+def word_break(s, word_dict):
+	"""
+	s:
+		string
+	word_dict:
+		list of strings
+	return:
+		True if s can be segmented into a space-separated sequence of one
+		or more dictionary words
+	"""
+	# store word_dict in set
+	word_set = set(word_dict)
+	def helper(start, s):
+		# base case
+		if start == len(s):
+			return True
+		# loop through every character try to find a match from set
+		for i in range(start, len(s)+1):
+			w = s[start:i]
+			# if match found and remaining found: return True
+			if w in word_set:
+
+				if helper(i, s):
+					return True
+		return False
+
+	return helper(0, s)
+	
+
 # PRIVATE METHODS BELOW:
 def _expand_from_middle(s: str, left: int, right: int) -> int:
 	"""
