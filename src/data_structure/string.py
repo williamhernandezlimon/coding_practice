@@ -978,32 +978,74 @@ def to_goat_latin(s: str) -> str:
 
 def word_break(s, word_dict):
 	"""
+	Solves using BFS to keep track of the last valid substring
 	s:
-		string
+		string containg the chars to parse
 	word_dict:
 		list of strings
 	return:
 		True if s can be segmented into a space-separated sequence of one
 		or more dictionary words
 	"""
-	# store word_dict in set
+	# convert list to set for O(1) look up
 	word_set = set(word_dict)
-	def helper(start, s):
-		# base case
-		if start == len(s):
-			return True
-		# loop through every character try to find a match from set
-		for i in range(start, len(s)+1):
-			w = s[start:i]
-			# if match found and remaining found: return True
+
+	# track visited element
+	visited = set()
+
+	# start from 0
+	q = [0]
+
+	# loop until nothing else in the q
+	while q:
+		i = q.pop(0)
+
+		# if value visited ignore
+		if i in visited:
+			continue
+
+		# loop through all elements starting from q element + 1
+		for j in range(i+1, len(s)+1):
+			w = s[i:j]
+			# if element in word_set: store that value in q & visited
 			if w in word_set:
-
-				if helper(i, s):
+				q.append(j)
+				# if end reached: return True
+				if j == len(s):
 					return True
-		return False
 
-	return helper(0, s)
-	
+			# add visited
+			visited.add(i)
+
+	# no solution
+	return False
+
+
+def word_break_dp(s, word_dict):
+	"""
+	Solves using memoization to keep track of the last valid substring
+	s:
+		string containg the chars to parse
+	word_dict:
+		list of strings
+	return:
+		True if s can be segmented into a space-separated sequence of one
+		or more dictionary words
+	"""
+	word_set = set(word_dict)
+	mem = [False] * (len(s)+1)
+	mem[0] = True
+
+	# loop through all elements
+	for i in range(1, len(s)+1):
+		for j in range(i):
+			w = s[j:i]
+			if mem[j] and w in word_set:
+				mem[i] = True
+				break
+
+	return mem[len(s)]
+
 
 # PRIVATE METHODS BELOW:
 def _expand_from_middle(s: str, left: int, right: int) -> int:

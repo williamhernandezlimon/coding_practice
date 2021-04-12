@@ -507,3 +507,5 @@ def test_word_break(test_s, test_word_dict, expected_response):
 
 	assert response == expected_response
 
+	response = string.word_break_dp(test_s, test_word_dict)
+	assert response == expected_response
