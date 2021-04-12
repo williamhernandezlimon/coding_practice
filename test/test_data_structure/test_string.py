@@ -166,6 +166,28 @@ def test_get_larger(test_s1, test_s2, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_strs, expected_response", [
+		([""], [[""]]),
+		(["a"], [["a"]]),
+		(
+			["eat","tea","tan","ate","nat","bat"], 
+			[["bat"],["nat","tan"],["ate","eat","tea"]]
+		)
+	]
+)
+def test_group_anagrams(test_strs, expected_response):
+	response = string.group_anagrams(test_strs)
+
+	# convert elements to sets
+	assert len(response) == len(expected_response)
+	for i in range(len(response)):
+		response[i] = set(response[i])
+		expected_response[i] = set(expected_response[i])
+
+	for r in response:
+		assert r in expected_response
+
+
 @mark.parametrize(
 	"test_serialNumber, expected_response", [
 		([], 0),
