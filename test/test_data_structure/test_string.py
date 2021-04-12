@@ -76,6 +76,18 @@ def test_compress(test_s, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_chars, test_new_chars, expected_response", [
+		(["a"],["a"],1),
+		(["a","b","b","b","b","b","b","b","b","b","b","b","b"], ["a","b","1","2"], 4),
+		(["a","a","b","b","c","c","c"],  ["a","2","b","2","c","3"], 6)
+	]
+)
+def test_compress_list(test_chars, test_new_chars, expected_response):
+	response = string.compress_list(test_chars)
+	assert response == expected_response
+	assert test_chars == test_new_chars
+
+
 @mark.parametrize("test_n, expected_response", [
 		(1, "1"),
 		(2, "11"),
