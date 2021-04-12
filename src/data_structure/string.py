@@ -45,6 +45,45 @@ def compress(s):
 	return "".join(compressed_string)
 
 
+def compress_list(chars):
+	"""
+	Given a list of characters, compress by beginning with an
+	empty string s
+	chars:
+		list of chars
+	complexity:
+		time: O(N)
+		space: O(N)
+	"""
+	char_count = 1
+	comp = [chars[0]]
+
+	i = 0
+	for j in range(i+1, len(chars)):
+		if chars[i] == chars[j]:
+			char_count += 1
+		else:
+			# append char_count to comp
+			if char_count > 1:
+				# append char_count
+				comp.extend(list(str(char_count)))
+
+			# forward i to j
+			i = j
+			# reset char_count
+			char_count = 1
+			# append new char
+			comp.append(chars[j])
+
+	if char_count > 1:
+		# append char_count
+		comp.extend(list(str(char_count)))	
+
+	chars[:] = comp
+	del chars[len(comp)+1:]
+	return len(comp)
+
+
 def count_and_say(n):
 	"""
 	Recursively calculated the count and say of a given integer.
