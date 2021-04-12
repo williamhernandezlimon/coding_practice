@@ -232,6 +232,41 @@ def get_larger(s1, s2):
 	return s1 if len(l1) > len(l2) else s2
 
 
+def group_anagrams(strs):
+	"""
+	Given an array of strs, group anagrams together. 
+	Return in any order. 
+	Anagram is a word or phrase formed by rearranging the letters
+	of a different word or phrase, typically all the original
+	letters exactly once.
+	return:
+		list of list anagrams
+	complexity:
+		time: O(N*MlogM)
+		space: O(N*M)
+	"""
+	# track of sets
+	m = {}
+
+	# loop through ever string
+	for s in strs:
+		# sort s
+		s_sorted = "".join(sorted(list(s)))
+		# if in map append
+		if s_sorted in m:
+			m[s_sorted].append(s)
+		# else add new map entry
+		else:
+			m[s_sorted] = [s]
+
+	# create new list of list representing anagram using map
+	anagram = []
+	for k in m:
+		anagram.append(m[k])
+
+	return anagram
+
+
 def countCounterfeit(serialNumbers):
 	"""
 	serialNumbers:
