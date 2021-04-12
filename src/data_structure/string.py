@@ -1021,6 +1021,32 @@ def word_break(s, word_dict):
 	return False
 
 
+def word_break_dp(s, word_dict):
+	"""
+	Solves using memoization to keep track of the last valid substring
+	s:
+		string containg the chars to parse
+	word_dict:
+		list of strings
+	return:
+		True if s can be segmented into a space-separated sequence of one
+		or more dictionary words
+	"""
+	word_set = set(word_dict)
+	mem = [False] * (len(s)+1)
+	mem[0] = True
+
+	# loop through all elements
+	for i in range(1, len(s)+1):
+		for j in range(i):
+			w = s[j:i]
+			if mem[j] and w in word_set:
+				mem[i] = True
+				break
+
+	return mem[len(s)]
+
+
 # PRIVATE METHODS BELOW:
 def _expand_from_middle(s: str, left: int, right: int) -> int:
 	"""
