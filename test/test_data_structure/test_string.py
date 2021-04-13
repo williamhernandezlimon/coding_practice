@@ -76,6 +76,18 @@ def test_compress(test_s, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_chars, test_new_chars, expected_response", [
+		(["a"],["a"],1),
+		(["a","b","b","b","b","b","b","b","b","b","b","b","b"], ["a","b","1","2"], 4),
+		(["a","a","b","b","c","c","c"],  ["a","2","b","2","c","3"], 6)
+	]
+)
+def test_compress_list(test_chars, test_new_chars, expected_response):
+	response = string.compress_list(test_chars)
+	assert response == expected_response
+	assert test_chars == test_new_chars
+
+
 @mark.parametrize("test_n, expected_response", [
 		(1, "1"),
 		(2, "11"),
@@ -152,6 +164,28 @@ def test_get_larger(test_s1, test_s2, expected_response):
 	response = string.get_larger(test_s1, test_s2)
 
 	assert response == expected_response
+
+
+@mark.parametrize("test_strs, expected_response", [
+		([""], [[""]]),
+		(["a"], [["a"]]),
+		(
+			["eat","tea","tan","ate","nat","bat"], 
+			[["bat"],["nat","tan"],["ate","eat","tea"]]
+		)
+	]
+)
+def test_group_anagrams(test_strs, expected_response):
+	response = string.group_anagrams(test_strs)
+
+	# convert elements to sets
+	assert len(response) == len(expected_response)
+	for i in range(len(response)):
+		response[i] = set(response[i])
+		expected_response[i] = set(expected_response[i])
+
+	for r in response:
+		assert r in expected_response
 
 
 @mark.parametrize(
