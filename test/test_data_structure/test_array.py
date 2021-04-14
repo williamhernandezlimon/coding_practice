@@ -643,6 +643,7 @@ def test_rotate(test_matrix, expected_response):
 
 @mark.parametrize("test_nums, test_target, expected_response", [
 		([], 0, -1),
+		([0], 0, 0),
 		([1,3], 3, 1),
 		([3,4,5,6,7,8,1,2], 2, 7),
 		([2], 3, -1),
