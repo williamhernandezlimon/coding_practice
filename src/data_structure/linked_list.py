@@ -118,22 +118,20 @@ def remove_duplicates(ll: LinkedList) -> LinkedList:
 	# empty case
 	if not ll or not ll.head: return None
 
+	prev = None
 	current = ll.head
-	s = {current.data}
-	prev = current
-	current = current.next
+	s = set()
+	
 	while current:
-		# remove duplicate
+		# duplicate found
 		if current.data in s:
 			prev.next = current.next
-			current = current.next 	
 		else:
-			# add data set
+			# add to set
 			s.add(current.data)
+			prev = current
 
-			# continue traversing
-			prev = prev.next
-			current = current.next
+		current = current.next
 
 
 def remove_nth_node_from_end(head, n):

@@ -485,6 +485,33 @@ def highest_population(population):
 	return max_year
 
 
+def integer_break(n):
+	"""
+	Given an integer n, break it into the sum of k positive 
+	integers, where k>=2 and maximize the product of those
+	integers
+	n:
+		unsigned integer that must be cut into pieces
+	return:
+		integer with the maximum product value
+	complexity:
+		time: O(N)
+		space: O(1)
+	"""
+	max_product = 1
+
+	if n < 2: return 0
+	if n == 2: return 1
+	if n == 3: return 2
+
+	while n > 4:
+		max_product *= 3
+		n -= 3
+
+	max_product *= n
+	return max_product
+
+
 def intersect(nums1, nums2):
 	"""
 	Get intersect of numbers between nums1 & nums2
