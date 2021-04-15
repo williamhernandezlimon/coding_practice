@@ -304,6 +304,17 @@ def test_highest_population(test_population, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_n, expected_response", [
+		(1, 0),
+		(2, 1),
+		(5, 6),
+		(10, 36)
+	]
+)
+def test_integer_break(test_n, expected_response):
+	response = integer_break(test_n)
+
+	assert response == expected_response
 
 
 @mark.parametrize(
