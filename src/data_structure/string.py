@@ -2,6 +2,60 @@
 from src.data_structure import table as table_obj
 
 
+def calculate(s):
+	"""
+	Assume s is a valid arithmetic expression, evaluate the
+	expression
+	s:
+		string representing an arithmetic expression.
+		Example:
+			"(1+(4+5+2)-3)+(6+8)"
+	return:
+		the answer of the string arithmetic expression
+	complexity:
+		time: O(N)
+		space: O(N)
+	"""
+	ans = 0
+	num = 0
+	stack = []
+	sign = 1
+	# loop through s
+	for i in s:
+		# if (
+		if i == '(':
+			# store ans in stack
+			stack.append(ans)
+			stack.append(sign)
+			# empty ans
+			ans = 0
+			sign = 1
+		# if digit
+		elif i.isnumeric():
+			# add to num
+			num = num*10 + int(i)
+		# if +/-
+		elif i == '+':
+			ans += sign * num
+			num = 0
+			sign = 1
+		elif i == '-':
+			ans += sign * num
+			num = 0
+			sign = -1
+		# if )
+		elif i == ')':
+			ans += sign*num
+			# get last +/- and num
+			ans *= stack.pop()
+			# perform arithmetic
+			ans += stack.pop()
+			# reset num
+			num = 0
+
+	return ans + sign*num
+
+
 def compress(s):
 	"""
 	Compress duplicate neighboring characters, by using integer
