@@ -54,6 +54,17 @@ def test_solution3(test_t, test_r, expected_response):
 	assert response == expected_response
 	
 
+@mark.parametrize("test_s, expected_response", [
+		("(1+(4+5+2)-3)+(6+8)", 23),
+		("- (3 + (4 + 5))", -12)
+	]
+)
+def test_calculate(test_s, expected_response):
+	response = string.calculate(test_s)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_s, expected_response", [
 		("", ""),
