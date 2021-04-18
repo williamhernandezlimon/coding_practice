@@ -11,6 +11,9 @@ def array_to_tree(l):
 	right = 2 * i + 2
 	"""
 	# add root to q
+	if not l:
+		return None
+
 	root = NodeBinary(l[0], None, None)
 	q = [root]
 	i = 0
@@ -298,6 +301,19 @@ def test_sorted_array_to_bst(test_nums, expected_response):
 )
 def test_valid_tree(test_tree_map, test_root, expected_response):
 	response = valid_tree(test_tree_map, test_root)
+
+	assert response == expected_response
+
+
+@mark.parametrize("test_root, expected_response", [
+		([], []),
+		([1], [[1]]),
+		([3,9,20,None,None,15,7], [[3],[20,9],[15,7]])
+	]
+)
+def test_zigzag_level_order(test_root, expected_response):
+	test_root = array_to_tree(test_root)
+	response = zigzag_level_order(test_root)
 
 	assert response == expected_response
 
