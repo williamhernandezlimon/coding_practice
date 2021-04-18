@@ -272,6 +272,62 @@ def valid_tree(tree_map, root):
 	return has_no_loops and has_no_islands
 
 
+def zigzag_level_order(root):
+	"""
+	Given the root of a binary tree, return the zigzag level
+	order traversal of its nodes' values.
+	Example:
+		from left to right, then right to left for the next level
+		and alternate between.
+	root:
+		root of the binary tree
+	return:
+		list of list of integers representing different levels
+		in zigzag order
+	complexity:
+		time: O(N)
+		space: O(N)
+	"""
+	# empty case
+	if not root:
+		return []
+
+	# track queue, stack, level, and order
+	q = [root]
+	s = []
+	left = True
+	order = []
+	
+	# start with root
+	while q or s:
+		level = []
+		# left to right
+		if left:
+			while q:
+				node = q.pop()
+				level.append(node.value)
+				if node.left:
+					s.append(node.left)
+				if node.right:
+					s.append(node.right)
+		# right to left
+		else:
+			while s:
+				node = s.pop(-1)
+				level.append(node.value)
+				if node.right:
+					q.append(node.right)
+				if node.left:
+					q.append(node.left)
+
+		# add level to order
+		order.append(level)
+		# update flag
+		left = not left
+
+	return order
+
+
 def _has_loops(tree_map, root, visited):
 	"""
 	tree_map:
