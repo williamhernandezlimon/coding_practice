@@ -930,6 +930,44 @@ def min_cost(s, cost):
 	return min_cost
 	
 
+def remove_duplicates_letters(s):
+	"""
+	Given a string s, remove duplicate letters so that every
+	letter appears once and only once. You must make sure
+	result is in the smalelst in lexicographical order
+	among all possible results.
+	s:
+		string representing chars
+	return:
+		string with duplicates removed, in lexiographical order
+	complexity:
+		space: O(N)
+		time: O(N)
+	"""
+	# populate map the last seen index for each char
+	m = {}
+	for i, c in enumerate(s):
+		m[c] = i
+
+	a = []
+	seen = set()
+	# for every c in s:
+	for i, current in enumerate(s):
+		if current not in seen:
+			# remove everything smaller than current from stack
+			while a and current < a[-1] and m[a[-1]] > i:
+				# pop previous
+				t = a.pop(-1)
+				seen.discard(t)
+				
+			# add current
+			a.append(current)
+			seen.add(current)
+
+	# join and return a
+	return "".join(a)
+
+
 def reverse_integer(number: int) -> int:
 	"""
 	Given an unsigned integer, reverse the number.
