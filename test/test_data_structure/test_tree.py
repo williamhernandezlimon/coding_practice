@@ -267,7 +267,8 @@ def test_lowest_common_ancestor(test_root, test_p, test_q, expected_response):
 	assert test_root and test_p and test_q, "Invalid test parameters"
 	
 	response = lowest_common_ancestor(test_root, test_p, test_q)
-	assert response and response.value == expected_response
+	assert response
+	assert response.value == expected_response
 
 
 @mark.parametrize("test_nums, expected_response", [
