@@ -326,6 +326,18 @@ def test_min_cost(test_s, test_cost, expected_response):
 	assert response == expected_response
 
 
+@mark.parametrize("test_s, expected_response", [
+		("bcabc", "abc"),
+		("cbacdcbc", "acdb"),
+		("abacb", "abc")
+	]
+)
+def test_remove_duplicates_letters(test_s, expected_response):
+	response = string.remove_duplicates_letters(test_s)
+
+	assert response == expected_response
+
+
 @mark.parametrize(
 	"test_number, expected_response", [
 		(123, 321),
