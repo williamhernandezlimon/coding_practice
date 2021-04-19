@@ -202,35 +202,43 @@ def kth_smallest(root, k):
 
 def lowest_common_ancestor(root, p, q):
 	"""
-	[3,5,1,6,2,0,8,null,null,7,4]
-	6
-	0
-
-					3
-			5				1
-		6		2		0		8
-							7		4
+	Given a binart tree find the lowest common ancestor (LCA)
+	of two given nodes in the tree
+	Lowest common ancestor is definied between two nodes
+	p and q as the lowest node in T that has both p and q
+	as descendants.
+	root:
+		root of a binary tree
+	p:
+		valid child of root binary tree
+	q:
+		valid child of root binary tree
+	complexity:
+		time: O(N)
+		space: O(N)
 	"""
-	# get ancestor method
-
-	# if root is None:
+	# empty case: return None
 	if not root:
-		# return None
 		return None
-	# if root == p or q:
 	if root == p or root == q:
-		# return root
-		return root 
-	 
+		return root
+
+	# check left 
 	left = lowest_common_ancestor(root.left, p, q)
+	# check right
 	right = lowest_common_ancestor(root.right, p, q)
 
-	lca = root if left and right else None
-	if not lca:
-		lca = left if left else right
+	# if left and right: return root
+	if left and right:
+		return root
 
-	return lca
+	# if left: return left
+	if left:
+		return left
 
+	# if right: return right
+	if right:
+		return right
 
 
 def sorted_array_to_bst(nums):
