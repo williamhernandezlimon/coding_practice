@@ -440,7 +440,38 @@ def get_index(nums, target):
 		time: O(log(n))
 		space: O(log(n))
 	"""
-	return _get_index_helper(nums, target, 0, len(nums)-1)
+	# start from middle go left or right based on target
+	def helper(start, end, target):
+		# track midpoint
+		mid = (start+end)//2
+		# if target found: return index
+		if nums[mid] == target:
+			return mid
+		# does not exist
+		if start >= end:
+			return None
+
+		# left ascending
+		if nums[start] <= nums[mid]:
+			# if in range: go left
+			if nums[start] <= target and target <= nums[mid-1]:
+				end = mid-1
+			# else: go right
+			else:
+				start = mid+1
+		# right ascending
+		else:
+			# if in range: go right
+			if nums[mid+1] <= target and target <= nums[end]:
+				start = mid+1
+			# else: go left
+			else:
+				end =  mid-1
+
+		# recursive calls
+		helper(start, end, target)
+
+	return helper(0, len(nums)-1, target)
 
 
 def highest_population(population):
@@ -1701,49 +1732,3 @@ def two_sum(nums, target):
 		m[num] = i
 
 	return []
-
-
-def _get_index_helper(nums, target, start, end):
-	"""
-	Helper method for get_index.
-	Please see get_index for additional details
-	"""
-	mid = start +  (end - start)//2
-	
-	# index found
-	if nums[mid] == target:
-		return mid
-
-	# does not exist
-	if end-start <= 0:
-		return None
-
-	# note: select which half of array to traverse
-
-	# 0 - mid ordered? 
-		# check if in range
-		# else mid - end
-	# mid - end ordered?
-		# check if in range
-		# else 0 - mid
-	# return non exists
-	
-	# check first half is ascending order
-	if nums[start] <= nums[mid]:
-		# get first half if in range 
-		if nums[start] <= target and target <= nums[mid]:
-			return _get_index_helper(nums, target, start, mid-1)
-		# otherwise get second half
-		else:
-			return _get_index_helper(nums, target, mid, end)
-
-	elif nums[mid] <= nums[end]:
-		# get second half if in range
-		if nums[mid] <= target and target <= nums[-1]:
-			return _get_index_helper(nums, target, mid, end)
-		# otherwise get first half
-		else:
-			return _get_index_helper(nums, target, start, mid-1)
-	else:
-		print(f"Should not be here!!!")
-		return []
